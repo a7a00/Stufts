@@ -7,6 +7,6 @@ Inspired by the similar repositories belonging to [Zach Latta](https://github.co
 
 #### Taking stuff from here
 
-On Shreyas' recommendation, I'm using the [MIT License](license.md).
+On Shreyas' recommendation, I'm using a slightly modified version of the [MIT License](LISCENSE.md).
 
 My essays and projects (and code for CS classes) will be up here. If you want to use bits and pieces, that's fine, but please attribute it to this repo in your comments. I'll be making this repo citable for papers when stuff gets added. Until then, just cite it like a website.
