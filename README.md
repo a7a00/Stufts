@@ -3,7 +3,7 @@ Stufts
 
 Notes and projects from my first year of college. (Go Jumbos!) Mom wouldn't let me use my main GitHub. Grrr...
 
-Inspired by the similar repositories belonging to [Zach Latta](https://github.com/zachlatta/school) and [Krish Dholakiya](https://github.com/krrishd/school), and [Shreyas Raman](https://github.com/anubiann00b). If you're going to use this system, attribute them, too please!
+Inspired by the similar repositories belonging to [Zach Latta](https://github.com/zachlatta/school), [Krish Dholakiya](https://github.com/krrishd/school), and [Shreyas Raman](https://github.com/anubiann00b). If you're going to use this system, attribute them, too please!
 
 #### Taking stuff from here
 
