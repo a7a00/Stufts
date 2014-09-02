@@ -1,0 +1,236 @@
+%% LyX 2.1.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{luainputenc}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{babel}
+\begin{document}
+
+\title{Calculus 2}
+
+
+\author{Professor Glaser}
+
+\maketitle
+
+\part{Review}
+
+
+\section{Basic Antiderivatives}
+
+Below are some antiderivatives you should be able to list at the drop
+of a hat. These are fundamental to any serious problem solving.
+
+
+\subsection{Exponents}
+
+\[
+\int x^{n}dx=\frac{x^{n+1}}{x+1}+C\, n\neq-1\qquad\int\frac{1}{x}dx=\ln|x|+C
+\]
+
+
+\[
+\int e^{x}dx=e^{x}+C\qquad\int a^{x}dx=\frac{a^{x}}{\ln a}+C\,\left(a>0,a\neq1\right)
+\]
+
+
+
+\subsection{Trig Functions}
+
+\[
+\int\cos xdx=\sin x+C\qquad\int\sin xdx=-\cos x+C
+\]
+
+
+\[
+\int\sec^{2}xdx=\tan x+C\qquad\int\csc^{2}xdx=-\cot x+C
+\]
+
+
+\[
+\int\sec x\tan xdx=\sec x+C\qquad\int\csc x\cot xdx=-\csc x+C
+\]
+
+
+\[
+\int\tan xdx=\ln|\sec x|+C\quad\left(=\ln|\cos x|+C\right)\qquad\int\cot xdx=\ln|\sin x|+C
+\]
+
+
+\[
+\int\sec xdx=\ln|\sec x+\tan x|+C\qquad\int\csc xdx=-\ln|\csc x+\cot x|+C
+\]
+
+
+
+\subsection{Fractions}
+
+\[
+\int\frac{dx}{\sqrt{1-x^{2}}}=\sin^{-1}x+C
+\]
+
+
+\[
+\int\frac{dx}{1+x^{2}}=\tan^{-1}x+C
+\]
+
+
+\[
+\int\frac{dx}{a^{2}+x^{2}}=\frac{1}{a}\tan^{-1}\frac{x}{a}+C
+\]
+
+
+\[
+\int\frac{1}{2\sqrt{x}}dx=\sqrt{x}+C\qquad\int\frac{dx}{x^{2}}=-\frac{1}{x}+C
+\]
+
+
+
+\section{U-Substitution}
+
+Again, you should know this stuff. Like, you should be able to do
+all of this without thinking. These problems are designed to be simple.
+
+
+\subsection{Basic U-Sub}
+
+\[
+\int2x\left(x^{2}+10\right)^{98}dx
+\]
+We assign $u$ to the pain in the ass, so $u=x^{2}+10$ and $du=2xdx$.
+Rewrite the equation so it's blantantly obvious and solve:
+
+\[
+\int2xdx\left(x^{2}+10\right)^{98}=\int u^{98}du=\frac{u^{99}}{99}+C
+\]
+Then you substitute in the original like so:
+
+\[
+\boxed{\frac{\left(x^{2}+10\right)^{99}}{99}+C}
+\]
+Not so bad, right?
+
+
+\subsection{A bit harder}
+
+All right, what if the answer isn't glaringly obvious?
+
+\[
+\int2x\left(x^{2}+10\right)^{98}dx
+\]
+
+
+This is also really easy. $u=x^{2}+10$ and $du=2xdx$, so just divide
+until $dx$ fits in nicely. Since $\frac{1}{2}du=xdx$, we can do
+the exct same thing, but with a new constant.
+
+\[
+\int xdx\left(x^{2}+10\right)^{98}=\int\frac{1}{2}u^{98}du=\frac{1}{2}*\frac{u^{99}}{99}+C
+\]
+
+
+Substitute again:
+
+\[
+\boxed{\frac{\left(x^{2}+10\right)^{99}}{198}+C}
+\]
+
+
+Again, not hard at all.
+
+
+\subsection{Bounded Integrals}
+
+What is there are bounds on the integral? This isn't hard, just more
+tedious.
+
+\[
+\int_{0}^{1}2x\left(x^{2}+2\right)^{5}dx
+\]
+
+
+Do the same thing with $u$:
+
+\[
+u=x^{2}+2\quad du=2xdx
+\]
+
+
+\[
+\int_{?}^{?}u^{5}du
+\]
+
+
+Great. Now that the equation is in terms of $u$, we have to recalculate
+the bounds. Since we already know the equation for $u$, shoudln't
+be that bad. Plug in 0 and 1 in this case and solve it out:
+
+\[
+\int_{2}^{3}u^{5}du=\boxed{\frac{3^{6}}{6}-\frac{2^{6}}{6}}
+\]
+
+
+Boom. Done.
+
+
+\subsection{Fractions}
+
+\[
+\int\frac{2xdx}{x^{2}+34}
+\]
+
+
+If you set $u=x^{2}+34$ and $du=2xdx$, this problem is actually
+stupidly simple. But you have to remember some log rules.
+
+\[
+\int\frac{du}{u}=\ln|u|+C=\boxed{\ln|x^{2}+34|+C}
+\]
+
+
+...Let's keep going.
+
+
+\subsection{$e$ and Friends}
+
+\[
+\int xe^{x^{2}}dx
+\]
+
+
+Remember, $u$ handles the pain in the ass part. $u=x^{2}$and $\frac{1}{2}du=xdx$.
+
+\[
+\frac{1}{2}\int e^{u}du=\frac{1}{2}e^{u}+C=\boxed{\frac{1}{2}e^{x^{2}}+C}
+\]
+
+
+
+\subsection{Trig}
+
+I'm too lazy to write commentary for this:
+
+\[
+\int\frac{\cos x}{\sqrt{\sin x}}
+\]
+
+
+\[
+u=\sin x\quad u=\cos xdx
+\]
+
+
+\[
+\int\frac{du}{\sqrt{u}}=\int u^{-\frac{1}{2}}du=2u^{\frac{1}{2}}=\boxed{2\sqrt{\sin x}+C}
+\]
+
+
+
+\section{Final Words}
+
+I swear, Alex, if you don't remember any part of this after learning
+it 4 times in your life, I want you to call Miguel and Carrie and
+Alexandra so they can yell at you. A lot.
+\end{document}
