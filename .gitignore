@@ -1,1 +1,5 @@
-.lyx
+*.lyx
+*.aux
+*.txt
+*.lyx~
+*.lyx#
