@@ -1,0 +1,162 @@
+%% LyX 2.1.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{luainputenc}
+\usepackage{url}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\title{Introduction to Data Structures}
+
+
+\author{cgregg@cs.tufts.edu}
+
+\maketitle
+
+\part{Course Goals}
+
+This course aims to teach you to program efficiently. It's not enough
+to just write code. You need to refactor that stuff so it doesn't
+destroy the CPU. We're going to analyze the costs associated with
+coding choices and solve real-world coding problems. Hopefully, we'll
+have some fun as well.
+
+
+\part{4 Lists}
+
+We want to study data structures because they teach us to manage a
+ton of data efficiently in a short time frame. So:
+\begin{itemize}
+\item Let's create 4 ``List-Like'' containers for our data.
+\item Let's add 100,000 integers to each container (the even integers between
+0 and 200,000)
+\item We search for the integers from 0-50,000
+\item We erase the integers from 0-20,000
+\end{itemize}
+With a 2.4GHz processor:
+
+\begin{tabular}{|c|c|}
+\hline 
+Structure & Overall (s)\tabularnewline
+\hline 
+\hline 
+Array & 9.80517\tabularnewline
+\hline 
+Linked List & 23.38263\tabularnewline
+\hline 
+Hash Table & 0.01826\tabularnewline
+\hline 
+Binary Tree & 0.06077\tabularnewline
+\hline 
+Sorted Array & 4.87678\tabularnewline
+\hline 
+\end{tabular}
+
+Data structures are no joke, obviously. But what's interesting is
+when we break down the structures, different parts have different
+problems. Inserting is much faster on an arrray than a sorted array,
+while searching is the other way around. Why are there these discrepancies?
+Well, the bottom line is that some structures contain more information
+by design. And manipulating structures \textit{always} takes time.
+The computer hardware knows only a giant array. Our job with C++ is
+to change the way this data is laid out.
+
+How can structures have information contained within them? Well, look
+at a sorted array. Because we know that every number to the left of
+the index is lower, every number to the right is higher. Unfortunatley,
+this is also a tradeoff. Inserting numbers sucks in sorted arrays
+because you have to run some crappy insertion sort algorithm to put
+anything in the list.
+
+
+\part{The Wait List and YouTube}
+
+Everyone on the waitlist is enrolled. Done. Also all classes will
+be uploaded to YouTube.
+
+
+\part{Staff}
+
+
+\section*{Professors}
+\begin{itemize}
+\item Dr. Gregg - Grew up in Upstate NY, studied EE ant Johns Hopkins, and
+was recruited into the navy where he became a cryptologist. During
+that time he went to San Diego, the Middle East, Thailand, Malaysia,
+you get the idea. He was then posted to Australia where he went surfing
+often, and decided to become a teacher, getting his Masters in Education
+at Harvard. He then taught at Brookline HS down the street from Tufts,
+taught at UC Santa Cruz, got his PhD in computer engineeering from
+UVA, and was sent to Africa by the Navy Reserves (He's since stayed
+in the Navy Reserves, and has to go to Seattle once a month.) He was
+then grabbed from Africa by Tufts.
+\item Bruce Molay - A cool guy who brings popcorn into lab. He wasn't here
+to tell us about himself.
+\end{itemize}
+
+\section*{TA's}
+\begin{itemize}
+\item Tomoki Shibata
+\item Hugo Akita
+\item Tons of undergrads.
+\end{itemize}
+
+\part{Resources}
+
+
+\section*{The Magic of the Internet}
+\begin{itemize}
+\item Course Website - \url{cs.tufts.edu/comp/15}
+\item Piazza - Private StackOverflow for this class - \url{piazza.com/tufts/fall2014/comp15/home}
+\item Some other stuff I couldn't write down because I was busy tripping
+over people.
+\end{itemize}
+
+\section*{Textbooks}
+
+Data Structures and Algorithm Analysis, 4th Edition, Mark A Weiss
+
+\url{people.cs.?t.edu/~shaffer/Book/c++3elatest.pdf}
+
+
+\part{Labs}
+
+Lab signups will begin at 6PM \textit{tonight}. First come first served
+on the class website. Labs are mandatory. 22 people per lab. You will
+be given makefiles to submit the assignment.
+
+
+\part{Eclipse}
+
+Eclipse is recommended, but if you want to use the filthy piece of
+trash known as emacs or the glorious paragon of simplicity known as
+vim, that's great, too. Cite your fellow students. Code you submit
+is owned by Tufts.
+
+
+\part{Assignments}
+
+
+\section*{Assignment 0}
+
+Learn to use Eclipse and SSH into the homework server from your machine.
+Make sure you use -X parameter. when you SSH. Get your CS username
+so you can SSH into the machine.
+
+
+\section*{Assignment 1}
+
+Due 9/12/14. This assignment is on Dynaamic Arrays. For this assignment,
+you'll be given a ton of boilerplate code, so you only need to write
+13 functions.
+\end{document}
