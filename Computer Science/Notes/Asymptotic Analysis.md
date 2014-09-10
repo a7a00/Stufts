@@ -7,7 +7,9 @@ Apparently, we don't know how the hell to debug code properly, so we're doing th
 ##Obfuscated C
 
 LOOK AT THIS COOL THING:
+
 [FLUID SIMULATOR](youtube.com/watch?v=QMYfkOtYYlg)
+
 THAT WAS SO DAMN COOL, WASN'T IT? YOU SHOULD ASPIRE TO BE LIKE THAT. MOTIVATIONAL TALK OVER.
 
 ##Algorithm Analysis
