@@ -41,12 +41,12 @@ So when you calculate Big-O notation, find the biggest factor and dump the rest.
 
 Function | Notation
 ---------|---------
-Constant | O(1)
-Logarithmic | O(logn)
-Linear | O(n)
-Quadratic | O(n^2)
-Polynomial | O(n^k) (k>=1)
-Exponential | O(a^n) (n>1)
+Constant | ![O(1)](../res/2.gif)
+Logarithmic | ![O(logn)](../res/1.gif)
+Linear | ![O(n)](../res/3.gif)
+Quadratic | ![O(n^2)](../res/4.gif)
+Polynomial | ![O(n^k) (k>=1)](../res/5.gif)
+Exponential | ![O(a^n) (n>1)](../res/6.gif)
 
 Whenever you have a time efficiency composed of a multiple functions, just take the nastiest function.
 
