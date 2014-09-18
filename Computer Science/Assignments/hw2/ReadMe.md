@@ -1,4 +1,4 @@
-# ReadMe for COMP 15 HW2 
+# ReadMe for COMP 15 HW2 (DUE ON THE 26TH)
 ## Linked Lists
 
 Every assignment you submit you will include a ReadMe file. The name
