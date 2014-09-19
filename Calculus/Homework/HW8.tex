@@ -3,6 +3,8 @@
 \documentclass[english]{article}
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,lmargin=1cm}
 \usepackage{amsmath}
 \usepackage{esint}
 
@@ -36,7 +38,12 @@
 32.
 
 \[
-\int\frac{x+1}{x(x^{2}+4)}dx=\int\left(\frac{A}{x}+\frac{Bx+C}{x^{2}+4}\right)dx\qquad x+1=Ax^{2}+4A+Bx^{2}+Cx\qquad A=\frac{1}{4},B=-\frac{1}{4},C=1\qquad\int\left(\frac{1}{4x}+\frac{-\frac{x}{4}+1}{x^{2}+4}\right)dx=\boxed{\frac{x^{2}-\ln\left|x^{2}+4\right|+4\tan^{-1}\frac{x}{2}}{8}+C}
+\int\frac{x+1}{x(x^{2}+4)}dx=\int\left(\frac{A}{x}+\frac{Bx+C}{x^{2}+4}\right)dx\qquad x+1=Ax^{2}+4A+Bx^{2}+Cx\qquad A=\frac{1}{4},B=-\frac{1}{4},C=1
+\]
+
+
+\[
+\int\left(\frac{1}{4x}+\frac{-\frac{x}{4}+1}{x^{2}+4}\right)dx=\boxed{\frac{x^{2}-\ln\left|x^{2}+4\right|+4\tan^{-1}\frac{x}{2}}{8}+C}
 \]
 
 
