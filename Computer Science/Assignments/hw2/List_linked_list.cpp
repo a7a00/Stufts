@@ -159,11 +159,14 @@ void List_linked_list::insert_at_head(Card c) //???
 void List_linked_list::insert_at_tail(Card c)
 {
 	Card_Node * current = head;
+	Card_Node * newNode = new Card_Node();
+	newNode -> card = c;
 	while(current->next != NULL)
 	{
-		
+		Card_Node * temp = current->next;
+		current = temp;
 	}
-	//set current->next to the new Card_node
+	current->next = newNode;
 }
 
 // inserts a card at an index such that
@@ -177,7 +180,18 @@ void List_linked_list::insert_at_tail(Card c)
 // after the current tail.
 void List_linked_list::insert_at_index(Card c, int index)
 {
-
+	if(index == 0)
+		insert_at_head(c);
+	else if(index==cards_in_hand())
+		insert_at_tail(c);
+	else
+	{
+		Card_Node * prevNode = node_at(index-1);
+		Card_Node * nextNode = node_at(index);
+		Card_Node newNode = new Card_Node();
+		prevNode->next = newNode;
+		newNode->next = nextNode;
+	}
 }
 
 // replaces the card at index
@@ -189,9 +203,21 @@ void List_linked_list::replace_at_index(Card c, int index)
 
 // returns the card at index.
 // allowed to crash if index is not in the list
+Card_Node* List_linked_list::node_at(int index)
+{
+	Card_Node * current = head;
+	for(int i = 0; i < index; i++)
+	{
+		Card_node * temp = current->next;
+		current = temp;
+	}
+	return current;
+}
+
 Card List_linked_list::card_at(int index)
 {
-
+	Card_Node * temp = node_at(index);
+	return temp->card;
 }
 
 // returns true if the card is in the list
