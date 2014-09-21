@@ -249,24 +249,33 @@ bool List_linked_list::has_card(Card c)
 bool List_linked_list::remove(Card c)
 {
 	Card_Node * current = head;
+	cout << "RM: Created new \"current\" card.\n";
 	Card_Node * previous;
+	cout << "RM: Created new \"previous\" card.\n";
 	if(current->card.same_card(c))
 	{
+		cout << "RM: In the conditional!\n";
 		Card f = remove_from_head();
+		cout << "PM: removed from head OK.\n";
 		return true;
 	}
 	previous = current;
+	cout << "RM: No issues reassigning \"previous\".\n";
 	current = previous->next;
+	cout << "RM: No issues reassigning \"current\".\n";
         while(current != NULL)
         {
+		cout << "RM: In the while loop.\n";
                 if(current->card.same_card(c))
 		{
+			cout << "RM: The cards match!\n";
                         previous->next = current->next;
 			delete current;
-			current = previous->next;
 			return true;
 		}
-        }
+		previous = current;
+		current = previous->next;
+	}
         return false;
 
 }
