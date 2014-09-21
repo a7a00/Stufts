@@ -161,12 +161,20 @@ void List_linked_list::insert_at_tail(Card c)
 	Card_Node * current = head;
 	Card_Node * newNode = new Card_Node();
 	newNode -> card = c;
-	while(current->next != NULL)
+	if (current == NULL)
 	{
-		Card_Node * temp = current->next;
-		current = temp;
+		head = new Card_Node;
+		head-> card = c;
 	}
-	current->next = newNode;
+	else
+	{
+		while(current->next != NULL)
+		{
+			Card_Node * temp = current->next;
+			current = temp;
+		}
+		current->next = newNode;
+	}
 }
 
 // inserts a card at an index such that
