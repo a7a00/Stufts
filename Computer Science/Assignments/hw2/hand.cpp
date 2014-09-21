@@ -19,24 +19,30 @@ Hand::~Hand()
 
 void Hand::order_hand_by_suit()
 {
+	//cout << "OBS: We got called.\n";
 	Card temp;
 	int temp_int;
+	//cout << "OBS: Temporary variables are good.\n";
 	// perform an in-place insertion sort
 	int cards_held = hand.cards_in_hand();
 	for (int i=1;i<cards_held;i++) {
 		temp = hand.card_at(i);
+		//cout << "OBS: Accessed the card OK.\n";
 		temp_int = temp.card_int();
 		int j;
 		for (j=i-1;j>=0;j--) {
 			if (hand.card_at(j).card_int() > temp_int) {
+				//cout << "OBS: Comparison working fine.\n";
 				// move card up
 				hand.replace_at_index(hand.card_at(j),j+1);
+				//cout << "OBS: We can replace at an index.\n";
 			}
 			else {
 				break;
 			}
 		}
 		hand.replace_at_index(temp,j+1);
+		//cout << "OBS: Replace at index that's basically an IAH is good.\n";
 	}
 }
 

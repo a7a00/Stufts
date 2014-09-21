@@ -165,11 +165,13 @@ void List_linked_list::insert_at_tail(Card c)
 	{
 		head = new Card_Node;
 		head-> card = c;
+		head-> next = NULL;
 	}
 	else
 	{
 		while(current->next != NULL)
 		{
+			//cout << "The condition passed once!\n";
 			Card_Node * temp = current->next;
 			current = temp;
 		}
