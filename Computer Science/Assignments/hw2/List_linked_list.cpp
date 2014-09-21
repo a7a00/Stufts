@@ -17,7 +17,7 @@ List_linked_list::~List_linked_list()
 	Card_Node * current = head;
 	while (current != NULL)
 	{
-		Card_Node temp = current->next;
+		Card_Node * temp = current->next;
 		delete current;
 		current = temp;
 	}
@@ -136,7 +136,7 @@ void List_linked_list::make_empty()
 	Card_Node * current = head;
 	while (current != NULL)
         {
-                Card_Node temp = current->next;
+                Card_Node * temp = current->next;
                 delete current;
                 current = temp;
         }
@@ -151,7 +151,7 @@ void List_linked_list::insert_at_head(Card c) //???
 	node->card = c;
 	node->next = head; //If the list is empty and head is NULL,
 	//the new head would just point to a NULL as well.
-	head = &node;
+	head = node;
 }
 
 // inserts a card at the tail (final node)
@@ -186,9 +186,9 @@ void List_linked_list::insert_at_index(Card c, int index)
 		insert_at_tail(c);
 	else
 	{
-		Card_Node * prevNode = node_at(index-1);
-		Card_Node * nextNode = node_at(index);
-		Card_Node newNode = new Card_Node();
+		Card_Node* prevNode = node_at(index-1);
+		Card_Node* nextNode = node_at(index);
+		Card_Node* newNode = new Card_Node();
 		prevNode->next = newNode;
 		newNode->next = nextNode;
 	}
@@ -208,7 +208,7 @@ Card_Node* List_linked_list::node_at(int index)
 	Card_Node * current = head;
 	for(int i = 0; i < index; i++)
 	{
-		Card_node * temp = current->next;
+		Card_Node * temp = current->next;
 		current = temp;
 	}
 	return current;
@@ -282,12 +282,12 @@ Card List_linked_list::remove_from_tail()
 	else
 	{
 		Card_Node * current = head;
-		while(current->next->next != null)
+		while(current->next->next != NULL)
 		{
 			Card_Node * temp = current->next;
 			current = temp;
 		}
-		Card_Node temp2 = current->next;
+		Card_Node * temp2 = current->next;
 		Card r = temp2->card;
 		delete temp2;
 		current->next = NULL;
