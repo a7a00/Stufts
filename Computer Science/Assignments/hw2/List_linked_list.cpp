@@ -198,7 +198,7 @@ void List_linked_list::insert_at_index(Card c, int index)
 // A card at index must already exist
 void List_linked_list::replace_at_index(Card c, int index)
 {
-
+	node_at(index)->card = c;
 }
 
 // returns the card at index.
@@ -224,7 +224,13 @@ Card List_linked_list::card_at(int index)
 // returns false if the card is not in the list
 bool List_linked_list::has_card(Card c)
 {
-
+	Card_Node * current = head;
+	while(current != NULL)
+	{
+		if(current->card.same_card(c))
+			return true;
+	}
+	return false;
 }
 
 // removes the card from the list
@@ -232,6 +238,24 @@ bool List_linked_list::has_card(Card c)
 // Returns false if the card was not in the list
 bool List_linked_list::remove(Card c)
 {
+	Card_Node * current = head;
+	Card_Node * previous;
+	if(current->card.same_card(c))
+	{
+		remove_from_head();
+	}
+	previous = current;
+	current = previous->next;
+        while(current != NULL)
+        {
+                if(current->card.same_card(c))
+		{
+                        previous->next = current->next;
+			delete current;
+			current = previous->next;
+		}
+        }
+        return false;
 
 }
 
@@ -241,7 +265,11 @@ bool List_linked_list::remove(Card c)
 // Allowed to fail if list is empty
 Card List_linked_list::remove_from_head()
 {
-
+	Card r = head->card;
+	Card_Node * temp = head->next;
+	delete head;
+	head = temp;
+	return r;
 }
 
 // Removes the card from the tail
@@ -249,7 +277,21 @@ Card List_linked_list::remove_from_head()
 // Allowed to fail if the list is empty
 Card List_linked_list::remove_from_tail()
 {
-
+	if(cards_in_hand() == 1)
+		return remove_from_head();
+	else
+	{
+		Card_Node * current = head;
+		while(current->next->next != null)
+		{
+			Card_Node * temp = current->next;
+			current = temp;
+		}
+		Card_Node temp2 = current->next;
+		Card r = temp2->card;
+		delete temp2;
+		current->next = NULL;
+	}
 }
 
 // Removes the card from index
@@ -257,5 +299,10 @@ Card List_linked_list::remove_from_tail()
 // Allowed to fail if index is beyond the end of the list
 Card List_linked_list::remove_from_index(int index)
 {
-
+	Card r = card_at(index);
+	if(index == 0)
+		remove_from_head();
+	else
+		node_at(index-1)->next = node_at(index)->next;
+	return r;
 }
