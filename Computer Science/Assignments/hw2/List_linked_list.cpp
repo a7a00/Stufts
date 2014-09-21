@@ -243,7 +243,6 @@ bool List_linked_list::remove(Card c)
 	if(current->card.same_card(c))
 	{
 		Card f = remove_from_head();
-		delete f
 		return true;
 	}
 	previous = current;

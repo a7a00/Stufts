@@ -52,6 +52,7 @@ public:
 	
 	// returns the card at index.
 	// allowed to crash if index is not in the list
+	Card_Node * node_at(int index);
 	Card card_at(int index);
 	
 	// returns true if the card is in the list
