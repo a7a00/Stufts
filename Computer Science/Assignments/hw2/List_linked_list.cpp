@@ -159,8 +159,6 @@ void List_linked_list::insert_at_head(Card c) //???
 void List_linked_list::insert_at_tail(Card c)
 {
 	Card_Node * current = head;
-	Card_Node * newNode = new Card_Node();
-	newNode -> card = c;
 	if (current == NULL)
 	{
 		head = new Card_Node;
@@ -169,6 +167,8 @@ void List_linked_list::insert_at_tail(Card c)
 	}
 	else
 	{
+		Card_Node * newNode = new Card_Node();
+		newNode -> card = c;
 		while(current->next != NULL)
 		{
 			//cout << "The condition passed once!\n";

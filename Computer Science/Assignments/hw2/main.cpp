@@ -48,6 +48,9 @@ int main(int argc, char **argv)
 	hand1.print_hand();
 	cout << "New Hand 2:\n";
 	hand2.print_hand();
-
+	//delete deck;
+	//delete deck2;
+	//delete hand1;
+	//delete hand2;
 	return 0;
 }
