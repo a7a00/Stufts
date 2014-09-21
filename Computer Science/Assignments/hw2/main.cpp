@@ -17,7 +17,8 @@ int main(int argc, char **argv)
 
 	Card c('3','H');
 
-	//deck.remove_card(c);
+	cout << "Remove the 3 of Hearts:\n";
+	deck.remove_card(c); //TODO GODDAMMIT THIS CAUSES A HANG
 
 	cout << "Shuffle the deck:\n";
 	deck.shuffle();
@@ -32,6 +33,10 @@ int main(int argc, char **argv)
 		//cout << "Successfully dealt to Hand 2! i is now " << i << ".\n";
 	}
 	cout << "Dealt cards out!\n";
+	cout << "Hand 1:\n";
+	hand1.print_hand();
+	cout << "Hand 2:\n";
+	hand2.print_hand();
 	hand1.order_hand_by_suit();
 	cout << "Ordered Hand 1 by suit!\n";
 	hand2.order_hand_by_suit();
