@@ -242,7 +242,9 @@ bool List_linked_list::remove(Card c)
 	Card_Node * previous;
 	if(current->card.same_card(c))
 	{
-		remove_from_head();
+		Card f = remove_from_head();
+		delete f
+		return true;
 	}
 	previous = current;
 	current = previous->next;
@@ -253,6 +255,7 @@ bool List_linked_list::remove(Card c)
                         previous->next = current->next;
 			delete current;
 			current = previous->next;
+			return true;
 		}
         }
         return false;
