@@ -4,6 +4,7 @@
 
 #include "hand.h"
 
+using namespace std;
 
 int main(int argc, char **argv)
 {
@@ -17,7 +18,10 @@ int main(int argc, char **argv)
 
 	//deck.remove_card(c);
 
+	cout << "Shuffle the deck.";
 	deck.shuffle();
+	deck.print_hand();
+	cout << "print int";
 	deck.print_hand_int();
 
 	for (int i=0;i<5;i++) {
@@ -26,8 +30,11 @@ int main(int argc, char **argv)
 	}
 	hand1.order_hand_by_suit();
 	hand2.order_hand_by_suit();
+	cout << "New Deck:";
 	deck.print_hand();
+	cout << "New Hand 1:";
 	hand1.print_hand();
+	cout << "New Hand 2:";
 	hand2.print_hand();
 
 	return 0;

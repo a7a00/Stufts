@@ -293,6 +293,7 @@ Card List_linked_list::remove_from_tail()
 		Card r = temp2->card;
 		delete temp2;
 		current->next = NULL;
+		return r;
 	}
 }
 
