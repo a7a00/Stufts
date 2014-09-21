@@ -1,35 +1,25 @@
-# ReadMe for COMP 15 HW2 (DUE ON THE 26TH)
-## Linked Lists
+# ReadMe for COMP 15 HW2
+## Overview
 
-Every assignment you submit you will include a ReadMe file. The name
-could be ReadMe, readme, Read-me.txt, readME, ReadMe.md (the “.md”
-stands for “markdown,” which allows lightweight formatting) or almost
-anything you like that has the word read followed by the word me. Exact
-spelling is not important, the contents are.
+This program simulates a deck of cards, with functionality for adding,
+removing and manipulating cards in a hand.
 
-The purpose of the ReadMe file is the same as the little paper insert
-you get in a new appliance -- to give the reader an introduction and
-overview of the product.
+## Files
 
-Your ReadMe file for the assignments **must** include:
+* card.cpp - A playing card. Knows suit and rank, can compare itself to others.
+* hand.cpp - Holds a set of cards. Can add, remove and manipulate its cards.
+* List_linked_list.cpp - Underlying data structure. Basic linked list with
+        functionality for mid-array insertion and deletion.
+* main.cpp - Various test cases.
+* Makefile - For compiling
 
-1.  The purpose of your program
+(All `.cpp` files except `main.cpp` have `.h` files associated with them.)
 
-2.  List of files with one/or two-line summary
+## Data Structure
 
-3.  How to compile it (saying "use included Makefile" is ok)
+This project used a linked list, a collection of elements containing objects 
+and pointers for continuing the list.
 
-4.  Outline of data structure (depending on the assignment)
+## Compiling
 
-5.  Outline of algorithm (depending on the assignment)
-
-The ReadMe file shows the reader, in a quick glance, what the program is
-about and gives a general idea of how it works. For short programs the
-readme file will be short, for more complicated programs the readme file
-will be longer.
-
-Use outline form rather than long discursive paragraphs. A ReadMe file
-is an overview.
-
-There is no correct readme format; within these guidelines, devise your
-own style.
+Use the included makefile with no flags.
