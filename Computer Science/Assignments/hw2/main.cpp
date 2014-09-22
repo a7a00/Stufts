@@ -1,56 +1,265 @@
-#include <iostream>
+//I WAS TOO BUSY HAVING MY LAPTOP STOLEN TO TEST THIS PROPERLY.
+//MANY THANKS TO BEN STEEPHWNSON FOR THIS CODE.
+
+nclude <iostream>
 #include <cstdlib>
 #include <time.h>
-
+#include <assert.h>
 #include "hand.h"
 
-using namespace std;
+void test_cards_in_hand()
+{
+
+	//CASE EMPTY LINKED LIST
+	List_linked_list list;
+	assert(list.cards_in_hand() == 0);
+	//CASE NON-EMPTY
+	Card card;
+	list.insert_at_head(card);
+	assert(list.cards_in_hand() == 1);
+
+	//CASE AFTER REMOVAL
+	list.remove(card);
+	assert(list.cards_in_hand() == 0);
+
+}
+
+void test_make_empty()
+{
+	List_linked_list list;
+	//CASE EMPTY LINKED LIST
+	list.make_empty();
+	assert(list.cards_in_hand() == 0);
+	//CASE NON-EMPTY
+	Card card;
+	list.insert_at_head(card);
+	list.make_empty();
+	assert(list.cards_in_hand() == 0);
+	assert(!list.has_card(card));
+}
+
+void test_insert_at_head()
+{
+
+	List_linked_list list;
+	Card c1;
+	Card c2('3', 'H');
+	//CASE EMPTY LINKED LIST
+	list.insert_at_head(c1);
+	assert(list.has_card(c1));
+	//CASE NON-EMPTY
+	list.insert_at_head(c2);
+	assert(list.has_card(c2));
+}
+
+void test_insert_at_tail()
+{
+	List_linked_list list;
+	Card c1;
+	Card c2('3', 'H');
+	//CASE EMPTY LINKED LIST
+	list.insert_at_tail(c1);
+	assert(list.has_card(c1));
+	//CASE NON-EMPTY
+	list.insert_at_tail(c2);
+	assert(list.has_card(c2));
+}
+
+void test_insert_at_index()
+{
+	List_linked_list list;
+	Card c1('1', 'S');
+	Card c2('2', 'S');
+	Card c3('3', 'S');
+	Card c4('4', 'S');
+
+	//CASE EMPTY LINKED LIST
+	list.insert_at_index(c1, 0);
+	assert(list.has_card(c1));
+
+	//CASE INDEX IS HEAD
+	list.insert_at_index(c2, 0);
+	assert(list.card_at(0).same_card(c2));
+
+	//CASE INDEX IS TAIL
+	list.insert_at_index(c3, 2);
+	assert(list.card_at(2).same_card(c3));
+
+	//CASE INDEX IS IN THE MIDDLE
+	list.insert_at_index(c4, 1);
+	assert(list.card_at(1).same_card(c4));
+}
+
+void test_replace_at_index()
+{
+	List_linked_list list;
+	Card c1('1', 'S');
+	Card c2('2', 'S');
+	Card c3('3', 'S');
+	Card c4('4', 'S');
+
+	list.insert_at_tail(c1);
+	list.insert_at_tail(c2);
+	list.insert_at_tail(c3);
+
+	//CASE AT HEAD
+	list.replace_at_index(c4, 0);
+	//CASE AT TAIL
+	list.replace_at_index(c2, 2);
+	//CASE IN MIDDLE
+	list.replace_at_index(c3, 1);
+
+	assert(list.card_at(0).same_card(c4));
+	assert(list.card_at(1).same_card(c3));
+	assert(list.card_at(2).same_card(c2));
+}
+
+void test_card_at()
+{
+	List_linked_list list;
+	Card c1('1', 'S');
+	Card c2('2', 'S');
+	Card c3('3', 'S');
+
+	list.insert_at_tail(c1);
+	list.insert_at_tail(c2);
+	list.insert_at_tail(c3);
+
+	assert(list.card_at(0).same_card(c1));
+	assert(list.card_at(1).same_card(c2));
+	assert(list.card_at(2).same_card(c3));
+
+}
+
+void test_has_card()
+{
+	List_linked_list list;
+	Card c1('1', 'S');
+	Card c2('2', 'S');
+	Card c3('3', 'S');
+
+	list.insert_at_tail(c1);
+	list.insert_at_tail(c2);
+
+	assert(list.has_card(c1));
+	assert(list.has_card(c2));
+	assert(!list.has_card(c3));
+}
+
+void test_remove()
+{
+	List_linked_list list;
+	Card c1('1', 'S');
+	Card c2('2', 'S');
+	Card c3('3', 'S');
+	Card c4('4', 'S');
+	Card c5('5', 'S');
+
+	//CASE EMPTY LINKED LIST
+	assert(!list.remove(c2));
+	//CASE HEAD
+	list.insert_at_tail(c1);
+	list.insert_at_tail(c2);
+	list.insert_at_tail(c3);
+	list.insert_at_tail(c4);
+
+	assert(list.remove(c1));
+	assert(!list.has_card(c1));
+	assert(list.cards_in_hand() == 3);
+
+	//CASE MIDDLE
+	assert(list.remove(c3));
+	assert(!list.has_card(c3));
+	assert(list.cards_in_hand() == 2);
+
+	//CASE TAIL
+	assert(list.remove(c4));
+	assert(!list.has_card(c4));
+	assert(list.cards_in_hand() == 1);
+
+	//CASE NOT IN LIST
+	assert(!list.remove(c5));
+	assert(list.cards_in_hand() == 1);
+}
+
+void test_remove_from_head()
+{
+	List_linked_list list;
+	Card c1('1', 'S');
+	Card c2('2', 'S');
+	Card c3('3', 'S');
+	list.insert_at_head(c1);
+	//CASE ONLY ONE ELEMENT
+	assert(list.remove_from_head().same_card(c1));
+	//CASE MULTIPLE ELEMENTS
+	list.insert_at_head(c2);
+	list.insert_at_head(c3);
+	assert(list.remove_from_head().same_card(c3));
+}
+
+void test_remove_from_tail()
+{
+	List_linked_list list;
+	Card c1('1', 'S');
+	Card c2('2', 'S');
+	Card c3('3', 'S');
+	list.insert_at_tail(c1);
+	//CASE ONLY ONE ELEMENT
+	assert(list.remove_from_tail().same_card(c1));
+	//CASE MULTIPLE ELEMENTS
+	list.insert_at_tail(c2);
+	list.insert_at_tail(c3);
+	assert(list.remove_from_tail().same_card(c3));
+}
+
+void test_remove_from_index()
+{
+	List_linked_list list;
+	Card c1('1', 'S');
+	Card c2('2', 'S');
+	Card c3('3', 'S');
+	Card c4('4', 'S');
+	Card c5('5', 'S');
+	Card c6('6', 'S');
+	
+	//CASE ONLY ONE ELEMENT
+	list.insert_at_tail(c1);
+	assert(list.remove_from_index(0).same_card(c1));
+	assert(list.cards_in_hand() == 0);
+	
+	//CASE HEAD
+	list.insert_at_tail(c2);
+	list.insert_at_tail(c3);
+	assert(list.remove_from_index(0).same_card(c2));
+	assert(list.card_at(0).same_card(c3));
+
+	//CASE MIDDLE
+	list.insert_at_tail(c4);
+	list.insert_at_tail(c5);
+	list.insert_at_tail(c6);
+	assert(list.remove_from_index(1).same_card(c4));
+	assert(list.cards_in_hand() == 3);
+	//CASE TAIL
+	assert(list.remove_from_index(2).same_card(c6));
+	assert(list.cards_in_hand() == 2);
+}
+
 
 int main(int argc, char **argv)
 {
-	Hand deck, deck2, hand1, hand2;
+	test_cards_in_hand();
+	test_make_empty();
+	test_card_at();
+	test_has_card();
 
-	cout << "Create a deck:\n";
-	deck.create_deck();
-	//deck.read_deck();
-	deck.print_hand();
+	test_insert_at_head();
+	test_insert_at_tail();
+	test_insert_at_index();
+	test_replace_at_index();
 
-	Card c('3','H');
-
-	cout << "Remove the 3 of Hearts:\n";
-	deck.remove_card(c);
-	deck.print_hand();
-
-	cout << "Shuffle the deck:\n";
-	deck.shuffle();
-	deck.print_hand();
-	cout << "Test int printing:\n";
-	deck.print_hand_int();
-
-	for (int i=0;i<10;i++) {
-		deck.deal_card_from_top(hand1);
-		//cout << "Successfully dealt to Hand 1! i is now " << i << ".\n";
-		deck.deal_card_from_top(hand2);
-		//cout << "Successfully dealt to Hand 2! i is now " << i << ".\n";
-	}
-	cout << "Dealt cards out!\n";
-	cout << "Hand 1:\n";
-	hand1.print_hand();
-	cout << "Hand 2:\n";
-	hand2.print_hand();
-	hand1.order_hand_by_suit();
-	cout << "Ordered Hand 1 by suit!\n";
-	hand2.order_hand_by_suit();
-	cout << "Ordered Hand 2 by suit!\n";
-	cout << "New Deck:\n";
-	deck.print_hand();
-	cout << "New Hand 1\n";
-	hand1.print_hand();
-	cout << "New Hand 2:\n";
-	hand2.print_hand();
-	//delete deck;
-	//delete deck2;
-	//delete hand1;
-	//delete hand2;
-	return 0;
+	test_remove_from_head();
+	test_remove_from_tail();
+	test_remove_from_index();
+	test_remove();
+	std::cout << "No red tape? You're good =)" << std::endl;
 }
