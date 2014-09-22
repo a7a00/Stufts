@@ -161,21 +161,28 @@ void List_linked_list::insert_at_tail(Card c)
 	Card_Node * current = head;
 	if (current == NULL)
 	{
-		head = new Card_Node;
+		//cout << "This part works.\n";
+		head = new Card_Node();
 		head-> card = c;
 		head-> next = NULL;
 	}
 	else
 	{
 		Card_Node * newNode = new Card_Node();
+		cout << "Card created\n";
 		newNode -> card = c;
+		cout << "Card assigned\n";
 		while(current->next != NULL)
 		{
+			cout << "Loop entered.\n";
 			//cout << "The condition passed once!\n";
 			Card_Node * temp = current->next;
+			cout << "Temp created.\n";
 			current = temp;
+			cout << "Current reassigned.\n";
 		}
 		current->next = newNode;
+		cout << "Current->next assigned.\n";
 	}
 }
 

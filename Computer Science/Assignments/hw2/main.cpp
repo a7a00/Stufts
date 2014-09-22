@@ -1,11 +1,13 @@
 //I WAS TOO BUSY HAVING MY LAPTOP STOLEN TO TEST THIS PROPERLY.
 //MANY THANKS TO BEN STEEPHWNSON FOR THIS CODE.
 
-nclude <iostream>
+#include <iostream>
 #include <cstdlib>
 #include <time.h>
 #include <assert.h>
 #include "hand.h"
+
+using namespace std;
 
 void test_cards_in_hand()
 {
@@ -134,12 +136,15 @@ void test_card_at()
 void test_has_card()
 {
 	List_linked_list list;
+	cout << "HC: We have a list.\n";
 	Card c1('1', 'S');
 	Card c2('2', 'S');
 	Card c3('3', 'S');
-
+	cout << "HC: We have cards.\n";
 	list.insert_at_tail(c1);
+	cout << "HC: C1 inserted OK.\n";
 	list.insert_at_tail(c2);
+	cout << "HC: C2 inserted OK.";
 
 	assert(list.has_card(c1));
 	assert(list.has_card(c2));
@@ -247,19 +252,31 @@ void test_remove_from_index()
 
 int main(int argc, char **argv)
 {
+	cout << "Testing cards_in_hand\n";
 	test_cards_in_hand();
+	cout << "Testing make_empty()\n";
 	test_make_empty();
+	cout << "Testing card_at()\n";
 	test_card_at();
+	cout << "Testing has_card()\n";
 	test_has_card();
 
+	cout << "Testing insert_at_head()\n";
 	test_insert_at_head();
+	cout << "Testing insert_at_tail()\n";
 	test_insert_at_tail();
+	cout << "Testing insert_at_index()\n";
 	test_insert_at_index();
+	cout << "Testing replace_at_index\n";
 	test_replace_at_index();
 
+	cout << "Testing remove_from_head()\n";
 	test_remove_from_head();
+	cout << "Testing remove_from_tail()\n";
 	test_remove_from_tail();
+	cout << "Testing remove_from_index()\n";
 	test_remove_from_index();
+	cout << "Testing remove()\n";
 	test_remove();
-	std::cout << "No red tape? You're good =)" << std::endl;
+	cout << "No red tape? You're good =)" << endl;
 }
