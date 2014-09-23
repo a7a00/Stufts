@@ -1,0 +1,97 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[letterpaper,english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{esint}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\pdfpageheight\paperheight
+\pdfpagewidth\paperwidth
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{amssymb}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\title{Homework 9: Improper Integrals I}
+
+
+\author{Alexander Gould, Section 3}
+
+
+\date{September 23, 2014}
+
+\maketitle
+5.
+
+\[
+\int_{1}^{\infty}\frac{1}{x^{2}}dx=\lim_{n\to+\infty}\int_{1}^{n}\frac{dn}{n^{2}}=\lim_{n\to+\infty}\left(1-\frac{1}{n}\right)=\boxed{1}
+\]
+
+
+9.
+
+\[
+\int_{0}^{\infty}e^{-2x}dx=\lim_{n\to+\infty}\left.-\frac{e^{-2n}}{2}\right|_{0}^{n}=\lim_{n\to+\infty}\left(\frac{e^{-2n}}{2}-\frac{1}{2}\right)=\boxed{\frac{1}{2}}
+\]
+
+
+10.
+
+\[
+\int_{1}^{\infty}\frac{1}{x\ln x}dx=\lim_{n\to+\infty}\left.\ln\ln x\right|_{1}^{n}=\lim_{n\to+\infty}\left(\ln\ln n+\infty\right)\boxed{\notin\ensuremath{\mathbb{R}}}
+\]
+
+
+13.
+
+\[
+\int_{0}^{\infty}e^{-x^{2}}dx=???
+\]
+
+
+15.
+
+\[
+\int_{2}^{\infty}\frac{\cos\frac{\pi}{x}}{x^{2}}dx=\lim_{n\to+\infty}\left.-\frac{\sin\frac{\pi}{x}}{\pi}\right|_{2}^{n}=\lim_{n\to+\infty}\left(0+\frac{1}{\pi}\right)=\boxed{\frac{1}{\pi}}
+\]
+
+
+20.
+
+\[
+\int_{1}^{\infty}\frac{\tan^{-1}x}{x^{2}+1}dx=\lim_{n\to+\infty}\left.\frac{\tan^{-2}x}{2}\right|_{1}^{n}=\boxed{\frac{3\pi^{2}}{32}}
+\]
+
+
+22. Find the volume when the reigon $\int_{1}^{\infty}x^{-2}dx$ is
+revolved around the x-axis.
+
+\[
+2\pi*\lim_{n\to+\infty}\left.\frac{1}{n}\right|_{1}^{n}=2\pi
+\]
+
+
+25. Same as above, but with $\int_{2}^{\infty}\frac{1}{\sqrt{x}\ln x}dx$
+
+\[
+\lim_{n\to+\infty}\left.Ei\left(\frac{\ln x}{2}\right)\right|_{2}^{\infty}\boxed{\notin\mathbb{R}}
+\]
+
+
+54. Use integration by parts:
+
+\[
+\int_{1}^{\infty}\frac{\ln x}{x^{2}}dx=\lim_{n\to+\infty}\left.-\frac{\ln\left(x+1\right)}{x}\right|_{1}^{n}=\left(0-0\right)=\boxed{0}
+\]
+
+\end{document}
