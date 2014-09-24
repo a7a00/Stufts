@@ -89,13 +89,15 @@ void test_insert_at_index()
 
 	//CASE INDEX IS IN THE MIDDLE
 	list.insert_at_index(c4, 1);
+	list.card_at(1).print_card();
+	c4.print_card();
 	assert(list.card_at(1).same_card(c4));
 }
 
 void test_replace_at_index()
 {
 	List_linked_list list;
-	Card c1('1', 'S');
+	Card c1('A', 'S');
 	Card c2('2', 'S');
 	Card c3('3', 'S');
 	Card c4('4', 'S');

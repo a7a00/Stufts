@@ -246,6 +246,7 @@ bool List_linked_list::has_card(Card c)
 	{
 		if(current->card.same_card(c))
 			return true;
+		current = current -> next;
 	}
 	return false;
 }
