@@ -1,8 +1,8 @@
 #
 # Makefile for List_linked_list
 #
-#CXX = clang++
-CXX = g++
+CXX = clang++
+#CXX = g++
 FLAGS =  -g -Wall 
 
 cards_linked_list: List_linked_list.cpp List_linked_list.h \
