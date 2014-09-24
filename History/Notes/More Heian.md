@@ -46,7 +46,7 @@ There's no real need to work for these elites, so they develop some traditional 
 
 Many of these took the form of contests. Those with better taste were afforded higher rank, and sometimes better pay. Society was driven entirely by sophisticated taste and asthetic.
 
-[!WAHAHA](../res/Rarity.png)
+![WAHAHA](../res/Rarity.png)
 
 Yeah, Rarity would have liked it.
 
