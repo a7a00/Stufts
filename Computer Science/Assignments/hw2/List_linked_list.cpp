@@ -197,6 +197,8 @@ void List_linked_list::insert_at_tail(Card c)
 // after the current tail.
 void List_linked_list::insert_at_index(Card c, int index)
 {
+	//c.print_card();
+	//cout << "\n";
 	if(index == 0)
 		insert_at_head(c);
 	else if(index==cards_in_hand())
@@ -206,6 +208,7 @@ void List_linked_list::insert_at_index(Card c, int index)
 		Card_Node* prevNode = node_at(index-1);
 		Card_Node* nextNode = node_at(index);
 		Card_Node* newNode = new Card_Node();
+		newNode->card = c;
 		prevNode->next = newNode;
 		newNode->next = nextNode;
 	}
@@ -246,6 +249,7 @@ bool List_linked_list::has_card(Card c)
 	{
 		if(current->card.same_card(c))
 			return true;
+		current = current -> next;
 	}
 	return false;
 }
@@ -259,6 +263,7 @@ bool List_linked_list::remove(Card c)
 	//cout << "RM: Created new \"current\" card.\n";
 	Card_Node * previous;
 	//cout << "RM: Created new \"previous\" card.\n";
+	if(current == NULL) return false;
 	if(current->card.same_card(c))
 	{
 		//cout << "RM: In the conditional!\n";

@@ -88,14 +88,24 @@ void test_insert_at_index()
 	assert(list.card_at(2).same_card(c3));
 
 	//CASE INDEX IS IN THE MIDDLE
+	cout << "Old List: ";
+	list.print_list();
+	cout << "\n";
 	list.insert_at_index(c4, 1);
+	cout << "New List: ";
+	list.print_list();
+	cout << "\n";
+	list.card_at(1).print_card();
+	cout << "\n";
+	c4.print_card();
+	cout << "\n";
 	assert(list.card_at(1).same_card(c4));
 }
 
 void test_replace_at_index()
 {
 	List_linked_list list;
-	Card c1('1', 'S');
+	Card c1('A', 'S');
 	Card c2('2', 'S');
 	Card c3('3', 'S');
 	Card c4('4', 'S');
@@ -279,4 +289,5 @@ int main(int argc, char **argv)
 	cout << "Testing remove()\n";
 	test_remove();
 	cout << "No red tape? You're good =)" << endl;
+	return 0;
 }
