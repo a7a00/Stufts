@@ -92,7 +92,6 @@ void test_insert_at_index()
 	list.print_list();
 	cout << "\n";
 	list.insert_at_index(c4, 1);
-<<<<<<< HEAD
 	cout << "New List: ";
 	list.print_list();
 	cout << "\n";
@@ -100,10 +99,6 @@ void test_insert_at_index()
 	cout << "\n";
 	c4.print_card();
 	cout << "\n";
-=======
-	list.card_at(1).print_card();
-	c4.print_card();
->>>>>>> cc353085b18e34d0186ee3c2fb3af26241278fab
 	assert(list.card_at(1).same_card(c4));
 }
 
