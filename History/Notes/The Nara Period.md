@@ -47,18 +47,18 @@ These schools cooperate with only no fighting and work together. However, only t
 
 This female emperor rules for 9 years, abdicates in favor of hr cousin, and reascends after her cousin was exiled to Awaji Island. She's famous for her promotion of Buddhism, and her fondness for a priest named Dokyo. After curing her of an illness, Dokyo goes full Rasputin, and becomes her inseperable counselor. Histories don't paint him too favorably. Popular songs of the time went like this:
 
-*Don't be contemptuous of monks because of their robes,*  
-*For under their skirts are hung garters and hammers.*  
-*When hammers erect themselves,"*  
-*The monks turn out to be awesome lords!"*  
+> *Don't be contemptuous of monks because of their robes,*  
+> *For under their skirts are hung garters and hammers.*  
+> *When hammers erect themselves,"*  
+> *The monks turn out to be awesome lords!"*  
 
-*Straight at the root of the Bodhi tree*  
-*And you will find a venerable master standing,*  
-*Satiated and fat!*
+> *Straight at the root of the Bodhi tree*  
+> *And you will find a venerable master standing,*  
+> *Satiated and fat!*
 
 Histories were just as nasty:
 
-*In 765, Dharma Master Dokyo of the Yuge had intercourse with the Empress on the same pillow, hearing the affairs of state and ruling over the country together.*
+> *In 765, Dharma Master Dokyo of the Yuge had intercourse with the Empress on the same pillow, hearing the affairs of state and ruling over the country together.*
 
 She declares her desire to transfer power to Dokyo and a theocracy of Buddhist clerics. A courtier named Wake no Kiyomaro goes to the shrine of Hachiman (Jingo's chiled) in Kyushu. (Both a powerful Kami and a Bodhisattva) He claims to recieve a vision. (Probably untrue) He claims to have heard that subjects cannot be made lords and that the wicked should be swept away. This proclamation was made by someone in the *same school* as Dokyo.
 
