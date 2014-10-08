@@ -49,7 +49,7 @@ All right? Good.
 To understand this, we need to look at our friends the Taira and the Minamoto.
 
 Taira | Minamoto
-------------------
+--------|----------
 Tadamori | Tameyoshi
 Kiyomori (son) | Yoshitomo (son)
  | Yoritomo (grandson)
