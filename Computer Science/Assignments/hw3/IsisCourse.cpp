@@ -37,32 +37,72 @@ void IsisCourse::set_class_cap(int cap) {
 IsisCourse::ENROLLMENT_STATUS IsisCourse::enroll_student(Student s) {
 	// See the enrollment logic from the assignment handout or
 	// the IsisCourse.h file!
-	// TODO: Student writes code here
+	// TODONE: Student writes code here
 	if(s.major)
 	{
 		if (roster.size() < class_capacity)
 		{
 			if(roster.add(s)) return ENROLLED;
+			else return NONE;
 		}
-		//Else add to major q
+		else major_waitlist.enqueue(s);
 	}
+	else other_waitlist.enqueue(s);
 }
 
 bool IsisCourse::drop_student(Student s) {
 	bool found_student = false; // if we find the student to drop
-	// TODO: Student writes code here
+	// TODONE: Student writes code here
 
-
+	if(roster.drop(s)) found_student = true;
+	if(drop_from_queue(major_waitlist, s)) found_student = true;
+	if(drop_from_queue(other_waitlist, s)) found student = true;
 	// if we dropped a student, there should be room on
 	// the roster
 	update_enrollments();
 	return found_student;
 }
 
-int IsisCourse::waitlist_position(ENROLLMENT_STATUS status, Student s) {
-	// TODO: Student writes code here
-
+bool IsisCourse::drop_from_queue(Queue q, Student s)
+{
+	bool r = false;
+	Queue nq = new Queue();
+	while(!(q.is_empty()))
+	{
+		Student temp = q.dequeue();
+		if(temp.name == s.name && temp.maj == s.maj) r = true;
+		else nq.enqueue(temp);
+	}
+	delete q;
+	q = nq;
+	return r;
 }
+
+int IsisCourse::waitlist_position(ENROLLMENT_STATUS status, Student s) {
+	// TODONE: Student writes code here
+	if(status == MAJOR_WAITLIST) return find_in_queue(major_waitlist, s);
+	if(status == OTHER_WAITLIST) return find_in_queue(other_waitlist, s);
+	else return -1;
+}
+
+int IsisCourse::find_in_queue(Queue q, Student s)
+{
+        int r = 0;
+	bool flag = false;
+        Queue nq = new Queue();
+        while(!(q.is_empty()))
+        {
+                Student temp = q.dequeue();
+                if(temp.name == s.name && temp.maj == s.maj) flag = true;
+		if(!flag) r++;
+                nq.enqueue(temp);
+        }
+        delete q;
+        q = nq;
+        if(flag) return r;
+	else return -1;
+}
+
 
 IsisCourse::ENROLLMENT_STATUS IsisCourse::status(Student s) {
 	// returns an ENROLLMENT_STATUS that says which list
