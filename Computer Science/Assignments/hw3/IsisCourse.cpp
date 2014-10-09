@@ -8,14 +8,23 @@
 
 IsisCourse::IsisCourse() {
 	class_capacity = 0; // no students allowed in yet
+	roster = new Set();
+        major_waitlist = new Queue();
+        other_waitlist = new Queue();
 }
 
 IsisCourse::IsisCourse(int init_capacity) {
-	// TODO: Student writes code here
+	// TODONE: Student writes code here
+	class_capacity = init_capacity;
+	roster = new Set();
+	major_waitlist = new Queue();
+	other_waitlist = new Queue();
 }
 
 IsisCourse::~IsisCourse() {
-	// nothing to do
+	delete roster;
+	delete major_waitlist;
+	delete other_waitlist;
 }
 
 void IsisCourse::set_class_cap(int cap) {
@@ -29,6 +38,14 @@ IsisCourse::ENROLLMENT_STATUS IsisCourse::enroll_student(Student s) {
 	// See the enrollment logic from the assignment handout or
 	// the IsisCourse.h file!
 	// TODO: Student writes code here
+	if(s.major)
+	{
+		if (roster.size() < class_capacity)
+		{
+			if(roster.add(s)) return ENROLLED;
+		}
+		//Else add to major q
+	}
 }
 
 bool IsisCourse::drop_student(Student s) {

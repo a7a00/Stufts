@@ -42,6 +42,7 @@ private:
 	// You may update the private section of this class, but
 	// not the public section.
 	Student *queue_array; // the dynamic array for the queue
+	void incrementPointer(int &i)
 	int capacity; // the capacity of the queue 
 	int size; // how many characters there are in the queue
 	int front; // the front of the queue

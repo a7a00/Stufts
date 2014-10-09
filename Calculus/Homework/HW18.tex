@@ -1,0 +1,88 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,lmargin=2cm,rmargin=2cm}
+\usepackage{esint}
+\usepackage{babel}
+\begin{document}
+
+\title{Homework 18: The Integral Test and P-Series}
+
+
+\author{Alexander Gould, Section 3}
+
+\maketitle
+2. Is it true as the terms of a positive series approach 0 that the
+series converges? Give an example.
+
+Yes. As the sequence approaches 0, there's less and less to add, and
+the function levels off. $\left(0.6+0.06+0.006+\ldots+0.\overline{0}6=\frac{2}{3}\right)$
+
+3. Can the integral Test be used to determine is a series diverges?
+
+Yep! If the integral diverges, so does the series.
+
+4. For what values of $p$ does the series $\sum_{k=1}^{\infty}\frac{1}{k^{p}}$
+converge? For what values does it diverge?
+
+It converges when $p$ is positive. When $p$ is negative, the thing
+osccilates and diverges.
+
+23. Use the Integral Test to test the convergence of $\sum_{k=2}^{\infty}\frac{1}{k\ln k}$.
+
+$\int_{2}^{\infty}\frac{1}{x\ln x}dx$ doesn't converge to anything,
+which means the series diverges.
+
+25. Use the Integral Test to test the convergence of $\sum_{k=1}^{\infty}ke^{-2k^{3}}$.
+
+The integral of the summed term will eventually converge to something
+as the base is overpowered by the exponent, so this series converges.
+
+28. Use the Integral Test to test the convergence of $\sum_{k=2}^{\infty}\frac{1}{k\left(\ln k\right)^{2}}$.
+
+This integral of the summed term gradually gets bigger and doesn't
+approach anything, so this series diverges.
+
+30.
+
+Use the Integral Test to test the convergence of $\sum_{k=2}^{\infty}\frac{1}{k\ln k\ln\left(\ln k\right)}$.
+
+This integral of the summed term also gets bigger and doesn't approach
+anything, so this series diverges as well.
+
+31. Determine the convergence or divergence of $\sum_{k=1}^{\infty}\frac{1}{k^{10}}$.
+
+The exponent is bigger than 1. The series converges.
+
+33. Determine the convergence or divergence of $\sum_{k=3}^{\infty}\frac{1}{\left(k-2\right)^{4}}$.
+
+Doesn't matter what's in the denominator, if the exponent is bigger
+than 1, we converge.
+
+43A. True or false? If a summed series starting at 1 converges, that
+same series starting at 10 converges.
+
+True. Convergence has to do with the end of a sequence, not the beginning.
+
+43B. True or false? If a summed series starting at 1 diverges, that
+same series starting at 10 diverges.
+
+True. Dinvergence also has to do with the end of a sequence, not the
+beginning.
+
+43C. If the sum of $a_{n}$ converges, will the sum of $a_{n}+.000001$?
+
+No. As you keep adding this new constant, the sequence gradually converges
+to a linear function, not a constant.
+
+43D. If the sum of $p^{k}$ diverges, will the sum of $\left(a_{n}+.000001\right)^{k}$?
+
+Yes. The constant won't affect the behavior of the exponent.
+
+43E. If the sum of $p^{k}$ diverges, will the sum of $p^{k+.000001}$?
+
+No. Eventually, the exponent will cross 1, and the series will converge.
+\end{document}
