@@ -4,9 +4,9 @@
 
 For some reason, your dumb ass never does the right assignment! The homework due tomorow is Homework 17. SEVENTEEN. ONE, SEVEN. Lo entiendes? 分かるのか？ OK. Good.
 
-## "Positive" series.
+## Series.
 
-Suppose we have 2 postitive convergent series, ![1](../res/Lesson\ 1/1.gif) and ![2](../res/Lesson\ 1/2.gif). If C is any constant, ![1](../res/Lesson\ 1/1.gif) converges to the integral of the summed term ![3](../res/Lesson\ 1/3.gif). Secondly ![5](../res/Lesson\ 1/5.gif) converges to ![6](../res/Lesson\ 1/6.gif)
+Suppose we have 2 convergent series, ![1](../res/Lesson\ 1/1.gif) and ![2](../res/Lesson\ 1/2.gif). If C is any constant, ![1](../res/Lesson\ 1/1.gif) converges to the integral of the summed term ![3](../res/Lesson\ 1/3.gif). Secondly ![5](../res/Lesson\ 1/5.gif) converges to ![6](../res/Lesson\ 1/6.gif)
 
 ## The Divergence Test
 
