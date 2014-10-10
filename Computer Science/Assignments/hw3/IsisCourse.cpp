@@ -107,8 +107,11 @@ int IsisCourse::find_in_queue(Queue q, Student s)
 IsisCourse::ENROLLMENT_STATUS IsisCourse::status(Student s) {
 	// returns an ENROLLMENT_STATUS that says which list
 	// (or none) that the student is on.
-
-	// TODO: Student writes code here
+	// TODONE: Student writes code here
+	if(roster.is_enrolled(s)) return ENROLLED;
+	else if(find_in_queue(major_waitlist, s) != -1) return MAJOR_WAITLIST;
+	else if(find_in_queue(other_waitlist, s) != -1) return OTHER_WAITLIST;
+	else return NONE;
 }
 
 void IsisCourse::print_list(ENROLLMENT_STATUS status) {
@@ -125,14 +128,31 @@ void IsisCourse::print_list(ENROLLMENT_STATUS status) {
 		waitlist_queue = &other_waitlist;
 	}
 	// now handle printing the queue
-
-	// TODO: Student writes code here
-}
+	// TODONE: Student writes code here
+	int r = 1;
+	Queue nq = new Queue();
+        while(!(q.is_empty()))
+        {
+                Student temp = q.dequeue();
+                cout << r << ". " << temp.name << "\n";
+		r++;
+                nq.enqueue(temp);
+        }
+        delete q;
+        q = nq;
+	}
 
 void IsisCourse::update_enrollments() {
 	// put students from the waitlists into the class
 	// in priority (majors first, then others), up to
 	// the class capacity.
-
-	// TODO: Student writes code here
+	// TODONE: Student writes code here
+	while(roster.size() > class_capacity && !(major_waitlist.is_empty()))
+	{
+		bool temp = roster.add(major_queue.dequeue());
+	}
+	while(roster.size() > class_capacity && !(other_waitlist.is_empty()))
+        {
+                bool temp = roster.add(other_queue.dequeue());
+        }
 }
