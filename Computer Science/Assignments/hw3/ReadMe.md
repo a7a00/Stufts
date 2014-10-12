@@ -1,41 +1,30 @@
-# ReadMe for COMP 15 HW3
-## ISIS Course Roster and Waitlists
+# ReadMe for COMP 15 HW3 - ISIS Course Roster and Waitlists
 
-Every assignment you submit you will include a ReadMe file. The name
-could be ReadMe, readme, Read-me.txt, readME, ReadMe.md (the “.md”
-stands for “markdown,” which allows lightweight formatting) or almost
-anything you like that has the word read followed by the word me. Exact
-spelling is not important, the contents are.
+## Overview
 
-The purpose of the ReadMe file is the same as the little paper insert
-you get in a new appliance -- to give the reader an introduction and
-overview of the product.
+This program allows users to add students to a course, much as you can on ISIS. (Or SIS, as we're now calling it for obvious reasons). Students with majors will be placed in the course right away, or on a priority waitlist if there's no space. Non-major students will be put on a special waitlist and will only be added in once everyone's signed up.
 
-Your ReadMe file for the assignments **must** include:
+## Files
 
-1.  The purpose of your program
+* `hw3` - The binary executable.
+* `main.cpp` - Used for testing. Creates students, adds them, expands the class size and repeats to make sure everything's working.
+* `IsisCourse.cpp` - Controls adding students and expanding the class. Also determines where prospecive studetns should go.
+* `IsisCourse.h` - Function definitions for `Isiscourse.cpp`.
+* `Set.cpp` - Acts as the roster for the class. Can have elements added to it and report its own size/emptiness.
+* `Set.h` - Function definitions for `Set.cpp`.
+* `Queue.cpp` - Acts as the waitlist. Can add elements to the end of the queue and pop elements off the beginning.
+* `Queue.h` - Function definitions for `Queue.cpp`.
+* `Student.h` - Contains information about the student, including name, major and enrollment. Also includes the struct for enrollmnt.
+* `Makefile`- For compiling.
 
-2.  List of files with one/or two-line summary
+## Compiling
 
-3.  How to compile it (saying "use included Makefile" is ok)
+Use the included makefile with no flags.
 
-4.  Outline of data structure (depending on the assignment)
+## Data Structures
 
-5.  Outline of algorithm (depending on the assignment)
+This project relies on a set for the class roster, queues for the waitlist.
 
-6.  A list of people who materially helped you on the assignment. If
-    you worked with a friend and you shared ideas, you need to 
-    list that person, e.g., "Josh Whedon helped me on this assignment".
-    You do not need to list TAs, or professors, but you may feel free
-    to do so.
+## Acknowledgements
 
-The ReadMe file shows the reader, in a quick glance, what the program is
-about and gives a general idea of how it works. For short programs the
-readme file will be short, for more complicated programs the readme file
-will be longer.
-
-Use outline form rather than long discursive paragraphs. A ReadMe file
-is an overview.
-
-There is no correct readme format; within these guidelines, devise your
-own style.
+Special thanks to my good friend caffiene. Also to my roommate who helped me figure out a pointer bug.
