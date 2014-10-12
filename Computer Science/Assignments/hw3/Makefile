@@ -1,7 +1,8 @@
 #
 # Makefile for ISIS Course
 #
-CXX = clang++
+##CXX = clang++
+CXX = g++
 FLAGS =  -g -Wall 
 
 isis_course: IsisCourse.cpp IsisCourse.h \

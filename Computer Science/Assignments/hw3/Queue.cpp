@@ -9,14 +9,14 @@
 
 Queue::Queue()
 {
-	capacity = INITIAL_SIZE;
-	queue_array = new Student[INITIAL_SIZE];
+	capacity = 2;
+	queue_array = new Student[2];
 	size = 0;
 	back = 0;
 	front = 0;
 }
 
-SandwichList::~SandwichList()
+Queue::~Queue()
 {
 	delete[] queue_array;
 }
@@ -48,7 +48,7 @@ Student Queue::dequeue()
 void Queue::enqueue(const Student& c)
 {
 	queue_array[back] = c;
-	orderCount++;
+	size++;
 	incrementPointer(back);
 	if(front == back) expand();
 }

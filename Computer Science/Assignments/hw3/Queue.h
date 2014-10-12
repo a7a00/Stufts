@@ -26,7 +26,7 @@ public:
 	~Queue();
 
 	// enqueue a char onto at the back of the queue
-	void enqueue(Student c);
+	void enqueue(const Student& c);
 
 	// dequeue a char from the front of the queue
 	Student dequeue();

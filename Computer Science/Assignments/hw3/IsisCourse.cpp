@@ -6,25 +6,27 @@
 #include <iostream>
 #include "IsisCourse.h"
 
+using namespace std;
+
 IsisCourse::IsisCourse() {
 	class_capacity = 0; // no students allowed in yet
-	roster = new Set();
-        major_waitlist = new Queue();
-        other_waitlist = new Queue();
+	//roster = new Set();
+        //major_waitlist = new Queue();
+        //other_waitlist = new Queue();
 }
 
 IsisCourse::IsisCourse(int init_capacity) {
 	// TODONE: Student writes code here
 	class_capacity = init_capacity;
-	roster = new Set();
-	major_waitlist = new Queue();
-	other_waitlist = new Queue();
+	//roster = new Set();
+	//major_waitlist = new Queue();
+	//other_waitlist = new Queue();
 }
 
 IsisCourse::~IsisCourse() {
-	delete roster;
-	delete major_waitlist;
-	delete other_waitlist;
+	//delete roster;
+	//delete major_waitlist;
+	//delete other_waitlist;
 }
 
 void IsisCourse::set_class_cap(int cap) {
@@ -45,9 +47,17 @@ IsisCourse::ENROLLMENT_STATUS IsisCourse::enroll_student(Student s) {
 			if(roster.add(s)) return ENROLLED;
 			else return NONE;
 		}
-		else major_waitlist.enqueue(s);
+		else
+		{
+			major_waitlist.enqueue(s);
+			return MAJOR_WAITLIST;
+		}
 	}
-	else other_waitlist.enqueue(s);
+	else
+	{
+		other_waitlist.enqueue(s);
+		return OTHER_WAITLIST;
+	}
 }
 
 bool IsisCourse::drop_student(Student s) {
@@ -56,7 +66,7 @@ bool IsisCourse::drop_student(Student s) {
 
 	if(roster.drop(s)) found_student = true;
 	if(drop_from_queue(major_waitlist, s)) found_student = true;
-	if(drop_from_queue(other_waitlist, s)) found student = true;
+	if(drop_from_queue(other_waitlist, s)) found_student = true;
 	// if we dropped a student, there should be room on
 	// the roster
 	update_enrollments();
@@ -66,15 +76,16 @@ bool IsisCourse::drop_student(Student s) {
 bool IsisCourse::drop_from_queue(Queue q, Student s)
 {
 	bool r = false;
-	Queue nq = new Queue();
+	Queue* nq = new Queue();
 	while(!(q.is_empty()))
 	{
 		Student temp = q.dequeue();
-		if(temp.name == s.name && temp.maj == s.maj) r = true;
-		else nq.enqueue(temp);
+		if(temp.name == s.name && temp.major == s.major) r = true;
+		else nq->enqueue(temp);
 	}
-	delete q;
-	q = nq;
+	//delete q;
+	q = *nq;
+	//delete nq;
 	return r;
 }
 
@@ -89,16 +100,16 @@ int IsisCourse::find_in_queue(Queue q, Student s)
 {
         int r = 0;
 	bool flag = false;
-        Queue nq = new Queue();
+        Queue* nq = new Queue();
         while(!(q.is_empty()))
         {
                 Student temp = q.dequeue();
-                if(temp.name == s.name && temp.maj == s.maj) flag = true;
+                if(temp.name == s.name && temp.major == s.major) flag = true;
 		if(!flag) r++;
-                nq.enqueue(temp);
+                nq->enqueue(temp);
         }
-        delete q;
-        q = nq;
+        //delete q;
+        q = *nq;
         if(flag) return r;
 	else return -1;
 }
@@ -130,16 +141,16 @@ void IsisCourse::print_list(ENROLLMENT_STATUS status) {
 	// now handle printing the queue
 	// TODONE: Student writes code here
 	int r = 1;
-	Queue nq = new Queue();
-        while(!(q.is_empty()))
+	Queue* nq = new Queue();
+        while(!(waitlist_queue->is_empty()))
         {
-                Student temp = q.dequeue();
+                Student temp = waitlist_queue->dequeue();
                 cout << r << ". " << temp.name << "\n";
 		r++;
-                nq.enqueue(temp);
+                nq->enqueue(temp);
         }
-        delete q;
-        q = nq;
+        //delete q;
+        *waitlist_queue = *nq;
 	}
 
 void IsisCourse::update_enrollments() {
@@ -147,12 +158,15 @@ void IsisCourse::update_enrollments() {
 	// in priority (majors first, then others), up to
 	// the class capacity.
 	// TODONE: Student writes code here
-	while(roster.size() > class_capacity && !(major_waitlist.is_empty()))
+	//cout << "UE: Roster size is " << roster.size() << " and class capacity is " << class_capacity <<".";
+	while(roster.size() < class_capacity && !(major_waitlist.is_empty()))
 	{
-		bool temp = roster.add(major_queue.dequeue());
+		bool temp = roster.add(major_waitlist.dequeue());
+		if(!temp) cout << "ERR";
 	}
-	while(roster.size() > class_capacity && !(other_waitlist.is_empty()))
+	while(roster.size() < class_capacity && !(other_waitlist.is_empty()))
         {
-                bool temp = roster.add(other_queue.dequeue());
+                bool temp = roster.add(other_waitlist.dequeue());
+		if(!temp) cout << "ERR";
         }
 }
