@@ -110,6 +110,7 @@ int IsisCourse::find_in_queue(Queue q, Student s)
         }
         //delete q;
         q = *nq;
+	delete nq;
         if(flag) return r;
 	else return -1;
 }
@@ -151,6 +152,7 @@ void IsisCourse::print_list(ENROLLMENT_STATUS status) {
         }
         //delete q;
         *waitlist_queue = *nq;
+	delete nq;
 	}
 
 void IsisCourse::update_enrollments() {
