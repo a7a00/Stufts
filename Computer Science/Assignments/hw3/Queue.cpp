@@ -69,5 +69,5 @@ void Queue::expand()
 	queue_array = r;
 	back = c;
 	front = 0;
-	delete[] r;
+	//delete[] r;
 }
