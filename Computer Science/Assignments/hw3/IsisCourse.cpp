@@ -61,6 +61,8 @@ IsisCourse::ENROLLMENT_STATUS IsisCourse::enroll_student(Student s) {
 }
 
 bool IsisCourse::drop_student(Student s) {
+	if (!((waitlist_position(MAJOR_WAITLIST,s)) && !(waitlist_position(OTHER_WAITLIST,s)))) return false;
+	//Explicit failsafe if the student isn't anywhere.
 	bool found_student = false; // if we find the student to drop
 	// TODONE: Student writes code here
 
@@ -73,20 +75,21 @@ bool IsisCourse::drop_student(Student s) {
 	return found_student;
 }
 
-bool IsisCourse::drop_from_queue(Queue q, Student s)
+bool IsisCourse::drop_from_queue(Queue q, Student s) //This actually drops the student.
 {
-	bool r = false;
+	bool dropped = false;
 	Queue* nq = new Queue();
-	while(!(q.is_empty()))
+	while(!(q.is_empty())) //For as long as the array is empty,
 	{
-		Student temp = q.dequeue();
-		if(temp.name == s.name && temp.major == s.major) r = true;
-		else nq->enqueue(temp);
+		Student temp = q.dequeue(); //Pop off a student
+		if(temp.name == s.name && temp.major == s.major) dropped = true;
+		else nq->enqueue(temp); //Only add him on if he's not the person we want out.
 	}
 	//delete q;
-	q = *nq;
+	//q = *nq;
+	while(!(nq->is_empty())) q.enqueue(nq->dequeue()); //Move everything back
 	//delete nq;
-	return r;
+	return dropped;
 }
 
 int IsisCourse::waitlist_position(ENROLLMENT_STATUS status, Student s) {
@@ -96,22 +99,23 @@ int IsisCourse::waitlist_position(ENROLLMENT_STATUS status, Student s) {
 	else return -1;
 }
 
-int IsisCourse::find_in_queue(Queue q, Student s)
+int IsisCourse::find_in_queue(Queue &q, Student s) //This function does the heavy lifting for waitlist_position
 {
-        int r = 0;
-	bool flag = false;
-        Queue* nq = new Queue();
+        int index = 0;
+	bool flag = false; //This flag keeps track of whether we found the student or not.
+        Queue* nq = new Queue(); //New temporary queue
         while(!(q.is_empty()))
         {
-                Student temp = q.dequeue();
+                Student temp = q.dequeue(); //Pop off a student and see if they match
                 if(temp.name == s.name && temp.major == s.major) flag = true;
-		if(!flag) r++;
+		if(!flag) index++; //If we haven't found the student yet, we need to update the index.
                 nq->enqueue(temp);
         }
         //delete q;
-        q = *nq;
-	delete nq;
-        if(flag) return r;
+        //q = *nq;
+	while(!(nq->is_empty())) q.enqueue(nq->dequeue()); //Move everything back
+	delete nq; //Free up memory
+        if(flag) return index;
 	else return -1;
 }
 
@@ -151,7 +155,8 @@ void IsisCourse::print_list(ENROLLMENT_STATUS status) {
                 nq->enqueue(temp);
         }
         //delete q;
-        *waitlist_queue = *nq;
+        //*waitlist_queue = *nq;
+	while(!(nq->is_empty())) waitlist_queue->enqueue(nq->dequeue());
 	delete nq;
 	}
 

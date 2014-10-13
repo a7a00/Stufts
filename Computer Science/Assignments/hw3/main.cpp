@@ -1,38 +1,58 @@
 #include <iostream>
+#include <sstream>
 #include <cstdlib>
 #include <time.h>
 
-#include "Queue.h"
+#include "IsisCourse.h"
 
-#define NUM_STUDENTS 11
+#define NUM_STUDENTS 10
 
 using namespace std;
 
-void print_queue_status(Queue &q) {
-        cout << "Queue is " << (q.is_empty() ? "empty.\n" : "not empty.\n");
+void print_enrollment(IsisCourse::ENROLLMENT_STATUS es) {
+	switch(es) {
+	case IsisCourse::NONE:
+		cout << "NONE\n";
+		break;
+	case IsisCourse::ENROLLED:
+		cout << "ENROLLED\n";
+		break;
+	case IsisCourse::MAJOR_WAITLIST:
+		cout << "MAJOR_WAITLIST\n";
+		break;
+	case IsisCourse::OTHER_WAITLIST:
+		cout << "OTHER_WAITLIST\n";
+		break;
+	default:
+		cout << "Not a valid output!\n";
+		break;
+	}
 }
 
 int main() {
-        Student students[NUM_STUDENTS] = {
-                        Student("Green,Alice",true),
-                        Student("Blue,Misha",false),
-                        Student("Yellow,John",false),
-                        Student("Orange,Friya",true),
-                        Student("Pink,Julia",true),
-                        Student("Black,Henry",false),
-                        Student("Cyan,Barnaby",true),
-                        Student("Red,Justin",true),
-                        Student("Violet,Chester",false),
-                        Student("Fuchsia,Rebecca",false),
-                        Student("Beige,Barker",true)
-        };
-        Queue q;
-        print_queue_status(q);
+	Student s1("Indigo,Charlie",false);
+	Student s2("Maroon,Stacy",true);
 
-        for (int i=0;i<NUM_STUDENTS;i++) {
-                q.enqueue(students[i]);
-                print_queue_status(q);
-        }
-        return 0;
+	Student students[NUM_STUDENTS] = {
+			Student("Green,Alice",true),
+			Student("Blue,Misha",false),
+			Student("Yellow,John",true),
+			Student("Orange,Friya",false),
+			Student("Pink,Julia",true),
+			Student("Black,Henry",false),
+			Student("Cyan,Barnaby",true),
+			Student("Red,Justin",false),
+			Student("Violet,Chester",true),
+			Student("Fuchsia,Rebecca",false),
+	};
+	IsisCourse comp15(3); // cap of 20 students;
+
+	for (int i=0;i<NUM_STUDENTS;i++) {
+		comp15.enroll_student(students[i]);
+	}
+
+	cout << comp15.drop_student(s1) << "\n";
+	cout << comp15.drop_student(s2) << "\n";
+
+	return 0;
 }
-

@@ -29,45 +29,48 @@ bool Queue::is_empty()
 		return false;
 }
 
-void Queue::incrementPointer(int &i)
+void Queue::incrementIndex(int &index) //Helper function so I would have to handle this
+//exceptional case every time I moved in the queue.
 {
-	i++;
-	if(i == capacity) i = 0;
+	index++;
+	if(index == capacity) index = 0;
 	//return i;
 }
 
-Student Queue::dequeue()
+Student Queue::dequeue() //Return the student at the front, then move the front away.
 {
 	Student s = queue_array[front];
 	size--;
-	incrementPointer(front);
+	incrementIndex(front);
 	return s;
 }
 
 
-void Queue::enqueue(const Student& c)
+void Queue::enqueue(const Student& c) //Add an element behind the tail, move tail back.
 {
 	queue_array[back] = c;
 	size++;
-	incrementPointer(back);
+	incrementIndex(back);
 	if(front == back) expand();
 }
 
 void Queue::expand()
 {
-	Student * r = new Student[capacity*2];
-	int i = front;
-	int c = 0;
-	do
+	Student * newArray = new Student[capacity*2]; //New array with double the capacity.
+	int index = front;
+	int count = 0;
+	do //We want the code here to be run at least once no matter what.
 	{
-		r[c] = queue_array[i];
-		c++;
-		incrementPointer(i);
-	} while (i != back);
-	capacity *= 2;
-	delete[] queue_array;
-	queue_array = r;
-	back = c;
-	front = 0;
+		newArray[count] = queue_array[index]; //The  next (or first) element of
+		//the new array is the next (or first value of the old queue
+		count++; //We can just increase the count.
+		incrementIndex(index); //TO account for strange cases n the old queue, we have
+		//to use the helper function
+	} while (index != back); //Stop when we reach the back of the old queue.
+	capacity *= 2; //Update capacity
+	delete[] queue_array; //Free the old memory
+	queue_array = newArray; //Reassign the pointer
+	back = count; //Reassign the back
+	front = 0; //Reset the front
 	//delete[] r;
 }

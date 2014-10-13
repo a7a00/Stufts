@@ -115,7 +115,7 @@ private:
 	int class_capacity;
 	
 	bool drop_from_queue(Queue q, Student s);
-	int find_in_queue(Queue q, Student s);
+	int find_in_queue(Queue &q, Student s);
 };
 
 #endif /* ISISCOURSE_H_ */
