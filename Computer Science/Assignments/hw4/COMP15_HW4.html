@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Comp 15 (Data Structures) - Assignment 4, Binary Search Tree Implementation</title>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+</head>
+<body>
+<div id="container">
+
+<h2>Assigned: Tuesday October 14, 2014, Due: Sunday, October 26, 2014, 11:59pm.</h2>
+
+<h1>Binary Search Tree Implementation</h1>
+
+<ol>
+<li><h2>Overview</h2>
+
+This project is a straightforward binary search tree implementation. A binary search tree has the following invariant: all nodes to the left of a node are smaller in value, and all nodes to the right are larger in value.
+
+<p>Binary Search Trees have logarithmic asymptotic behavior for the following functions:
+
+<p>find_min(), find_max(), contains(), insert(value), remove(), tree_height(), node_count(), and others.
+
+<p>The Binary Search Tree functions can be almost all be coded recursively. You will be responsible for writing all of the functions above recursively.
+
+<p>This project will also include writing a copy constructor and an assignment overload function. The copy constructor is called in the following cases:
+
+<code><pre>
+BinarySearchTree *new_tree = old_tree;
+	and
+BinarySearchTree *new_tree(old_tree);
+</pre></code>
+
+<p>The assignment overload is called in the following case:
+
+<code><pre>
+BinarySearchTree *new_tree;
+new_tree = old_tree; // assignment overload gets called here
+</pre></code>
+
+In other words, when you try to make a copy of an object, those functions get called, depending on the situation. Why? Basically, the general idea is to make a “deep copy” of your object (in this case, a binary tree full of nodes that have to be created dynamically). The C++ compiler only makes “shallow copies” automatically — pointers and fundamental types are copied to a new object.
+
+There is nothing magical about either a copy constructor or an assignment operator overload, but it does take some time to learn how to write them. The format is always the same, however, so you should be able to follow the code on the page below to write the ones for this assignment.
+
+You should read the following carefully in order to understand what these two functions do:
+
+<p><a href="http://www.cplusplus.com/articles/y8hv0pDG/">Copy Constructor and Assignment Overload</a>
+
+
+<li><h2>Implementation Specifics</h2>
+
+For this assignment, we will provide the BinarySearchTree implementation file (.h file), and a structured outline of the BinarySearchTree functions (.cpp file). You are responsible for writing most of the implementation functions, although we have provided you with some of the functions already. We have thoroughly commented BinarySearchTree.h, so please refer to that file for specific information.
+
+<li><h2>Low Level Details</h2>
+
+Getting the files
+
+There are two ways to get the files for this assignment. The first is by copying the original files from the class folder. The second is to use “git” to pull the files from the GitHub cloud server.
+
+<ul>
+<li>
+<ul>
+<li>Method 1: copy files from the class folder
+
+First ssh to the homework server and, and make a directory called orderedListAssignment
+
+<code><pre>
+ssh -X your_cs_username@homework.cs.tufts.edu
+mkdir hw4
+</pre></code>
+
+change into that directory
+
+<p>cd hw4
+
+<p>At the command prompt, enter (don’t forget the period):
+
+<p>cp /comp/15/public_html/assignments/hw4/files/* .
+
+<li>Method 2: pull from GitHub:
+
+At the command prompt, enter 
+
+<p>“git clone https://github.com/Tufts-COMP15/Data_Structures_F2014_HW4.git hw4”
+
+<p>change into the directory that git created:
+
+<p>“cd hw4”
+</ul>
+
+<li>Compiling and running:
+At the command prompt, enter “make” and press enter or return to compile.
+At the command prompt, enter “./hw4” and press return to run the new program.
+
+
+<li>Providing:
+At the command prompt, enter “make provide” and press enter or return.
+</ol>
+
+
+</div>
+</body>
+</html>
+
