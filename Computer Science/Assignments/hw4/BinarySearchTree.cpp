@@ -6,7 +6,8 @@
 #include "BinarySearchTree.h"
 
 BinarySearchTree::BinarySearchTree() {
-	// TODO: Students write code here
+	// TODONE: Students write code here
+	root = NULL;
 }
 
 BinarySearchTree::~BinarySearchTree() {
@@ -15,8 +16,11 @@ BinarySearchTree::~BinarySearchTree() {
 }
 
 void BinarySearchTree::post_order_delete(Node *node) {
-	// TODO: students write code here
+	// TODONE: students write code here
 	// (hint: use a post-order traversal to remove all nodes)
+	if(root->left != NULL) postDelete(root -> left);
+        if(root->right != NULL) postDelete(root -> right);
+        delete root;
 }
 
 // copy constructor
@@ -28,14 +32,14 @@ BinarySearchTree::BinarySearchTree(const BinarySearchTree &source) {
 // assignment overload
 BinarySearchTree& BinarySearchTree::operator=
 		(const BinarySearchTree &source) {
-	// TODO: Students write code here
+	// TODONE: Students write code here
 	// check for self-assignment
-
+	if(this == source) return this;
 	// delete current tree if it exists
-
+	post_order_delete(root);
 	// use pre-order traversal to copy the tree
-
-	// don't forget to "return *this"
+	root = pre_order_copy(source.root);
+	/* don't forget to "*/return *this//"
 }
 
 Node * BinarySearchTree::pre_order_copy(Node *node) {
