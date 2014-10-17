@@ -48,7 +48,6 @@ Node * BinarySearchTree::pre_order_copy(Node *node) {
 	// node to a new_node)
 	if (node == NULL) return NULL;
 	Node *new_node = new Node();
-
 }
 
 int BinarySearchTree::find_min() {
