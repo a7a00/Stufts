@@ -43,11 +43,16 @@ BinarySearchTree& BinarySearchTree::operator=
 }
 
 Node * BinarySearchTree::pre_order_copy(Node *node) {
-	// TODO: Students write code here
+	// TODOiNE: Students write code here
 	// (hint: use a pre-order traversal to copy details from the
 	// node to a new_node)
 	if (node == NULL) return NULL;
-	Node *new_node = new Node();
+	Node* temp = new Node();
+	temp->data = node->data;
+	temp->count = node->count;
+	temp->left = pre_order_copy(node->left);
+	temp->right = pre_order_copy(node->right);
+	return copyNode;
 }
 
 int BinarySearchTree::find_min() {
@@ -56,15 +61,23 @@ int BinarySearchTree::find_min() {
 }
 
 Node *BinarySearchTree::find_min(Node *node) {
-	// TODO: Students write code here
+	// TODONE: Students write code here
+	Node* temp = node; //Just in case there's a reference passing issue
+	while(current->left != NULL) current = current->left;
+	return current;
 }
 
 int BinarySearchTree::find_max() {
-	// TODO: Students write code here
+	// TODONE: Students write code here
+	if (root == NULL) return INT_MIN;
+        return find_max(root)->data;
 }
 
 Node *BinarySearchTree::find_max(Node *node) {
-	// TODO: Students write code here
+	// TODONE: Students write code here
+	Node* temp = node; //Just in case there's a reference passing issue
+        while(current->left != NULL) current = current->left;
+        return current;
 }
 
 bool BinarySearchTree::contains(int value) {
@@ -81,6 +94,9 @@ void BinarySearchTree::insert(int value) {
 
 void BinarySearchTree::insert(Node *node,Node *parent, int value) {
 	// TODO: Students write code here
+	//If we've reached the end (NULL), return the node
+	//Recurse down the tree with 2 conditionals to see i we should go left or right.
+	//Return the give node.
 }
 
 bool BinarySearchTree::remove(int value) {
