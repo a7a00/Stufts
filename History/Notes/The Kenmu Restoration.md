@@ -59,13 +59,25 @@ Takauji and his sons become shoguns and quickly change some key features. The *s
 
 Arguably the most important Ashikaga shogun, this shogun works out an arrangement, whereby the Yoshino court shuts down, and that emperor returns to the capital. It's agreed that power will rotate between the two emperors. A peaceful, if confusing compromise. He also reestablishes ties with China, which had been cut off since the Mongol invasion. Following unification, and the re-opening of Kyushan ports. He also accepts a subordinate status from the Ming, which is unpopular, but worth it. On his deathbed, he tells his son to cease this trade, but it continues until the 1540's, with slightly different rules. He's also an enormous patron of the arts and sponsors the creation of *No* drama. He also builds the *Kinkakuji*.
 
+Yoshimitsu is suceeded by his son Yoshimochi, who takes a short break for his son Yoshikazu. Yoshimochi is succeeded by his brother Yoshikazu.
+
+#### The Kakitsu Incident
+
+In 1441, Yoshinori is assasinated by the *ninja* of an angry vassal, Akamatsu Mitsusuke in the vassal's own home. Yoshinori wanted to override Mitsusuke's inheritance plans and give the land to Amakatsu's relative (who Yoshinori was sleeping with). To prevent this, Akamatsu hires *ninja*, and you know the rest.
+
+#### *Wakko* Pirates
+
+There's also a crisis at this time with Korea. Tsushima was invaded by Japan and pirate bases were looted. The pirates would attack Korea and northern China, and ultimatley the waters around Taiwan. From 1400 on, Yoshimitsu tries to mitigate the threats.
+
 #### *No* Drama
 
-That's right, no drama at all. Hehe. Anyhow, this art style flourishes under the Ashikaha shoguns, and there's a set of extremley famous playwrights, and a whole slew of concepts that are very important.
+That's right, no drama at all. Hehe. Anyhow, this art style flourishes under the Ashikaga shoguns, and there's a set of extremley famous playwrights, and a whole slew of concepts that are very important.
 
 * Elaborate Backgrounds
 * Heroes
 * Foils
 * Masks and Costumes
+
+In 1374, Yoshimitsu, age 16, met Zeami, the legendary performer and playwright, age 11. The Japanese nobles don't like the status differential, but *No* becomes very importand as a result.
 
 We'll see some next week!
