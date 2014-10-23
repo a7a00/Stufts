@@ -34,7 +34,7 @@ BinarySearchTree& BinarySearchTree::operator=
 		(const BinarySearchTree &source) {
 	// TODONE: Students write code here
 	// check for self-assignment
-	if(this == source) return this;
+	if(this == &source) return *this;
 	// delete current tree if it exists
 	post_order_delete(root);
 	// use pre-order traversal to copy the tree
@@ -89,12 +89,17 @@ bool BinarySearchTree::contains(int value) {
 	return contains(root, value);
 }
 
-bool contains(Node *node, int value) {
+bool BinarySearchTree::contains(Node *node, int value) {
 	// TODONE: Students write code here
-	if(value == node->data) return true;
 	if(node == NULL) return false;
-	if(value < node->data) return contains(node->left, value);
-	if(value > node->data) return contains(node->right, value);
+	else if(value == node->data) return true;
+	else if(value < node->data) return contains(node->left, value);
+	else if(value > node->data) return contains(node->right, value);
+	else
+	{
+		std::cout << "YOU SCREWED UP BAD SOMEWHERE";
+		return false;
+	}
 }
 
 void BinarySearchTree::insert(int value) {
@@ -173,14 +178,16 @@ bool BinarySearchTree::remove(Node *node, Node *parent, int value) {
 				//Replace the value to be removed with the value of the node we just found
 				node->data = temp->data;
 				//Delete the node we found
-				remove(temp); //TODO debug
+				remove(temp, parent, value);
 			}
 			return true;
 		}
 	}
-        if(node == NULL) return false;
-        if(value < node->data) return remove(node->left, node, value);
-	if(value > node->data) return remove(node->right, node, value);
+        else if(node == NULL) return false;
+        else if(value < node->data) return remove(node->left, node, value);
+	else if(value > node->data) return remove(node->right, node, value);
+	std::cout << "YOU MESSED UP!";
+	return false; //THESE 2 LINES SHOULD NEVER BE CALLED. EVER.
 }
 
 int BinarySearchTree::tree_height() {
@@ -213,7 +220,7 @@ int BinarySearchTree::count_total() {
 int BinarySearchTree::count_total(Node *node) {
 	// TODONE: Students write code here
 	if(node == NULL) return 0;
-	else return (((node->value)*(node->count))+count_total(node->left)+count_total(node->right));
+	else return (((node->data)*(node->count))+count_total(node->left)+count_total(node->right));
 }
 
 // use the printPretty helper to make the tree look nice
