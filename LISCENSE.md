@@ -1,4 +1,4 @@
-The MIT License (MIT)
+The MIT License (MIT) (Slightly Modified)
 
 Copyright (c) 2014 Alex Gould <alexander.gould@tufts.edu>
 
@@ -11,6 +11,9 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+Any code in the "Computer Science" folder of this repository may not  be used without
+express written permission of the original author.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
