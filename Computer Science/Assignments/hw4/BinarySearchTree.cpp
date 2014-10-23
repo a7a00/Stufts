@@ -134,36 +134,46 @@ bool BinarySearchTree::remove(Node *node, Node *parent, int value) {
 	// (cannot be a lazy removal)
 	if(value == node->data)
 	{
-		if(node->left == NULL && node->right == NULL)
+		(node->count)--;
+		if(node->count == 0)
 		{
-			delete node;
-			node = NULL;
+			if(node->left == NULL && node->right == NULL)
+			{
+				delete node;
+				node = NULL;
+			}
+			//When I wrote this, only God and I knew what I was doing. Now, only God knows.
+			else if(node->left == NULL && node->right != NULL) //OK, what we're doing here is 
+			//taking note of which side of the parent we're on, because the method doesn't know that.
+			//We then reassign the pointer and delete the node.
+			{
+				char flag;
+				if(parent->left == node) flag = 'l';
+				else flag = 'r';
+				if(flag == 'l') parent->left = node -> right;
+				else parent->right = node -> right;
+				delete node;
+			}
+			else if(node->left != NULL && node->right == NULL) //Sane here
+			{
+				char flag;
+	                        if(parent->left == node) flag = 'l';
+	                        else flag = 'r';
+	                        if(flag == 'l') parent->left = node -> left;
+	                        else parent->right = node -> left;
+				delete node;
+			}
+			else if(node->left != NULL && node->right != NULL)
+			{
+				//Find minimum element in the right subtree
+				Node* temp = find_min(node);
+				//Replace the value to be removed with the value of the node we just found
+				node->data = temp->data;
+				//Delete the node we found
+				remove temp;
+			}
+			return true;
 		}
-		//When I wrote this, only God and I knew what I was doing. Now, only God knows.
-		else if(node->left == NULL && node->right != NULL) //OK, what we're doing here is 
-		//taking note of which side of the parent we're on, because the method doesn't know that.
-		//We then reassign the pointer and delete the node.
-		{
-			char flag;
-			if(parent->left == node) flag = 'l';
-			else flag = 'r';
-			if(flag == 'l') parent->left = node -> right;
-			else parent->right = node -> right;
-			delete node;
-		}
-		else if(node->left != NULL && node->right == NULL) //Sane here
-		{
-			char flag;
-                        if(parent->left == node) flag = 'l';
-                        else flag = 'r';
-                        if(flag == 'l') parent->left = node -> left;
-                        else parent->right = node -> left;
-		}
-		else if(node->left != NULL && node->right != NULL)
-		{
-			//TODO: This looks hard. Do it later.
-		}
-		return true;
 	}
         if(node == NULL) return false;
         if(value < node->data) return remove(node->left, node, value);
@@ -175,7 +185,10 @@ int BinarySearchTree::tree_height() {
 }
 
 int BinarySearchTree::tree_height(Node *node) {
-	// TODO: Students write code here
+	//TODONE: Students write code here
+	if(node->left == NULL && node->right == NULL) return 0; //Should this be -1?
+	if(tree_height(node->left) > tree_height(node->right)) return (tree_height(node->left) + 1);
+	else return (tree_height(node->right) + 1);
 }
 
 // returns the total number of nodes
@@ -184,7 +197,9 @@ int BinarySearchTree::node_count() {
 }
 
 int BinarySearchTree::node_count(Node *node) {
-	// TODO: Students write code here
+	// TODONE: Students write code here
+	if(node == NULL) return 0;
+	else return (node_count(node->left) + node_count(node->right) + 1);
 }
 
 // return the sum of all the node values (including duplicates)
@@ -193,7 +208,9 @@ int BinarySearchTree::count_total() {
 }
 
 int BinarySearchTree::count_total(Node *node) {
-	// TODO: Students write code here:
+	// TODONE: Students write code here
+	if(node == NULL) return 0;
+	else return (((node->value)*(node->count))+count_total(node->left)+count_total(node->right));
 }
 
 // use the printPretty helper to make the tree look nice
