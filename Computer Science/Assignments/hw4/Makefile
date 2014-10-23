@@ -1,7 +1,8 @@
 #
 # Makefile for Binary Search Tree
 #
-CXX = clang++
+CXX = g++
+#CXX = clang++
 FLAGS =  -g -Wall 
 
 bst: BinarySearchTree.cpp BinarySearchTree.h main.cpp pretty_print.cpp
