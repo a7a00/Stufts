@@ -92,9 +92,9 @@ bool BinarySearchTree::contains(int value) {
 bool contains(Node *node, int value) {
 	// TODONE: Students write code here
 	if(value == node->data) return true;
-	if(value == NULL) return false;
-	if(value < node->data) return contains(root->left, value);
-	if(value > node->data) return contains(root->right, value);
+	if(node == NULL) return false;
+	if(value < node->data) return contains(node->left, value);
+	if(value > node->data) return contains(node->right, value);
 }
 
 void BinarySearchTree::insert(int value) {
@@ -102,19 +102,72 @@ void BinarySearchTree::insert(int value) {
 }
 
 void BinarySearchTree::insert(Node *node,Node *parent, int value) {
-	// TODO: Students write code here
-	//If we've reached the end (NULL), return the node
-	//Recurse down the tree with 2 conditionals to see i we should go left or right.
-	//Return the given node.
+	// TODONE: Students write code here
+	if(node->data == value)
+	{
+		(node->count)++;
+		break;
+	}
+	if(node->left == NULL && node->right == NULL)
+	{
+		if(node->data < value) node->right->data = value;
+		else node->left->data = value;
+	}
+	if(node->left != NULL && value < node->data) insert(node->left, node, value);
+	if(node->right != NULL && value > node->data) insert(node->left, node, value)
 }
+
+	//KEEP THIS FOR LATER
+	// TODOMAYBE: Students write code here
+        //If we've reached the end (NULL), return the node
+        //if(node->left == NULL && node->right == NULL) return
+        //Recurse down the tree with 2 conditionals to see i we should go left or right.
+        //Return the given node.
+
 
 bool BinarySearchTree::remove(int value) {
 	return remove(root,NULL,value);
 }
 
 bool BinarySearchTree::remove(Node *node, Node *parent, int value) {
-	// TODO: Students write code here
+	// TODONE: Students write code here
 	// (cannot be a lazy removal)
+	if(value == node->data)
+	{
+		if(node->left == NULL && node->right == NULL)
+		{
+			delete node;
+			node = NULL;
+		}
+		//When I wrote this, only God and I knew what I was doing. Now, only God knows.
+		else if(node->left == NULL && node->right != NULL) //OK, what we're doing here is 
+		//taking note of which side of the parent we're on, because the method doesn't know that.
+		//We then reassign the pointer and delete the node.
+		{
+			char flag;
+			if(parent->left == node) flag = 'l';
+			else flag = 'r';
+			if(flag == 'l') parent->left = node -> right;
+			else parent->right = node -> right;
+			delete node;
+		}
+		else if(node->left != NULL && node->right == NULL) //Sane here
+		{
+			char flag;
+                        if(parent->left == node) flag = 'l';
+                        else flag = 'r';
+                        if(flag == 'l') parent->left = node -> left;
+                        else parent->right = node -> left;
+		}
+		else if(node->left != NULL && node->right != NULL)
+		{
+			//TODO: This looks hard. Do it later.
+		}
+		return true;
+	}
+        if(node == NULL) return false;
+        if(value < node->data) return remove(node->left, node, value);
+	if(value > node->data) return remove(node->right, node, value);
 }
 
 int BinarySearchTree::tree_height() {
