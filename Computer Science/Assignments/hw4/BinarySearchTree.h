@@ -106,6 +106,7 @@ private:
 	int node_count(Node *node);
 	int count_total(Node *node);
 	Node *pre_order_copy(Node *node);
+	void balance(Node* node, Node* new_node);
 
 	// used by the destructor to delete nodes recursively
 	void post_order_delete(Node *node);

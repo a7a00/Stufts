@@ -18,9 +18,9 @@ BinarySearchTree::~BinarySearchTree() {
 void BinarySearchTree::post_order_delete(Node *node) {
 	// TODONE: students write code here
 	// (hint: use a post-order traversal to remove all nodes)
-	if(root->left != NULL) post_order_delete(root -> left);
-        if(root->right != NULL) post_order_delete(root -> right);
-        delete root;
+	if(node->left != NULL) post_order_delete (node -> left);
+        if(node->right != NULL) post_order_delete(node -> right);
+        delete node;
 }
 
 // copy constructor
@@ -36,7 +36,7 @@ BinarySearchTree& BinarySearchTree::operator=
 	// check for self-assignment
 	if(this == &source) return *this;
 	// delete current tree if it exists
-	post_order_delete(root);
+	if(root != NULL) post_order_delete(root);
 	// use pre-order traversal to copy the tree
 	root = pre_order_copy(source.root);
 	/* don't forget to "*/return *this;//"
@@ -108,16 +108,30 @@ void BinarySearchTree::insert(int value) {
 
 void BinarySearchTree::insert(Node *node,Node *parent, int value) {
 	// TODONE: Students write code here
+	if(node == NULL)
+	{
+		node = new Node();
+		node->data = value;
+		node->count = 0;
+		node->left = NULL;
+		node->right = NULL;
+		if(parent == NULL) root = node;
+		else
+		{
+			if(parent->data < value) parent->right = node;
+			else parent->left = node;
+		}
+	}
 	if(node->data == value) (node->count)++;
 	else
 	{
-		if(node->left == NULL && node->right == NULL)
-		{
-			if(node->data < value) node->right->data = value;
-			else node->left->data = value;
-		}
-		if(node->left != NULL && value < node->data) insert(node->left, node, value);
-		if(node->right != NULL && value > node->data) insert(node->left, node, value);
+		//if(node->left == NULL && node->right == NULL)
+		//{
+		//	if(node->data < value) insert(node->left, node, value);
+		//	if(node->data > value) insert(node->right, node, value);
+		//}
+		if(value < node->data) insert(node->left, node, value);
+		if(value > node->data) insert(node->right, node, value);
 	}
 }
 
@@ -177,8 +191,33 @@ bool BinarySearchTree::remove(Node *node, Node *parent, int value) {
 				Node* temp = find_min(node);
 				//Replace the value to be removed with the value of the node we just found
 				node->data = temp->data;
+				node->count = temp->count;
 				//Delete the node we found
-				remove(temp, parent, value);
+				//remove(temp, find_parent(node, temp), temp->data);
+				if(temp == (find_parent(node, temp))->left) (find_parent(node, temp))->left = NULL;
+				else (find_parent(node, temp))->right = NULL;
+				if(node->data < node->left->data)
+				{
+					int tempData = node->data;
+					int tempCount = node->count;
+					node->data = node->left->data;
+					node->count = node->left->count;
+					node->left->data = tempData;
+					node->left->count = tempCount;
+				}
+				else if(node->data > node->right->data)//else if because we;ve only changed one of the 2 subtrees.
+				{
+					int tempData = node->data;
+                                        int tempCount = node->count;
+                                        node->data = node->right->data;
+                                        node->count = node->right->count;
+                                        node->right->data = tempData;
+                                        node->right->count = tempCount;
+				}
+				delete temp;
+				Node* balanced = NULL;
+				balance(node, balanced);
+				node = balanced;
 			}
 			return true;
 		}
@@ -186,8 +225,17 @@ bool BinarySearchTree::remove(Node *node, Node *parent, int value) {
         else if(node == NULL) return false;
         else if(value < node->data) return remove(node->left, node, value);
 	else if(value > node->data) return remove(node->right, node, value);
-	std::cout << "YOU MESSED UP!";
-	return false; //THESE 2 LINES SHOULD NEVER BE CALLED. EVER.
+	return false; //Not sure why this is being called, but seems to work.
+}
+
+void BinarySearchTree::balance(Node* node, Node* new_node)
+{
+	if(node->left != NULL) balance(node -> left, new_node);
+        if(node->right != NULL) balance(node -> right, new_node);
+	for(int i = 0; i < node->count; i++) insert(new_node, NULL, node->data);
+	find_parent(root, node)->left = NULL;
+	find_parent(root, node)->right = NULL;
+        delete node;
 }
 
 int BinarySearchTree::tree_height() {
@@ -196,7 +244,8 @@ int BinarySearchTree::tree_height() {
 
 int BinarySearchTree::tree_height(Node *node) {
 	//TODONE: Students write code here
-	if(node->left == NULL && node->right == NULL) return 0; //Should this be -1?
+	if(node == NULL) return -1;
+	//if(node->left == NULL && node->right == NULL) return 0; //Should this be -1?
 	if(tree_height(node->left) > tree_height(node->right)) return (tree_height(node->left) + 1);
 	else return (tree_height(node->right) + 1);
 }
