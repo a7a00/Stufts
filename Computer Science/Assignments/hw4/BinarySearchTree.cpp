@@ -187,37 +187,12 @@ bool BinarySearchTree::remove(Node *node, Node *parent, int value) {
 			}
 			else if(node->left != NULL && node->right != NULL)
 			{
-				//Find minimum element in the right subtree
-				Node* temp = find_min(node);
-				//Replace the value to be removed with the value of the node we just found
-				node->data = temp->data;
-				node->count = temp->count;
-				//Delete the node we found
-				//remove(temp, find_parent(node, temp), temp->data);
-				if(temp == (find_parent(node, temp))->left) (find_parent(node, temp))->left = NULL;
-				else (find_parent(node, temp))->right = NULL;
-				if(node->data < node->left->data)
-				{
-					int tempData = node->data;
-					int tempCount = node->count;
-					node->data = node->left->data;
-					node->count = node->left->count;
-					node->left->data = tempData;
-					node->left->count = tempCount;
-				}
-				else if(node->data > node->right->data)//else if because we;ve only changed one of the 2 subtrees.
-				{
-					int tempData = node->data;
-                                        int tempCount = node->count;
-                                        node->data = node->right->data;
-                                        node->count = node->right->count;
-                                        node->right->data = tempData;
-                                        node->right->count = tempCount;
-				}
-				delete temp;
-				Node* balanced = NULL;
-				balance(node, balanced);
-				node = balanced;
+				//first find the minimum node of the right child
+				//replace the node's data with the value and count of right's minimum
+				node->data = find_min(node->right)->data;
+				node->count = find_min(node->right)->count;
+				//and then recursively delete right's minimum.
+				remove(node->right, node, find_min(node->right)->data);
 			}
 			return true;
 		}
@@ -228,13 +203,13 @@ bool BinarySearchTree::remove(Node *node, Node *parent, int value) {
 	return false; //Not sure why this is being called, but seems to work.
 }
 
-void BinarySearchTree::balance(Node* node, Node* new_node)
+void BinarySearchTree::balance(Node* node, Node*& new_node)
 {
 	if(node->left != NULL) balance(node -> left, new_node);
         if(node->right != NULL) balance(node -> right, new_node);
 	for(int i = 0; i < node->count; i++) insert(new_node, NULL, node->data);
-	find_parent(root, node)->left = NULL;
-	find_parent(root, node)->right = NULL;
+	//find_parent(root, node)->left = NULL;
+	//find_parent(root, node)->right = NULL;
         delete node;
 }
 
