@@ -18,9 +18,12 @@ BinarySearchTree::~BinarySearchTree() {
 void BinarySearchTree::post_order_delete(Node *node) {
 	// TODONE: students write code here
 	// (hint: use a post-order traversal to remove all nodes)
-	if(node->left != NULL) post_order_delete (node -> left);
-        if(node->right != NULL) post_order_delete(node -> right);
-        delete node;
+	if(node != NULL)
+	{
+		if(node->left != NULL) post_order_delete (node -> left);
+        	if(node->right != NULL) post_order_delete(node -> right);
+        	delete node;
+	}
 }
 
 // copy constructor
@@ -71,7 +74,7 @@ Node *BinarySearchTree::find_min(Node *node) { //I forgot these had to be recurs
 
 int BinarySearchTree::find_max() {
 	// TODONE: Students write code here
-	if (root == NULL) return INT_MIN;
+	if (root == NULL) return INT_MAX;
         return find_max(root)->data;
 }
 
@@ -150,6 +153,7 @@ bool BinarySearchTree::remove(int value) {
 bool BinarySearchTree::remove(Node *node, Node *parent, int value) {
 	// TODONE: Students write code here
 	// (cannot be a lazy removal)
+	if(!(contains(root, value))) return false;
 	if(value == node->data)
 	{
 		(node->count)--;
@@ -157,45 +161,66 @@ bool BinarySearchTree::remove(Node *node, Node *parent, int value) {
 		{
 			if(node->left == NULL && node->right == NULL)
 			{
+				//std::cout << "Removing node with no children.\n";
 				delete node;
-				char flag;
-                                if(parent->left == node) flag = 'l';
-                                else flag = 'r';
-                                if(flag == 'l') parent->left = NULL;
-                                else parent->right = NULL;
+				if(parent != NULL)
+				{
+					char flag;
+	                                if(parent->left == node) flag = 'l';
+	                                else flag = 'r';
+	                                if(flag == 'l') parent->left = NULL;
+	                                else parent->right = NULL;
+				}
+				else root = NULL;
 			}
 			//When I wrote this, only God and I knew what I was doing. Now, only God knows.
 			else if(node->left == NULL && node->right != NULL) //OK, what we're doing here is 
 			//taking note of which side of the parent we're on, because the method doesn't know that.
 			//We then reassign the pointer and delete the node.
 			{
-				char flag;
-				if(parent->left == node) flag = 'l';
-				else flag = 'r';
-				if(flag == 'l') parent->left = node -> right;
-				else parent->right = node -> right;
+				//std::cout << "Removing node with only right child.\n";
+				if(parent != NULL)
+				{
+					char flag;
+					if(parent->left == node) flag = 'l';
+					else flag = 'r';
+					if(flag == 'l') parent->left = node -> right;
+					else parent->right = node -> right;
+				}
+				else if(node->left != NULL) root = node->left;
+				else root = node->right;
 				delete node;
 			}
 			else if(node->left != NULL && node->right == NULL) //Sane here
 			{
-				char flag;
-	                        if(parent->left == node) flag = 'l';
-	                        else flag = 'r';
-	                        if(flag == 'l') parent->left = node -> left;
-	                        else parent->right = node -> left;
-				delete node;
+				//std::cout << "Removing node with only left child.\n";
+				if(parent != NULL)
+                                {
+                                        char flag;
+                                        if(parent->left == node) flag = 'l';
+                                        else flag = 'r';
+                                        if(flag == 'l') parent->left = node -> left;
+                                        else parent->right = node -> left;
+                                }
+                                else if(node->left != NULL) root = node->left;
+                                else root = node->right;
+                                delete node;
+
 			}
 			else if(node->left != NULL && node->right != NULL)
 			{
+				//std::cout << "Removing node with 2 children.\n";
 				//first find the minimum node of the right child
 				//replace the node's data with the value and count of right's minimum
 				node->data = find_min(node->right)->data;
 				node->count = find_min(node->right)->count;
 				//and then recursively delete right's minimum.
+				find_min(node->right)->count = 1;
 				remove(node->right, node, find_min(node->right)->data);
 			}
 			return true;
 		}
+		//else std::cout << "No removal should have happened.\n";
 	}
         else if(node == NULL) return false;
         else if(value < node->data) return remove(node->left, node, value);
