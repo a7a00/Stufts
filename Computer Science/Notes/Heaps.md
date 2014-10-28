@@ -26,8 +26,8 @@ There's one other rule that's crucial. The binary tree MUST be full, which means
 
 We store a heap with an array! To make the math easier, we put the root at position 1. The tree above therefore becomes the array:
 
-0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16
-- | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | -
+0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15
+--- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | ---
 X | 5 | 10 | 8 | 12 | 11 | 14 | 13 | 22 | 43 | X | X | X | X | X | X
 
 You'll note that this is in level order. So, for any element at position `i`,
