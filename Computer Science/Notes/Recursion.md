@@ -145,6 +145,8 @@ The proof of why that works can be found [here](http://goo.gl/p9JtRo).
 
 Just see if the two letters at the ends are the same, and then evaluate the substring created by lopping those two letters off. Sort of a "middle-in" approach. You reckon this would work for "data" manipulation, Richard?
 
+![Silicon Valley](../res/PIEDPIPER.gif)
+
 (Code available on the course website.)
 
 ## Important
