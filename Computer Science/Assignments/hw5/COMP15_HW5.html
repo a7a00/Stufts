@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Comp 15 (Data Structures) - HW5: Three Sorts</title>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+</head>
+<body>
+<div id="container">
+<h1>Three Sorts</h1>
+<h1>Assigned: Wednesday, 29 October 2014, Due: Friday,  14 November, 11:59pm</h1>
+<h1>Overview</h1>
+This assignment will test your ability to write three different sorting algorithms in C++. We have discussed a number of different sorts, and you will have the freedom to choose from the myriad of different sorting algorithms that have been developed.
+
+<h1>Implementation Specifics</h1>
+
+You need to write three programs that are able to sort integers that are input through the “standard input” (stdin) stream. In other words, numbers can either be typed into the command shell, or they can be read in from a text file of integers (see below for an example of the latter). The numbers will go into an array in the following struct:
+
+<code><pre>
+struct arrayWithLength{
+        int length;
+        int *arr;
+};
+</pre></code>
+
+<p>As you can see, the struct gives you the length of the integer array as well as a pointer to the array itself.
+
+<p>Output from the sorted array will be printed to standard out (stdout) using the printArray() function, which you need to write.
+
+<h1>The Three Sorts</h1>
+
+The following is a breakdown of the sorting programs you can write:
+
+<ul>
+<li>One of your sorts must be selection sort. The sample code you will be given has a SelectionSort class that you should use to write the code, but the algorithm is in our class notes or online (see Section 6 for a list of references)
+
+<li>One of your sorts must be from the following list:
+<ul>
+<li>shell sort, merge sort, quicksort, insertion sort
+</ul>
+<li>Your final sort can be from the previous list, or it can be any other reasonable sorting algorithm, except for bubble sort or heap sort (only because we just wrote heap sort in lab). “Reasonable” is defined as a sort that can be completed for all of our test inputs in three minutes or less. That precludes sorts such as Bogosort (see: http://en.wikipedia.org/wiki/Bogosort), sleep sort (see: http://stackoverflow.com/questions/6474318/what-is-the-time-complexity-of-the-sleep-sort), or other sorts that, while in principal could sort, are not feasible as general purpose sorts. Ideas for out-of-the-ordinary (or non-comparison) sorts are radix sort, tim sort, bucket sort, library sort, quick3.
+</ul>
+
+<h1>Describing Your Sorts, and Finding Sorting Algorithms</h1>
+
+In your ReadMe.md file, you need to describe the algorithm for each sort in your own words. This is especially important if you chose an out-of-the ordinary sort. Include a discussion of the worst case and best case complexity, and justify your response. If you include an average complexity, please provide a reference or a proof. You should have a section in your readme.txt file dedicated to each sort. You should also have a list of references where you found the algorithm for your sorts.
+
+<p>You may use offline or online resources to find the algorithm for your sorts. DO NOT copy C++ code from the internet! Almost all sorts have very detailed algorithms online, written in both C++ and other languages. We can’t stop you from looking at code samples of the algorithms, but you are on your honor to translate only algorithms and not specific code into C++. In other words, you are free to look at algorithms (indeed, you must), but you can’t copy specific code.
+
+<h1>Other Comments (IMPORTANT!)</h1>
+You will need to handle having more than one main() function in your three mainX.cpp files — the best way to handle the issue is to rename your other main() functions main1(), main2() while you are testing your third sort.
+
+The Makefile (provided) will create three executable files:
+<ul>
+<li>selectionSort
+<li>sort2
+<li>sort3
+</ul>
+
+See the Makefile itself for details on the names for the files you need to produce.
+
+<p>Testing for this assignment will include timed tests as well as functionality tests, with varying input sizes and element orderings. If your sorts do not finish within the three minute time-limit for our input data, we will consider them to be incorrect. You should test your code on O(n2) sorting algorithms on input sizes up to 100,000 elements. You will have test input files that have that many input integers. We will only test on positive integers (including 0).
+
+<p>In order to test your sorts, you can either type (or paste) a list of integers (separated by newlines) into the terminal (followed by ctrl-D), or you can input them directly from test files, as follows:
+
+<code><pre>	./selectionSort < randList100000.txt</pre></code>
+
+<p>As always, direct any specific questions to the Piazza class site.
+
+
+
+<h1>References</h1>
+Feel free to use any of the following sites to discover sorting algorithms:
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Sorting_algorithm">Wikipedia Sorting Algorithm</a>
+
+<li><a href="http://www.sorting-algorithms.com">www.sorting-algorithms.com</a>
+
+<li><a href="http://betterexplained.com/articles/sorting-algorithms/">sorting algorithms explained</a>
+</ul>
+
+<h1>Low Level Details</h1>
+
+<h2>Getting the files<h2>
+
+There are two ways to get the files for this assignment. The first is by copying the original files from the class folder. The second is to use “git” to pull the files from the GitHub cloud server.
+
+<h2>Method 1: copy files from the class folder</h2>
+
+First ssh to the homework server and, and make a directory called sorting
+
+<p>ssh -X your_cs_username@homework.cs.tufts.edu
+<p>mkdir hw5
+
+<p>change into that directory
+
+<p>cd hw5
+
+<p>At the command prompt, enter (don’t forget the period):
+
+<p>cp /comp/15/public_html/assignments/hw5/files/* .
+
+<p>Method 2: pull from GitHub:
+
+<p>At the command prompt, enter 
+
+<p>“git clone https://github.com/Tufts-COMP15/Data_Structures_F2014_HW5.git hw5”
+
+c<p>hange into the directory that git created:
+
+<p>“cd hw5”
+
+
+<h1>Compiling and running:</h1>
+To make all three of your sorts, type the following: make
+<p>To make an individual sort, enter “make selectionSort” (or sort2 or sort3)
+
+<h1>Providing:</h1>
+At the command prompt, enter “make provide” and press enter or return.
+
+
+</div>
+</body>
+</html>
+
