@@ -15,13 +15,16 @@ struct arrayWithLength{
 
 class MergeSort {
 public:
-        RadixSort(); // constructor
-        
+        MergeSort(); // constructor
+	~MergeSort();
+
         // read in a list of values from stdin
         void readList();
         
         // sort function
         void sort();
+	void sort(int from, int to);
+	void merge(int from, int midpoint, int to);
         
         // print the array
         void printArray();

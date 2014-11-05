@@ -16,6 +16,7 @@ struct arrayWithLength{
 class SelectionSort {
 public:
         SelectionSort(); // constructor
+	~SelectionSort();
         
         // read in a list of values from stdin
         void readList();

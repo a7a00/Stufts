@@ -13,10 +13,11 @@ struct arrayWithLength{
         int *arr;
 };
 
-class RadixSort {
+class InPlaceMergeSort {
 public:
-        RadixSort(); // constructor
-        
+        InPlaceMergeSort(); // constructor
+	~InPlaceMergeSort();
+
         // read in a list of values from stdin
         void readList();
         

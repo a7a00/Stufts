@@ -12,6 +12,11 @@ SelectionSort::SelectionSort(){ // constructor
         sortArray.arr = NULL;
 }
 
+SelectionSort::~SelectionSort()
+{
+	delete[] sortArray.arr;
+}
+
 // reads in a list of integers from stdin and returns an arrayWithLength
 void SelectionSort::readList(){
         int currentCapacity = 10;

@@ -4,13 +4,13 @@
 //
 
 #include <iostream>
-#include "sort3.h"
+#include "sort2.h"
 
 using namespace std;
 
 int main()
 {
-        InPlaceMergeSort sorter;
+        MergeSort sorter;
         
         sorter.readList();
         sorter.sort();

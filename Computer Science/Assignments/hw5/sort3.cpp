@@ -7,13 +7,18 @@
 
 using namespace std;
 
-RadixSort::RadixSort(){ // constructor
+InPlaceMergeSort::InPlaceMergeSort(){ // constructor
         sortArray.length = 0;
         sortArray.arr = NULL;
 }
 
+RadixSort::~InPlaceMergeSort()
+{
+	delete[] sortArray.arr;
+}
+
 // reads in a list of integers from stdin and returns an arrayWithLength
-void RadixSort::readList(){
+void InPlaceMergeSort::readList(){
         int currentCapacity = 10;
         sortArray.arr = new int[currentCapacity];
         
@@ -31,12 +36,12 @@ void RadixSort::readList(){
         }
 }
 
-void RadixSort::sort()
+void InPlaceMergeSortSort::sort()
 {
 	
 }
 
-void RadixSort::printArray(){
+void InPlaceMergeSort::printArray(){
         for(int i = 0; i < sortArray.length; i++)
 	{
 		cout << sortArray.arr[i] << "\n";
