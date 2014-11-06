@@ -20,6 +20,9 @@ sort2: sort2.cpp sort2.h main2.cpp
 	
 sort3: sort3.cpp sort3.h main3.cpp
 	${CXX} ${FLAGS} -o sort3 sort3.cpp main3.cpp
+
+sort4: sort4.cpp sort4.h main4.cpp
+	${CXX} ${FLAGS} -o sort4 sort4.cpp main4.cpp
 	
 clean:
 	rm -f selectionSort sort2 sort3

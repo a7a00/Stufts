@@ -1,24 +1,24 @@
 //
 //  sort3.cpp
-//  Sorts integers using the Radix Sort algorithm
+//  Sorts integers using the In Place Merge Sort algorithm
 
 
 #include "sort3.h"
 
 using namespace std;
 
-InPlaceMergeSort::InPlaceMergeSort(){ // constructor
+MergeSort::MergeSort(){ // constructor
         sortArray.length = 0;
         sortArray.arr = NULL;
 }
 
-RadixSort::~InPlaceMergeSort()
+MergeSort::~MergeSort()
 {
 	delete[] sortArray.arr;
 }
 
 // reads in a list of integers from stdin and returns an arrayWithLength
-void InPlaceMergeSort::readList(){
+void MergeSort::readList(){
         int currentCapacity = 10;
         sortArray.arr = new int[currentCapacity];
         
@@ -36,16 +36,24 @@ void InPlaceMergeSort::readList(){
         }
 }
 
-void InPlaceMergeSortSort::sort()
+void MergeSort::sort()
+{
+	sort(0, sortArray.length-1);
+}
+
+void MergeSort::sort(int from, int to)
 {
 	
 }
 
-void InPlaceMergeSort::printArray(){
+void MergeSort::merge(int from, int midpoint, int to)
+{
+	
+}
+
+void MergeSort::printArray(){
         for(int i = 0; i < sortArray.length; i++)
 	{
 		cout << sortArray.arr[i] << "\n";
 	}
 }
-
-

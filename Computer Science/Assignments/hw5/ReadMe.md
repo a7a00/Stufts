@@ -1,6 +1,8 @@
 # ReadMe for COMP 15 HW5
 ## Sorting Assignment 
 
+#WHEN TALKING ABOUT THE NIGHTMARE THAT IS SORT4, MAKE SURE YOU MENTION WHY BOTTOM UP MERGESORT ISN'T GOOD.
+
 Every assignment you submit you will include a ReadMe file. The name
 could be ReadMe, readme, Read-me.txt, readME, ReadMe.md (the “.md”
 stands for “markdown,” which allows lightweight formatting) or almost
