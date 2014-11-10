@@ -27,4 +27,39 @@ What happens when you try to add two elements with the same key is up to the pro
 
 ### Load Factor
 
-The load factor is just the number of keys over the number of slots in the hash table. Most commercial ones are around .5-.7. Keep in mind that a tiny load factor doesn't even mean much. Even 2,500 keys in a 1,000,000 slot hash table have a 95% chance of a random collision.
+The load factor is just the number of keys over the number of slots in the hash table. Most commercial ones are around .5-.7. Keep in mind that a tiny load factor doesn't even mean much. Even 2,500 keys in a 1,000,000 slot hash table have a 95% chance of a random collision
+
+## Piping
+
+Time for a break, because you guys don't know what piping is. We've already seen how `<` and `>` can input and output data to and from files. You can also use the `|` symbol to pipe the output of the program before the pipe to the program after it.
+
+## Back to Hashing
+
+So linked lists are annoying. What are some alternatives? Let's say we drop something in the first location. The next thing is in the third spot. What if there was a way that we could use the second slot as storage space? Turns out we can. Just include instructions in the `findElement()` functions to start linearly searching when the key stored with the element doesn't match the key of the element. (We're assuming that we store the key along with the element.). If we ever hit an empty element, we know it isn't in the table.
+
+Remember that your hash should be relatively random! If there's a pileup around one slot, this algorithm becomes slow and balky.
+
+### Expanding a Hash Table
+
+I missed a lot of stuff here because I was sending an email. Sorry. (Doesn't look like it matters; we're still no closer to an answer.) Apparently you just kludge through it with StackOverflow.
+
+### Deleting an Element
+
+Deleting an element can leave empty slots that can fool our search. There are a few solutions. The first is to mark a spot as deleted so the search doesn't stop, but we still know we can insert something there.
+
+A hash function with *n* elements for *n* keys is called a *minimal perfect-hash function*.
+
+## Cryptographic Hashing
+
+FINALLY! COOL STUFF!
+
+A cryptographic hash function takes an arbitrary block of data and returns a string of fixed length called the *digest*. Changing any part of the input changes the entire output. They need to meet these criteria.
+
+* Feasible to compute
+* Infeasible to make a message that generates a given hash
+* Infeasible to modify a message without changing a hash
+* Infeasible to make 2 messages with the same hash.
+
+You give a hash and a half function FOLLOWED BY THE UNENCRYPTED MESSAGE, to prove the massage's authenticity.
+
+Hash functions can also be slow as a security measure. (I'm looking at you, YikYak.)
