@@ -3,22 +3,23 @@
 //  Sorts integers using the In Place Merge Sort algorithm
 
 
+#include <cassert>
 #include "sort3.h"
 
 using namespace std;
 
-MergeSort::MergeSort(){ // constructor
+InPlaceMergeSort::InPlaceMergeSort(){ // constructor
         sortArray.length = 0;
         sortArray.arr = NULL;
 }
 
-MergeSort::~MergeSort()
+InPlaceMergeSort::~InPlaceMergeSort()
 {
 	delete[] sortArray.arr;
 }
 
 // reads in a list of integers from stdin and returns an arrayWithLength
-void MergeSort::readList(){
+void InPlaceMergeSort::readList(){
         int currentCapacity = 10;
         sortArray.arr = new int[currentCapacity];
         
@@ -36,22 +37,57 @@ void MergeSort::readList(){
         }
 }
 
-void MergeSort::sort()
+void InPlaceMergeSort::sort()
 {
 	sort(0, sortArray.length-1);
 }
 
-void MergeSort::sort(int from, int to)
+void InPlaceMergeSort::sort(int from, int to)
 {
-	
+	cout << "--------\n" << "From: " << from << "\nTo: " << to << "\nMidpoint: " << (to+from)/2 << "\n";
+	//printArray();
+	//int flag = 0;
+	//assert(from < to);
+	if(to <= from)
+	{
+		cout << "RETURN\n";
+		return;
+	}
+	int midpoint = (to+from)/2;
+	sort (from, midpoint);
+	sort (midpoint+1, to);
+	if (sortArray.arr[midpoint] <= sortArray.arr[midpoint+1])
+	{
+		cout << "RETURN\n";
+		return; //We don't need to merge.
+	}
+	int pointer1 = from;
+	int pointer2 = midpoint+1;
+	while (pointer1 <= midpoint && pointer2 <= to)
+	{
+		if (sortArray.arr[pointer1] <= sortArray.arr[pointer2])
+		{
+			pointer1++;
+		}
+		else
+		{
+			int tmp = sortArray.arr[pointer2]; //Turns out you need to save this...
+			for(int i = 0; i < (pointer2-pointer1); i++)
+			{
+				sortArray.arr[pointer1+1] = sortArray.arr[pointer1];
+			}
+			sortArray.arr[pointer1] = tmp;
+			pointer1++;
+			midpoint++;
+			pointer2++;
+		}
+	}
+	cout << "NOW PRINTING ARRAY F" << from << "T" << to << "M" << midpoint << ":\n";
+	printArray();	
 }
 
-void MergeSort::merge(int from, int midpoint, int to)
-{
-	
-}
-
-void MergeSort::printArray(){
+void InPlaceMergeSort::printArray(){
+	cout << "------\n";
         for(int i = 0; i < sortArray.length; i++)
 	{
 		cout << sortArray.arr[i] << "\n";
