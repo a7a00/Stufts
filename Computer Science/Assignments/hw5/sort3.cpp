@@ -44,13 +44,13 @@ void InPlaceMergeSort::sort()
 
 void InPlaceMergeSort::sort(int from, int to)
 {
-	cout << "--------\n" << "From: " << from << "\nTo: " << to << "\nMidpoint: " << (to+from)/2 << "\n";
+	//cout << "--------\n" << "From: " << from << "\nTo: " << to << "\nMidpoint: " << (to+from)/2 << "\n";
 	//printArray();
 	//int flag = 0;
 	//assert(from < to);
 	if(to <= from)
 	{
-		cout << "RETURN\n";
+		//cout << "RETURN\n";
 		return;
 	}
 	int midpoint = (to+from)/2;
@@ -58,7 +58,7 @@ void InPlaceMergeSort::sort(int from, int to)
 	sort (midpoint+1, to);
 	if (sortArray.arr[midpoint] <= sortArray.arr[midpoint+1])
 	{
-		cout << "RETURN\n";
+		//cout << "RETURN\n";
 		return; //We don't need to merge.
 	}
 	int pointer1 = from;
@@ -82,12 +82,12 @@ void InPlaceMergeSort::sort(int from, int to)
 			pointer2++;
 		}
 	}
-	cout << "NOW PRINTING ARRAY F" << from << "T" << to << "M" << midpoint << ":\n";
-	printArray();	
+	//cout << "NOW PRINTING ARRAY F" << from << "T" << to << "M" << midpoint << ":\n";
+	//printArray();	
 }
 
 void InPlaceMergeSort::printArray(){
-	cout << "------\n";
+	//cout << "------\n";
         for(int i = 0; i < sortArray.length; i++)
 	{
 		cout << sortArray.arr[i] << "\n";
