@@ -44,7 +44,7 @@ void InPlaceMergeSort::sort()
 
 void InPlaceMergeSort::sort(int from, int to)
 {
-	//cout << "--------\n" << "From: " << from << "\nTo: " << to << "\nMidpoint: " << (to+from)/2 << "\n";
+	cout << "--------\n" << "From: " << from << "\nTo: " << to << "\nMidpoint: " << (to+from)/2 << "\n";
 	//printArray();
 	//int flag = 0;
 	//assert(from < to);
@@ -56,11 +56,6 @@ void InPlaceMergeSort::sort(int from, int to)
 	int midpoint = (to+from)/2;
 	sort (from, midpoint);
 	sort (midpoint+1, to);
-	if (sortArray.arr[midpoint] <= sortArray.arr[midpoint+1])
-	{
-		//cout << "RETURN\n";
-		return; //We don't need to merge.
-	}
 	int pointer1 = from;
 	int pointer2 = midpoint+1;
 	while (pointer1 <= midpoint && pointer2 <= to)
@@ -71,10 +66,13 @@ void InPlaceMergeSort::sort(int from, int to)
 		}
 		else
 		{
+			cout << "********\n" << "From: " << from << " To: " << to << " Midpoint: " << midpoint << " P1: " << pointer1 << " P2: " << pointer2 << "\n";
 			int tmp = sortArray.arr[pointer2]; //Turns out you need to save this...
+			//cout << "TMP: " << tmp;
 			for(int i = 0; i < (pointer2-pointer1); i++)
 			{
-				sortArray.arr[pointer1+1] = sortArray.arr[pointer1];
+				sortArray.arr[pointer1+i+1] = sortArray.arr[pointer1+i];
+				//pointer1++;
 			}
 			sortArray.arr[pointer1] = tmp;
 			pointer1++;
@@ -83,7 +81,7 @@ void InPlaceMergeSort::sort(int from, int to)
 		}
 	}
 	//cout << "NOW PRINTING ARRAY F" << from << "T" << to << "M" << midpoint << ":\n";
-	//printArray();	
+	printArray();	
 }
 
 void InPlaceMergeSort::printArray(){
