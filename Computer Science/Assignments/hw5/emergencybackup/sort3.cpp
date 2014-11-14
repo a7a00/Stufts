@@ -43,7 +43,7 @@ void QuickSort::sort()
 
 void QuickSort::sort(int from, int to)
 {
-	int pivot = (from+2)/2;
+	int pivot = sortArray.arr[(from+to)/2];
 	int pointer1 = from;
 	int pointer2 = to;
 	while(pointer1 <= pointer2)
@@ -61,13 +61,19 @@ void QuickSort::sort(int from, int to)
 			int tmp = sortArray.arr[pointer1];
 			sortArray.arr[pointer1] = sortArray.arr[pointer2];
 			sortArray.arr[pointer2] = tmp;
-			if(pivot == pointer1) pivot = pointer2; //These are catch cases. If the pivot it swapped,
-			//we pick a new one.
-			else if(pivot == pointer2) pivot = pointer1;
+			if(pivot == pointer1)
+			{
+				pivot = pointer2; //These are catch cases. If the pivot it swapped,
+			}//we pick a new one.
+			else if(pivot == pointer2)
+			{
+				pivot = pointer1;
+			}
 			pointer1++;
 			pointer2--;
 		}
 	}
+	//if(pointer1 == pointer2+1) return;
 	if(from < pointer2) sort(from, pointer2); //Recursive calls
 	if(to > pointer1) sort(pointer1, to);
 }
