@@ -48,7 +48,7 @@ void InPlaceMergeSort::sort(int from, int to)
 	//printArray();
 	//int flag = 0;
 	//assert(from < to);
-	if(from <= to)
+	if(from >= to)
 	{
 		//cout << "RETURN\n";
 		return;
@@ -65,9 +65,7 @@ void InPlaceMergeSort::merge(int from, int midpoint, int to)
 	//base case for length 2?
 	int pointer1 = (from+midpoint)/2;
 	int pointer2 = midpoint+pointer1;
-	int count = sortArray.length/8; //Divided by 2 once because we're splitting the array.
-	//Another time because it's a binary search, and a third time because it's the separation
-	//for the NEXT iteration of the search.
+	int count = (midpoint-from)/2;
 	while(count > 0)
 	{
 		if(sortArray.arr[pointer1] > sortArray.arr[pointer2])
@@ -92,6 +90,7 @@ void InPlaceMergeSort::merge(int from, int midpoint, int to)
 
 void InPlaceMergeSort::reverse(int from, int to)
 {
+	if(to == from) return;
 	int pointer1 = from;
 	int pointer2 = to;
 	while(pointer1 < pointer2)

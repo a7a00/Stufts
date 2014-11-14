@@ -1,43 +1,74 @@
-# ReadMe for COMP 15 HW5
-## Sorting Assignment 
+# ReadMe for COMP 15 HW5 - Sorting Assignment 
 
-#WHEN TALKING ABOUT THE NIGHTMARE THAT IS SORT4, MAKE SURE YOU MENTION WHY BOTTOM UP MERGESORT ISN'T GOOD.
+This project contains three methods for sorting an array of integers: selection
+sort, merge sort and an in place implementation of merge sort.
 
-Every assignment you submit you will include a ReadMe file. The name
-could be ReadMe, readme, Read-me.txt, readME, ReadMe.md (the “.md”
-stands for “markdown,” which allows lightweight formatting) or almost
-anything you like that has the word read followed by the word me. Exact
-spelling is not important, the contents are.
+## Files
 
-The purpose of the ReadMe file is the same as the little paper insert
-you get in a new appliance -- to give the reader an introduction and
-overview of the product.
+* `main` files - These 3 files take user input, build arrays from it, and call
+their respective sorts, and are virtually identical.
+* `SelectionSort.cpp/h` - Sorts a given array according to a linear selection
+sort.
+* `sort2.cpp/h` - Performs a typical merge sort algorithm on an array with
+time complexity O(n*log*n) and space compexity O(n).
+* `sort3.cpp/h` - Sorts an array according to an in place merge sort algorithm
+with O(1) space complexity, but O(n) or O(n^2) time complexity. (I'm not really
+sure...)
+* `Makefile` - For compiling.
 
-Your ReadMe file for the assignments **must** include:
+## Compliling
 
-1.  The purpose of your program
+Use the included makefile with no flags.
 
-2.  List of files with one/or two-line summary
+## Algorithms
 
-3.  How to compile it (saying "use included Makefile" is ok)
+### Selection Sort
 
-4.  Outline of data structure (depending on the assignment)
+This algorithm's pretty simple. You just go down the array and find the smallest
+unsorted element. Then just do a simple swap to move the element into the
+sorted section.
 
-5.  Outline of algorithm (depending on the assignment)
+### Merge Sort
 
-6.  A list of people who materially helped you on the assignment. If
-    you worked with a friend and you shared ideas, you need to 
-    list that person, e.g., "Josh Whedon helped me on this assignment".
-    You do not need to list TAs, or professors, but you may feel free
-    to do so.
+This algorithm splits the array into incrementally smaller and smaller pieces. 
+It then works its way up and merges the smaller pieces into bigger ones until
+we're done.
 
-The ReadMe file shows the reader, in a quick glance, what the program is
-about and gives a general idea of how it works. For short programs the
-readme file will be short, for more complicated programs the readme file
-will be longer.
+### In-Place Merge Sort
 
-Use outline form rather than long discursive paragraphs. A ReadMe file
-is an overview.
+This algorithm starts out the same way as regular merge sort, but the merge
+function is different. Instead of having 2 arrays, we have 2 different sections
+of one array, both sorted. So how do we merge these 2 parts without losing
+data? The answer lies in the fact that we can easily reverse a section of the
+array without losing extra space. Three reverses in a row can act as swapping
+two parts of an array:
 
-There is no correct readme format; within these guidelines, devise your
-own style.
+```
+[ABCD] -> [DC]BA -> CD[BA] -> CDAB
+```
+
+So we can now think of our array as 2 arrays, provided we can only perform one
+action:
+
+```
+[AB{CD}] [{EF}GH] -> [ABEF] [CDEH]
+```
+
+These 2 swapped pieces have to be the same size, and have to be the end of the
+first array and the beginning of the second. So the algorithm works like this:
+
+1. Perform a search to find the first place an element in the first list is
+greater than an element in the second.
+2. Swap the piece following that element's index in the first array with the
+piece before that element's index in the second array.
+3. Recursively merge this way with a base case of single element arrays.
+
+(I used a binary search for step 1 because of speed issues.)
+
+Now that we have a merge algorithm, we can just implement merge sort like
+normal.
+
+### Acknowledgements
+
+Many thanks to the TA's of Halligan for all their patience and help demystifying
+ my algorithms and associated scribbles.
