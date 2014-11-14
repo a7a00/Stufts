@@ -25,6 +25,7 @@ public:
         void sort();
 	void sort(int from, int to);
 	void merge(int from, int midpoint, int to);
+	void reverse(int from, int to);
         
         // print the array
         void printArray();

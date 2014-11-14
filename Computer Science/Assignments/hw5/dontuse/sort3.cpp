@@ -48,7 +48,7 @@ void InPlaceMergeSort::sort(int from, int to)
 	//printArray();
 	//int flag = 0;
 	//assert(from < to);
-	if(from <= to)
+	if(to <= from)
 	{
 		//cout << "RETURN\n";
 		return;
@@ -56,52 +56,37 @@ void InPlaceMergeSort::sort(int from, int to)
 	int midpoint = (to+from)/2;
 	sort (from, midpoint);
 	sort (midpoint+1, to);
-	merge(from, midpoint, to);
-}
-
-void InPlaceMergeSort::merge(int from, int midpoint, int to)
-{
-	if(to == from) return;
-	//base case for length 2?
-	int pointer1 = (from+midpoint)/2;
-	int pointer2 = midpoint+pointer1;
-	int count = sortArray.length/8; //Divided by 2 once because we're splitting the array.
-	//Another time because it's a binary search, and a third time because it's the separation
-	//for the NEXT iteration of the search.
-	while(count > 0)
+	//if (sortArray.arr[midpoint] <= sortArray.arr[midpoint+1])
+	//{
+	//	//cout << "RETURN\n";
+	//	return; //We don't need to merge.
+	//}
+	int pointer1 = from;
+	int pointer2 = midpoint+1;
+	while (pointer1 <= midpoint && pointer2 <= to)
 	{
-		if(sortArray.arr[pointer1] > sortArray.arr[pointer2])
+		if (sortArray.arr[pointer1] <= sortArray.arr[pointer2])
 		{
-			pointer1 -= count;
-			pointer2 += count;
+			pointer1++;
 		}
 		else
 		{
-			pointer1 += count;
-			pointer2 -= count;
+			//cout << "********\n" << "From: " << from << " To: " << to << " Midpoint: " << midpoint << " P1: " << pointer1 << " P2: " << pointer2 << "\n";
+			int tmp = sortArray.arr[pointer2]; //Turns out you need to save this...
+			//cout << "TMP: " << tmp;
+			for(int i = 0; i < (pointer2-pointer1); i++)
+			{
+				sortArray.arr[pointer1+i+1] = sortArray.arr[pointer1+i];
+				//pointer1++;
+			}
+			sortArray.arr[pointer1] = tmp;
+			pointer1++;
+			midpoint++;
+			pointer2++;
 		}
-		count /= 2;
 	}
-	reverse(pointer1, pointer2); //Initial swap done with a full reverse
-	reverse(pointer1, midpoint); //These 2 reverses get the 2 halves back into proper order
-	reverse(midpoint, to);
-	merge(from, (from+midpoint)/2, midpoint); //No -1 here. Otherwise single element arrays would be messed up.
-	merge(midpoint, (midpoint+to)/2, to);
-	//And the arrays are sorted, so we don't care about sorting midpoint twice, anyway.
-}
-
-void InPlaceMergeSort::reverse(int from, int to)
-{
-	int pointer1 = from;
-	int pointer2 = to;
-	while(pointer1 < pointer2)
-	{
-		int tmp = sortArray.arr[pointer1];
-		sortArray.arr[pointer1] = sortArray.arr[pointer2];
-		sortArray.arr[pointer2] = tmp;
-		pointer1++;
-		pointer2--;
-	}
+	//cout << "NOW PRINTING ARRAY F" << from << "T" << to << "M" << midpoint << ":\n";
+	//printArray();
 }
 
 void InPlaceMergeSort::printArray(){
