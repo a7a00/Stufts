@@ -20,6 +20,11 @@ InPlaceMergeSort::~InPlaceMergeSort()
 
 // reads in a list of integers from stdin and returns an arrayWithLength
 void InPlaceMergeSort::readList(){
+	//sortArray.length = 4;
+	//int tmp[4] = {5, 1, 3, 2};
+	//sortArray.arr = new int[4];
+	//for (int i=0;i<4;i++) sortArray.arr[i] = tmp[i];
+	//return;
         int currentCapacity = 10;
         sortArray.arr = new int[currentCapacity];
         
@@ -59,10 +64,21 @@ void InPlaceMergeSort::sort(int from, int to)
 	merge(from, midpoint, to);
 }
 
+//int __count = 0;
 void InPlaceMergeSort::merge(int from, int midpoint, int to)
 {
 	if(to == from) return;
-	//base case for length 2?
+	if(to == from+1)
+	{
+		if(sortArray.arr[from] > sortArray.arr[to])
+		{
+			int tmp = sortArray.arr[from];
+			sortArray.arr[from] = sortArray.arr[to];
+			sortArray.arr[to] = tmp;
+			return;
+		}
+		else return;
+	}
 	int pointer1 = (from+midpoint)/2;
 	int pointer2 = midpoint+pointer1;
 	int count = (midpoint-from)/2;
@@ -80,9 +96,13 @@ void InPlaceMergeSort::merge(int from, int midpoint, int to)
 		}
 		count /= 2;
 	}
+	//__count++;
+	//cout << "count:" << __count << "\n";
+
 	reverse(pointer1, pointer2); //Initial swap done with a full reverse
 	reverse(pointer1, midpoint); //These 2 reverses get the 2 halves back into proper order
 	reverse(midpoint, to);
+	//if(to == from) return;
 	merge(from, (from+midpoint)/2, midpoint); //No -1 here. Otherwise single element arrays would be messed up.
 	merge(midpoint, (midpoint+to)/2, to);
 	//And the arrays are sorted, so we don't care about sorting midpoint twice, anyway.
@@ -93,6 +113,9 @@ void InPlaceMergeSort::reverse(int from, int to)
 	if(to == from) return;
 	int pointer1 = from;
 	int pointer2 = to;
+	//if (__count == 6) {
+	//	cout << "stop!\n";
+	//}
 	while(pointer1 < pointer2)
 	{
 		int tmp = sortArray.arr[pointer1];
