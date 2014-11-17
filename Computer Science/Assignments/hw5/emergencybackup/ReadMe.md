@@ -34,7 +34,12 @@ This algorithm splits the array into incrementally smaller and smaller pieces.
 It then works its way up and merges the smaller pieces into bigger ones until
 we're done.
 
-### 
+### Quick Sort
+
+This algorithm picks a pivot element in the center of the array and then puts 
+all the elements with values less than the pivot to the left of it and all 
+elements with values greater than the pivot to the right. You then recursiveley
+ sort smaller and smaller pieces of the array with a base case of an array of 1. 
 
 ### Acknowledgements
 
