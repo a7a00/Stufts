@@ -4,7 +4,7 @@ My design focuses on a really fast read-in time, so the data structure is extrem
 
 ## Reading In Data
 
-The methods in `read_lyrics.cpp` might make my job a lot easier, or I might choose to code my own. Basically, there's a dynamic array full of Song objects. Each Song has:
+The methods in `read_lyrics.cpp` might make my job a lot easier, or I might choose to code my own. Basically, there's a dynamic arra (pr possibly a vector; no real difference in this case) full of Song objects. Each Song has:
 
 * A title
 * An artist
