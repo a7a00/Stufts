@@ -34,7 +34,7 @@ int find_match(string s, char c) //Finds the index of the last occurence of a ca
 {
 	for(int i = s.length()-1; i >= 0; i--)
 	{
-		if(s[i] == c) return 1;
+		if(s[i] == c) return i;
 	}
 	return -1;
 }
