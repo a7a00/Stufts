@@ -46,40 +46,43 @@ int main()
 
 	int patternPointer = pattern.length() - 1;
 	int stringPointer = pattern.length() -1;
-	int MAX = searchstring.length() -1;
+	int MAX = searchstring.length();
 	int extra = 0;
-	if(pattern[patternPointer] != searchstring[stringPointer])
+	while(stringPointer < MAX)
 	{
-		extra = 0;
-		if(find_match(pattern, searchstring[stringPointer] == -1))
+		if(pattern[patternPointer] != searchstring[stringPointer])
 		{
-			patternPointer = pattern.length() - 1;
-			stringPointer += pattern.length();
-			if(stringPointer >= searchstring.length()) return 0; //Prevents out of bounds segfaults
+			extra = 0;
+			if(find_match(pattern, searchstring[stringPointer] == -1))
+			{
+				patternPointer = pattern.length() - 1;
+				stringPointer += pattern.length();
+				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
+			}
+			else
+			{
+				patternPointer = pattern.length() - 1;
+				stringPointer += (pattern.length()-(find_match(pattern, searchstring[stringPointer])));
+				stringPointer += extra;
+				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
+			}
 		}
 		else
 		{
-			patternPointer = pattern.length() - 1;
-			stringPointer += (pattern.length()-(find_match(pattern, searchstring[stringPointer])));
-			stringPointer += extra;
-			if(stringPointer >= searchstring.length()) return 0; //Prevents out of bounds segfaults
-		}
-	}
-	else
-	{
-		extra++;
-		if(extra = (pattern.length()-1))
-		{
-			//REMEMBER TO CALL COPY IN TE ACTUAL METHOD
-			cout << "Match found at index " << stringPointer << "!";
-			patternPointer = pattern.length() - 1;
-			stringPointer += pattern.length();
-			if(stringPointer >= searchstring.length()) return 0; //Prevents out of bounds segfaults
-		}
-		else
-		{
-			patternPointer--;
-			stringPointer--;
+			extra++;
+			if(extra = (pattern.length()-1))
+			{
+				//REMEMBER TO CALL COPY IN TE ACTUAL METHOD
+				cout << "Match found at index " << stringPointer << "!";
+				patternPointer = pattern.length() - 1;
+				stringPointer += pattern.length();
+				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
+			}
+			else
+			{
+				patternPointer--;
+				stringPointer--;
+			}
 		}
 	}
 }
