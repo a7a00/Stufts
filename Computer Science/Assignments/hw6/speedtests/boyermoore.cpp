@@ -63,6 +63,7 @@ int main()
 			{
 				patternPointer = pattern.length() - 1;
 				stringPointer += (pattern.length()-(find_match(pattern, searchstring[stringPointer])));
+				stringPointer -= 1;
 				stringPointer += extra;
 				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
 			}
@@ -70,10 +71,10 @@ int main()
 		else
 		{
 			extra++;
-			if(extra = (pattern.length()-1))
+			if(extra == (pattern.length()-1))
 			{
 				//REMEMBER TO CALL COPY IN TE ACTUAL METHOD
-				cout << "Match found at index " << stringPointer << "!";
+				cout << "Match found at index " << stringPointer-pattern.length()+1 << "!\n";
 				patternPointer = pattern.length() - 1;
 				stringPointer += pattern.length();
 				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
