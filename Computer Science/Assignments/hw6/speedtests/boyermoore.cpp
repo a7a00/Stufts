@@ -53,7 +53,7 @@ int main()
 		if(pattern[patternPointer] != searchstring[stringPointer])
 		{
 			extra = 0;
-			if(find_match(pattern, searchstring[stringPointer] == -1))
+			if(find_match(pattern, searchstring[stringPointer]) == -1)
 			{
 				patternPointer = pattern.length() - 1;
 				stringPointer += pattern.length();
