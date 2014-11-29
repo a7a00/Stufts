@@ -42,7 +42,7 @@ int find_match(string s, char c) //Finds the index of the last occurence of a ca
 int main()
 {
 	string searchstring = "Friendship is Magic!";
-	string pattern = "riendship is M";
+	string pattern = "riendship is Magic!";
 
 	int patternPointer = pattern.length() - 1;
 	int stringPointer = pattern.length() -1;
@@ -71,7 +71,7 @@ int main()
 		else //If the characters match, we  just need to shift the  pointer back before checking again.
 		{
 			extra++; //We'll be able to move forward farther by this amount if it turns out not to be a match.
-			if(extra == (pattern.length()-1)) //If we're all the way back at the beginning of the pattern, it's obviously been found.
+			if(extra == (pattern.length()/*-1*/)) //If we're all the way back at the beginning of the pattern, it's obviously been found.
 			{
 				//REMEMBER TO CALL COPY IN THE ACTUAL METHOD
 				//cout << "Match found at index " << (stringPointer-pattern.length())+1 << "!\n";
