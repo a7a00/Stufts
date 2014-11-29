@@ -52,14 +52,14 @@ int main()
 	{
 		if(pattern[patternPointer] != searchstring[stringPointer])
 		{
-			extra = 0;
-			if(find_match(pattern, searchstring[stringPointer]) == -1)
+			extra = 0; //Reset this because we're at the end of the word.
+			if(find_match(pattern, searchstring[stringPointer]) == -1) //If the string character isn't in the pattern
 			{
-				patternPointer = pattern.length() - 1;
+				patternPointer = pattern.length() - 1; //Just shift the whole pattern over
 				stringPointer += pattern.length();
 				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
 			}
-			else
+			else //Otherwise, move it so the last match in the pattern lines up with the character in the string.
 			{
 				patternPointer = pattern.length() - 1;
 				stringPointer += (pattern.length()-(find_match(pattern, searchstring[stringPointer])));
@@ -68,18 +68,19 @@ int main()
 				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
 			}
 		}
-		else
+		else //If the characters match, we  just need to shift the  pointer back before checking again.
 		{
-			extra++;
-			if(extra == (pattern.length()-1))
+			extra++; //We'll be able to move forward farther by this amount if it turns out not to be a match.
+			if(extra == (pattern.length()-1)) //If we're all the way back at the beginning of the pattern, it's obviously been found.
 			{
-				//REMEMBER TO CALL COPY IN TE ACTUAL METHOD
-				cout << "Match found at index " << stringPointer-pattern.length()+1 << "!\n";
+				//REMEMBER TO CALL COPY IN THE ACTUAL METHOD
+				//cout << "Match found at index " << (stringPointer-pattern.length())+1 << "!\n";
+				cout << "Match found at index " << (int)((stringPointer+extra-pattern.length())/*+1*/) << "!\n";
 				patternPointer = pattern.length() - 1;
 				stringPointer += pattern.length();
 				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
 			}
-			else
+			else //Otherwise, just shift the pointer.
 			{
 				patternPointer--;
 				stringPointer--;
