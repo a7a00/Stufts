@@ -42,7 +42,7 @@ int find_match(string s, char c) //Finds the index of the last occurence of a ca
 int main()
 {
 	string searchstring = "Friendship is Magic!";
-	string pattern = "riendship is Magic!";
+	string pattern = "riendship is M";
 
 	int patternPointer = pattern.length() - 1;
 	int stringPointer = pattern.length() -1;
@@ -76,6 +76,9 @@ int main()
 				//REMEMBER TO CALL COPY IN THE ACTUAL METHOD
 				//cout << "Match found at index " << (stringPointer-pattern.length())+1 << "!\n";
 				cout << "Match found at index " << (int)((stringPointer+extra-pattern.length())/*+1*/) << "!\n";
+				//Since we increment extra every time, we know how many times we moved the pointer back!
+				//We can then just add extra to cancel out the backwards moves and jump to the end of the pattern!
+				//Alex, yuo of genious!
 				patternPointer = pattern.length() - 1;
 				stringPointer += pattern.length();
 				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults

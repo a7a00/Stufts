@@ -159,8 +159,8 @@ string SongSearch::getcontext(string lyrics, int index)
 	int spaces = 0;
 	int from = 0; //Safety values, guaranteed not to segfault
 	int len = lyrics.length();
-	for(int i = index; i > 0; i--) //Walk backwards through the loop
-	//If we see a certain amount of spaces before the loop, we know we can grap with impunity.
+	for(int i = index; i > 0; i--) //Walk backwards through the string
+	//If we see a certain amount of spaces before the loop, we know we can grab with impunity.
 	{
 		if(lyrics[i] == " ") spaces++;
 		if(spaces == 11) //Words = spaces-1
@@ -184,11 +184,64 @@ string SongSearch::getcontext(string lyrics, int index)
 	return lyrics.substr(from, len);
 }
 
-string SongSearch::search_lyrics(string pattern, Song song)
+int SongSearch::find_match(string s, char c) //Finds the index of the last occurence of a character in a string
+{
+	for(int i = s.length()-1; i >= 0; i--)
+	{
+		if(s[i] == c) return i;
+	}
+	return -1;
+}
+
+void SongSearch::search_lyrics(string pattern, Song song)
 {
 	pattern = " " + pattern;
 	pattern += " "; //This prevents us from picking up partial searches.
-	//TODO: THIS. HERE THERE BE DRAGONS
+	//HERE THERE BE DRAGONS
+	int patternPointer = pattern.length() - 1;
+	int stringPointer = pattern.length() -1;
+	int MAX = song.lyrics.length();
+	int extra = 0;
+	while(stringPointer < MAX)
+	{
+		if(pattern[patternPointer] != song.lyrics[stringPointer])
+		{
+			extra = 0; //Reset this because we're at the end of the word.
+			if(find_match(pattern, song.lyrics[stringPointer]) == -1) //If the string character isn't in the pattern
+			{
+				patternPointer = pattern.length() - 1; //Just shift the whole pattern over
+				stringPointer += pattern.length();
+				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
+			}
+			else //Otherwise, move it so the last match in the pattern lines up with the character in the string.
+			{
+				patternPointer = pattern.length() - 1;
+				stringPointer += (pattern.length()-(find_match(pattern, song.lyrics[stringPointer])));
+				stringPointer -= 1;
+				stringPointer += extra;
+				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
+			}
+		}
+		else //If the characters match, we  just need to shift the  pointer back before checking again.
+		{
+			extra++; //We'll be able to move forward farther by this amount if it turns out not to be a match.
+			if(extra == (pattern.length()/*-1*/)) //If we're all the way back at the beginning of the pattern, it's obviously been found.
+			{
+				copy(song, (int)((stringPointer+extra-pattern.length())/*+1*/));
+				//Since we increment extra every time, we know how many times we moved the pointer back!
+				//We can then just add extra to cancel out the backwards moves and jump to the end of the pattern!
+				//Alex, yuo of genious!
+				patternPointer = pattern.length() - 1;
+				stringPointer += pattern.length();
+				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
+			}
+			else //Otherwise, just shift the pointer.
+			{
+				patternPointer--;
+				stringPointer--;
+			}
+		}
+	}
 }
 
 void print_song(Song song)

@@ -47,6 +47,10 @@ private:
 	//ACCOUNT FOR WORDS AT THE BEGINNING AND END
 	string get_context(string lyrics, int index);
 	
+	//Finds the index of the last occurence of a character in a string
+	//Used by search_lyrics.
+	int SongSearch::find_match(string s, char c)
+
 	//searches a string for a given pattern and updates that song's info.
 	//This needs to call copy whenever it finds a match
 	void search_lyrics(string pattern, Song song);
