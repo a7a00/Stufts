@@ -68,7 +68,7 @@ void SongSearch::read_lyrics(const char * filename, bool show_progress)
 		}
 		// -- Important: skip the newline left behind
 		in.ignore();
-		songs.push_back(song);
+		songs->push_back(song);
 	}
 }
 
@@ -100,14 +100,14 @@ void SongSearch::search()
 	cin >> word;
 	word = alpha_only(word);
 	//search each song and copy it over if there's a match
-	for(int i = 0; i < songs.size(); i++)
+	for(int i = 0; i < (int)(songs->size()); i++)
 	{
-		search_lyrics(word, songs[i];)
+		search_lyrics(word, songs->at(i));
 		//if(songs[i].count > 0) copy(song[i]);
 	}
 	//We now sort the array of matches with a selection sort
 	//We terminate it ater the 10 largest elements have been found.
-	if(matches.size() == 0) //If there's nothing in the matches list, we can just leave.
+	if(matches->size() == 0) //If there's nothing in the matches list, we can just leave.
 	{
 		cout << "No results found!";
 		return;
@@ -119,26 +119,26 @@ void SongSearch::search()
 	//To save time, we terminate it after we've found the 10 unique songs with the highest counts
 	{
 		swap = i;
-		for(int j = i+1; j < matches.size(); j++)
+		for(int j = i+1; j < (int)(matches->size()); j++)
 		{
-			if(matches[j].count > matches[swap].count)
+			if(matches->at(j).count > matches->at(swap).count)
 			{
 				swap = j;
 			}
 		}
-		Song tmp = matches[swap];
-		matches[swap] = matches[i];
-		matches[i] = tmp;
+		Song tmp = matches->at(swap);
+		matches->at(swap) = matches->at(i);
+		matches->at(i) = tmp;
 		i++;
-		if(matches[i].title != matches[i-1].title || matches[i].artist != matches[i-1].artist)
+		if(matches->at(i).title != matches->at(i-1).title || matches->at(i).artist != matches->at(i-1).artist)
 		{
 			count++; //We know there's a different song.
 		}
 	}
 	//Go through and print the songs
-	for(int i = 0; i < matches.size(); i++)
+	for(int i = 0; i < (int)(matches->size()); i++)
 	{
-		print_song(matches[i]);
+		print_song(matches->at(i));
 	}
 	cout << "<END-OF-REPORT>\n";
 }
@@ -149,10 +149,10 @@ void SongSearch::copy(Song song, int index)
 	newSong.title = song.title;
 	newSong.artist = song.artist;
 	newSong.lyrics = get_context(song.lyrics, index);
-	matches.push_back(newSong);
+	matches->push_back(newSong);
 }
 
-string SongSearch::getcontext(string lyrics, int index)
+string SongSearch::get_context(string lyrics, int index)
 {
 	//bool closeToBeginning = false;
 	//bool closeToEnd = false;
@@ -162,7 +162,7 @@ string SongSearch::getcontext(string lyrics, int index)
 	for(int i = index; i > 0; i--) //Walk backwards through the string
 	//If we see a certain amount of spaces before the loop, we know we can grab with impunity.
 	{
-		if(lyrics[i] == " ") spaces++;
+		if(lyrics[i] == ' ') spaces++;
 		if(spaces == 11) //Words = spaces-1
 		{
 			from = i;
@@ -171,12 +171,12 @@ string SongSearch::getcontext(string lyrics, int index)
 		//closeToBeginning = true; //We'll only hit this line if there aren't enough spaces
 	}
 	spaces = 0;
-	for(int i = index; i < lyrics.length(); i++) //Same going forwards
+	for(int i = index; i < (int)(lyrics.length()); i++) //Same going forwards
 	{
-		if(lyrics[i] == " ") spaces++;
+		if(lyrics[i] == ' ') spaces++;
 		if(spaces == 10)
 		{
-			to = i;
+			len = i;
 			break;
 		}
 		//closeToEnd = true;
@@ -225,7 +225,7 @@ void SongSearch::search_lyrics(string pattern, Song song)
 		else //If the characters match, we  just need to shift the  pointer back before checking again.
 		{
 			extra++; //We'll be able to move forward farther by this amount if it turns out not to be a match.
-			if(extra == (pattern.length()/*-1*/)) //If we're all the way back at the beginning of the pattern, it's obviously been found.
+			if(extra == (int)(pattern.length()/*-1*/)) //If we're all the way back at the beginning of the pattern, it's obviously been found.
 			{
 				copy(song, (int)((stringPointer+extra-pattern.length())/*+1*/));
 				//Since we increment extra every time, we know how many times we moved the pointer back!
@@ -244,7 +244,7 @@ void SongSearch::search_lyrics(string pattern, Song song)
 	}
 }
 
-void print_song(Song song)
+void SongSearch::print_song(Song song)
 {
 	cout << "Title: " << song.title << "\nArtist: " << song.artist << "\nContext: " << song.lyrics << "\n\n";
 }

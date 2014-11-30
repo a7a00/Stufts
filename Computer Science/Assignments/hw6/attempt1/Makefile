@@ -1,11 +1,12 @@
 #
 # Makefile for SongSearch, Assignment 6
 #
-CXX = clang++
-FLAGS = -Wall -g3
+#CXX = clang++
+CXX = g++
+FLAGS = -Wall -g3 -std=c++11
 
-songsearch: <your .cpp and .h files go here>
-	${CXX} ${FLAGS} -o songsearch <your .cpp files go here>
+songsearch:
+	${CXX} ${FLAGS} -o songsearch main.cpp songsearch.cpp songsearch.h
 	
 clean:
 	rm -f songsearch
