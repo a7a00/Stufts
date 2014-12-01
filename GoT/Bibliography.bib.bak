@@ -1,0 +1,87 @@
+% This file was created with JabRef 2.10b2.
+% Encoding: UTF-8
+
+
+@Book{Cicero,
+  Title                    = {De Officiis/On Duties},
+  Author                   = {Cicero, Marcus Tullius},
+  Editor                   = {Harry G. Edinger},
+  Publisher                = {Bobbs-Merril},
+  Year                     = {1974},
+
+  Owner                    = {alex},
+  Timestamp                = {2014.12.01}
+}
+
+@Book{Confucius,
+  Title                    = {Analects},
+  Author                   = {Confucius},
+  Editor                   = {Arthur Waley},
+  Publisher                = {Vintage Books},
+  Year                     = {1965},
+
+  Owner                    = {alex},
+  Timestamp                = {2014.12.01}
+}
+
+@Book{Greeks,
+  Title                    = {The Greeks and the Irrational},
+  Author                   = {E. R. Dodds},
+  Publisher                = {University of California Press},
+  Year                     = {2004},
+
+  Owner                    = {alex},
+  Timestamp                = {2014.12.01}
+}
+
+@Article{Mughals,
+  Title                    = {Mughals},
+  Author                   = {Stewart Gordon},
+  Journal                  = {The Reader's Companion to Military History},
+  Year                     = {1996},
+
+  Owner                    = {alex},
+  Timestamp                = {2014.12.01}
+}
+
+@Book{WOIAF,
+  Title                    = {The World of Ice \& Fire: The Untold History of Westeros and the Game of Thrones},
+  Author                   = {George R. R. Martin},
+  Publisher                = {Bantam},
+  Year                     = {2014},
+
+  Owner                    = {alex},
+  Timestamp                = {2014.12.01}
+}
+
+@Book{Japanese,
+  Title                    = {Sources of Japanese Tradition},
+  Author                   = {William Bodiford, Jurgis Elisonas, Philip Yampolsky, Yoshiko Dykstra},
+  Editor                   = {Theodore de Bary},
+  Publisher                = {Columbia University Press},
+  Year                     = {2001},
+
+  Owner                    = {alex},
+  Timestamp                = {2014.12.01}
+}
+
+@Book{Chinese,
+  Title                    = {The Wiley-Blackwell Companion to Chinese Religions},
+  Editor                   = {Randall Nadeau},
+  Publisher                = {Wiley-Blackwell},
+  Year                     = {2012},
+
+  Owner                    = {alex},
+  Timestamp                = {2014.12.01}
+}
+
+@Electronic{Koreans,
+  Title                    = {Penetration of selected social networks in South Korea as of 3rd quarter 2013.},
+  Note                     = {Accessed November 26, 2014},
+  Organization             = {We Are Social},
+  Url                      = {http://www.statista.com/statistics/284473/south-korea-social-network-penetration/},
+
+  Owner                    = {alex},
+  Timestamp                = {2014.12.01}
+}
+
