@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
 		songsearch.read_lyrics(argv[1],true);
 	}
 	else { // use a pre-defined filename
-		filename = "rick_db.txt";
+		filename = "../rick_db.txt";
 		//filename = "lyrics_fulldb.txt";
 	        songsearch.read_lyrics(filename.c_str(),true);
 	}

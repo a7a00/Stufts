@@ -48,10 +48,19 @@ private:
 	//ACCOUNT FOR WORDS AT THE BEGINNING AND END
 	string get_context(string lyrics, int index);
 	
-	//Finds the index of the last occurence of a character in a string
-	//Used by search_lyrics.
-	int find_match(string s, char c);
+	//Creats a "Last Position Table", for use in searching and skipping
+	//innessecary characters
+	string lastPositionTable(string pattern);
+	
+	//This function steps backwards through the pattern, and determines how far
+	//ahead we can jump based on the position difference between what we've
+	//already searched and what we're searching now.
+	int jumpindex(char search, string pattern, string alreadySearched);
 
+	//This function builds a "jumping table" that keeps track of how far ahead we
+	//can jump at every index that we could land on.
+	string jumpingTable(string pattern);
+	
 	//searches a string for a given pattern and updates that song's info.
 	//This needs to call copy whenever it finds a match
 	void search_lyrics(string pattern, Song song);

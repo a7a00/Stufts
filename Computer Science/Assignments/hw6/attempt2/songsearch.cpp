@@ -57,6 +57,7 @@ void SongSearch::read_lyrics(const char * filename, bool show_progress)
 					" Artist: " << artist     << 
 					" Title:"   << title << endl;
 			}
+			//if(title == "Scotty Doesn't Know") cout << "Scotty Doesn't Know: " << song_count << "\n";
 		}
 		// -- Then read all words until we hit the 
 		// -- special <BREAK> token
@@ -68,6 +69,7 @@ void SongSearch::read_lyrics(const char * filename, bool show_progress)
 		}
 		// -- Important: skip the newline left behind
 		in.ignore();
+		//cout << song.lyrics << "\n" << "----------\n";
 		songs->push_back(song);
 	}
 }
@@ -109,9 +111,10 @@ void SongSearch::search()
 	//We terminate it ater the 10 largest elements have been found.
 	if(matches->size() == 0) //If there's nothing in the matches list, we can just leave.
 	{
-		cout << "No results found!";
+		cout << "No results found!\n";
 		return;
 	}
+	/*
 	int swap = 0;
 	int count = 1; //Starting at 1 because we know there's at lest 1 match
 	int i = 0; //Array index we're on
@@ -135,6 +138,7 @@ void SongSearch::search()
 			count++; //We know there's a different song.
 		}
 	}
+	*/
 	//Go through and print the songs
 	for(int i = 0; i < (int)(matches->size()); i++)
 	{
@@ -184,13 +188,72 @@ string SongSearch::get_context(string lyrics, int index)
 	return lyrics.substr(from, len);
 }
 
-int SongSearch::find_match(string s, char c) //Finds the index of the last occurence of a character in a string
+//This function creates a "Last Position Table". By the end of the method,
+//the index corresponding to a given character c will contain the index of
+//c's final appearance in the pattern. (temporarily cast as a char)
+//The reason I'm storing everything as chars in a string is because I
+//spent 4 hours in Halligan wrestling with pointers and this is much
+//easier because C++ handles pointers and memory allocation for you if you use
+//strings.
+//
+//If there is no occurence of the character in the pattern, its index will
+//contain a NULL character, representing index 0.
+string SongSearch::lastPositionTable(string pattern)
 {
-	for(int i = s.length()-1; i >= 0; i--)
+	string lastPositionTable = "";
+	for(int i = 0; i < 128; i++) lastPositionTable += (char)(0);
+	for(int i = 0; i < (int)(pattern.length()-1); i++)
 	{
-		if(s[i] == c) return i;
+		lastPositionTable[(int)(pattern[i])] = (pattern.length())-i-1;
 	}
-	return -1;
+	return lastPositionTable;
+}
+
+//This function steps backwards through the pattern, and determines how far
+//ahead we can jump based on the position difference between what we've
+//already searched and what we're searching now.
+int SongSearch::jumpindex(char search, string pattern, string alreadySearched)
+{
+	for(int i = pattern.length(); i >= 1; i--)
+	{
+        	bool flag = true;
+        	for(int j = 0; j < (int)(alreadySearched.length()); j++)
+		{
+            		int k = i-alreadySearched.length()-1+j;
+            		if(!(k < 0) && alreadySearched[j] != pattern[k])
+			{
+				flag = false;
+			}
+		}
+		signed int term_index = i-alreadySearched.length()-1;
+		if(flag)
+		{
+			if(term_index <= 0 || pattern[term_index-1] != search)
+			{
+				return (pattern.length()-i+1);
+			}
+		}
+	}
+	return -1; 	//Emergency return statement. If the search is working,
+			//this should be called rarely, if at all.
+}
+
+//This function builds a "jumping table" that keeps track of how far ahead we
+//can jump at every index that we could land on.
+//
+//Again, I'm storing the jumping table in a string because I'm growing to
+//despise pointers.
+string SongSearch::jumpingTable(string pattern)
+{
+	string jumpingTable = "";
+	for(int i = 0; i < 128; i++) jumpingTable += (char)(0);
+	string alreadySearched = "";
+	for(int i = 0; i < (int)(pattern.length()); i++)
+	{
+		jumpingTable[alreadySearched.length()] = jumpindex(pattern[pattern.length()-1-i], pattern, alreadySearched);
+		alreadySearched = pattern[pattern.length()-1-i] + alreadySearched;
+	}
+	return jumpingTable;
 }
 
 void SongSearch::search_lyrics(string pattern, Song song)
@@ -198,48 +261,29 @@ void SongSearch::search_lyrics(string pattern, Song song)
 	pattern = " " + pattern;
 	pattern += " "; //This prevents us from picking up partial searches.
 	//HERE THERE BE DRAGONS
-	int patternPointer = pattern.length() - 1;
-	int stringPointer = pattern.length() -1;
-	int MAX = song.lyrics.length();
-	int extra = 0;
-	while(stringPointer < MAX)
+	string jT = jumpingTable(pattern);
+	string lPT = lastPositionTable(pattern);
+	int index = 0;
+	while(index < (int)(song.lyrics.length()-pattern.length()+1))
 	{
-		if(pattern[patternPointer] != song.lyrics[stringPointer])
+		int j = pattern.length();
+		while((j > 0) && (pattern[j-1] == song.lyrics[index+j-1]))
 		{
-			extra = 0; //Reset this because we're at the end of the word.
-			if(find_match(pattern, song.lyrics[stringPointer]) == -1) //If the string character isn't in the pattern
-			{
-				patternPointer = pattern.length() - 1; //Just shift the whole pattern over
-				stringPointer += pattern.length();
-				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
-			}
-			else //Otherwise, move it so the last match in the pattern lines up with the character in the string.
-			{
-				patternPointer = pattern.length() - 1;
-				stringPointer += (pattern.length()-(find_match(pattern, song.lyrics[stringPointer])));
-				stringPointer -= 1;
-				stringPointer += extra;
-				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
-			}
+			j -= 1;
 		}
-		else //If the characters match, we  just need to shift the  pointer back before checking again.
+		if(j <= 0)
 		{
-			extra++; //We'll be able to move forward farther by this amount if it turns out not to be a match.
-			if(extra == (int)(pattern.length()/*-1*/)) //If we're all the way back at the beginning of the pattern, it's obviously been found.
-			{
-				copy(song, (int)((stringPointer+extra-pattern.length())/*+1*/));
-				//Since we increment extra every time, we know how many times we moved the pointer back!
-				//We can then just add extra to cancel out the backwards moves and jump to the end of the pattern!
-				//Alex, yuo of genious!
-				patternPointer = pattern.length() - 1;
-				stringPointer += pattern.length();
-				if(stringPointer >= MAX) break; //Prevents out of bounds segfaults
-			}
-			else //Otherwise, just shift the pointer.
-			{
-				patternPointer--;
-				stringPointer--;
-			}
+			copy(song, index);
+			//song.count++;
+			index++;
+		}
+		else
+		{
+ 			int lastPosition = lPT[(int)(song.lyrics[index+j-1])];
+			if(lastPosition == 0) lastPosition = pattern.length();
+			int jump = jT[pattern.length()-j];
+			if(lastPosition > jump) index += lastPosition;
+			else index += jump;
 		}
 	}
 }
