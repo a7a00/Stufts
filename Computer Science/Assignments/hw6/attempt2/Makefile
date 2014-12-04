@@ -7,7 +7,7 @@ FLAGS = -Wall -g3 -std=c++11
 
 searchtest:
 	#rm searchtest
-	${CXX} ${FLAGS} -o searchtest boyermoore.cpp
+	${CXX} ${FLAGS} -o searchtest searchtest.cpp
 
 songsearch:
 	${CXX} ${FLAGS} -o songsearch main.cpp songsearch.cpp songsearch.h
