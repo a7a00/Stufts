@@ -12,7 +12,7 @@ Start by introducing the concept of Japan artistically seperating from China, po
 * Japan chose to deature small objects, detailed interiors and selective backgrounds - Have Jap painting do likewise
 * Japan's style lent itself to the telling of stories
 
-## Evolutuon of Manga
+## Evolution of Manga
 
 Zoom in on Japan. The subjects of the Japanese painting blur as we zoom past them, and the background becomes the new permanant background. Local border lines appear.
 
@@ -24,7 +24,7 @@ Zoom out. Only Kyoto should be visible. Explain that the Genpei War and the esta
 
 Trasition to a single title slide. Explain that the Edo period was the period when manga truly became humorous. Show the He-gassen and explain what is is, and then just pan along it for slide trasitions.
 
-* Ukiyo-e
-* Shunga
-* Kamishibai
-* Kibyoshi
+* Ukiyo-e - Explain the origins of the medium with the rise of the bourgeoise in Japan. Talk about Hokusai and Hiroshige's serialized prints depicting stories and humorous situations. Explain how many modern manga and printing techniques were developed around this time. Show the 36 Views and the Great Wave to illustrate technique. Point out that horror and humor developed together.
+* Shunga - This was basically ukiyo-e pornography. It was considered by many to bring good luck, and its status as a household item meant that a lot of themes were explored. Japan also mass-produced its fascination with tentacles.
+* Kamishibai - These early forms of narrated print displays put pressure on artists to make sequential prints and scrolls that would keep audiences hooked. It was after one of these shows that Hokusai coined the term "manga", or "playful drawing"
+* Kibyoshi - These picture books were circulated as quick ways to spread news, but they very rapidly became a tool of social satire, poking fun at everything from the devaluation of silver to having violent samurai in civil positions. These are what truly sparked the rise of Japanese comic book culture, which Japan was happy to find it shared with England. (Japan Punch was a huge hit)
