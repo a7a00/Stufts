@@ -5,6 +5,9 @@
 CXX = g++
 FLAGS = -Wall -g3 -std=c++11
 
+unittests:
+	${CXX} ${FLAGS} -o unittests unittests.cpp songsearch.cpp songsearch.h
+
 searchtest:
 	#rm searchtest
 	${CXX} ${FLAGS} -o searchtest searchtest.cpp

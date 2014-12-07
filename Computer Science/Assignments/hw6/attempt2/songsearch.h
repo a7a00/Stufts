@@ -24,8 +24,15 @@ public:
 		int count = 0;
 	};
 	
+	//struct difference
+	//{
+	//	int beginningIndex;
+	//	int endingIndex;
+	//};
+	
 	vector<Song>* songs;
 	vector<Song>* matches;
+	vector<Song>* sorted_matches;
 
 	SongSearch();
 	~SongSearch();
@@ -34,7 +41,7 @@ public:
 	void read_lyrics(const char * filename, bool show_progress );
 	
 	// convert a string to lowercase and without punctuation
-	string alpha_only(string s);
+	string alpha_only(string s, bool lower);
 	
 	//Searches the entire database for a prompted word
 	void search();
@@ -67,5 +74,8 @@ private:
 
 	//prints information about the song
 	void print_song(Song song);
+	
+	//Nukes the program and leaves.
+	void fullStop();
 };
 #endif

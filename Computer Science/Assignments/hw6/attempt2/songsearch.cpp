@@ -16,12 +16,14 @@ SongSearch::SongSearch()
 {
 	songs = new vector<Song>;
 	matches = new vector<Song>;
+	sorted_matches = new vector<Song>;
 }
 
 SongSearch::~SongSearch()
 {
 	delete songs;
 	delete matches;
+	delete sorted_matches;
 }
 
 //
@@ -82,14 +84,16 @@ void SongSearch::read_lyrics(const char * filename, bool show_progress)
 //   returns: the alpha-only string
 //   does: converts the string
 //
-string SongSearch::alpha_only(string s)
+//Can also convert to all uppercase.
+string SongSearch::alpha_only(string s, bool lower)
 {
         ostringstream ss;
         for (size_t i=0;i<s.length();i++)
 	{
                 if (isalnum(s[i]))
 		{
-                        ss << (char)(tolower(s[i]));
+                        if(lower) ss << (char)(tolower(s[i]));
+			else ss << (char)(toupper(s[i]));
                 }
         }
         return ss.str();
@@ -97,54 +101,123 @@ string SongSearch::alpha_only(string s)
 
 void SongSearch::search()
 {
-	//read in words
-	string word;
-	cin >> word;
-	word = alpha_only(word);
-	//search each song and copy it over if there's a match
-	for(int i = 0; i < (int)(songs->size()); i++)
+	while(true)
 	{
-		search_lyrics(word, songs->at(i));
-		//if(songs[i].count > 0) copy(song[i]);
-	}
-	//We now sort the array of matches with a selection sort
-	//We terminate it ater the 10 largest elements have been found.
-	if(matches->size() == 0) //If there's nothing in the matches list, we can just leave.
-	{
-		cout << "No results found!\n";
-		return;
-	}
-	/*
-	int swap = 0;
-	int count = 1; //Starting at 1 because we know there's at lest 1 match
-	int i = 0; //Array index we're on
-	while(count < 10) //This is a simple selection sort algorithm
-	//To save time, we terminate it after we've found the 10 unique songs with the highest counts
-	{
-		swap = i;
-		for(int j = i+1; j < (int)(matches->size()); j++)
+		//read in words
+		string word;
+		string word2;
+		cin >> word;
+		if(word == "<BREAK>") return;
+		word = alpha_only(word, true);
+		word2 = alpha_only(word, false);
+		string word3 = word;
+		word3[0] = toupper(word[0]);
+		//search each song and copy it over if there's a match
+		for(int i = 0; i < (int)(songs->size()); i++)
 		{
-			if(matches->at(j).count > matches->at(swap).count)
+			search_lyrics(word, songs->at(i));
+			search_lyrics(word2, songs->at(i));
+			search_lyrics(word3, songs->at(i));
+			//if(songs[i].count > 0) copy(song[i]);
+		}
+		//We now sort the array of matches with a selection sort
+		//We terminate it ater the 10 largest elements have been found.
+		if(matches->size() == 0) //If there's nothing in the matches list, we can just leave.
+		{
+			cout << "No results found!\n";
+			continue;
+		}
+		//int swap = 0;
+		//int count = 1; //Starting at 1 because we know there's at lest 1 match
+		//int i = 0; //Array index we're on
+		/*while(count < 10) //This is a simple selection sort algorithm
+		//To save time, we terminate it after we've found the 10 unique songs with the highest counts
+		{
+			swap = i;
+			for(int j = i+1; j < (int)(matches->size()); j++)
 			{
-				swap = j;
+				if(matches->at(j).count > matches->at(swap).count)
+				{
+					swap = j;
+				}
+			}
+			Song tmp = matches->at(swap);
+			matches->at(swap) = matches->at(i);
+			matches->at(i) = tmp;
+			i++;
+			if(matches->at(i).title != matches->at(i-1).title || matches->at(i).artist != matches->at(i-1).artist)
+			{
+				count++; //We know there's a different song.
 			}
 		}
-		Song tmp = matches->at(swap);
-		matches->at(swap) = matches->at(i);
-		matches->at(i) = tmp;
-		i++;
-		if(matches->at(i).title != matches->at(i-1).title || matches->at(i).artist != matches->at(i-1).artist)
+		//Go through and print the songs
+		*/
+		/*
+		if(matches->size() == 1) //We need to do this because the following method doesn't check
+		//the last cell (it would segfault)
 		{
-			count++; //We know there's a different song.
+			sorted_matches->push_back(matches->at(0));
 		}
+		else
+		{
+			cout << "NOW SORTING\n";
+			vector<difference>* differences = new vector<difference>;
+			string temp = "";
+			int i = 0;
+			difference tempDifference;
+			cout << "Building Difference Table\n";
+			while(i < (int)(matches->size())-1)
+			{
+				if(matches->at(i).title != temp)
+				{
+					tempDifference.beginningIndex = i;
+					temp = matches->at(i).title;
+				}
+				if(matches->at(i+1).title != temp || i == (int)(matches->size()-2))
+				{
+					tempDifference.endingIndex = i;
+					differences->push_back(tempDifference);
+				}
+			}
+			cout << "Sorting\n";
+			int swap = 0; //Selection-sort the array of differences
+			//to get the biggest ranges
+			for(int j = 0; j < (int)(differences->size()); j++)
+			{
+				swap = j;
+				for(int k = j+1; k < (int)(differences->size()); k++)
+				{
+					if(differences->at(k).endingIndex-differences->at(k).beginningIndex
+							 < differences->at(swap).endingIndex-differences->at(swap).beginningIndex)
+					{
+						swap = k;
+					}
+				}
+				difference tmp = differences->at(swap);
+				differences->at(swap) = differences->at(j);
+				differences->at(j) = tmp;
+			}
+			cout << "Copying Songs\n";
+			for(int j = 1; j < 11; j++) //Use the top 10 differences to copy the songs
+			{
+				int index = differences->size()-j;
+				for(int k = (differences->at(index).beginningIndex);
+						k <= (differences->at(index).endingIndex); k++)
+				{
+					sorted_matches->push_back(matches->at(k));
+				}
+			}
+			delete differences;
+		}
+		*/
+		for(int i = 0; i < /*10*/(int)(sorted_matches->size()); i++)
+		{
+			print_song(sorted_matches->at(i));
+		}
+		matches->erase(matches->begin(), matches->end());
+		sorted_matches->erase(sorted_matches->begin(), sorted_matches->end());
+		cout << "<END OF REPORT>\n";
 	}
-	*/
-	//Go through and print the songs
-	for(int i = 0; i < (int)(matches->size()); i++)
-	{
-		print_song(matches->at(i));
-	}
-	cout << "<END-OF-REPORT>\n";
 }
 
 void SongSearch::copy(Song song, int index)
@@ -185,7 +258,7 @@ string SongSearch::get_context(string lyrics, int index)
 		}
 		//closeToEnd = true;
 	}
-	return lyrics.substr(from, len);
+	return lyrics.substr(from, len-from);
 }
 
 //This function creates a "Last Position Table". By the end of the method,
@@ -274,6 +347,7 @@ void SongSearch::search_lyrics(string pattern, Song song)
 		if(j <= 0)
 		{
 			copy(song, index);
+			//cout << index << "\n";
 			//song.count++;
 			index++;
 		}
