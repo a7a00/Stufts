@@ -127,89 +127,39 @@ void SongSearch::search()
 			cout << "No results found!\n";
 			continue;
 		}
-		//int swap = 0;
-		//int count = 1; //Starting at 1 because we know there's at lest 1 match
-		//int i = 0; //Array index we're on
-		/*while(count < 10) //This is a simple selection sort algorithm
-		//To save time, we terminate it after we've found the 10 unique songs with the highest counts
+		//cout << "NOW SORTING\n";
+		//vector<indexAndFreq>* thisVector = new vector<indexAndFreq>;
+		string temp = "";
+		//cout << "Building Difference Table\n";
+		for(int i = 0; i < 10; i++)
 		{
-			swap = i;
-			for(int j = i+1; j < (int)(matches->size()); j++)
+			//cout << i << "\n";
+			int max = 0;
+			int maxindex = 0;
+			//cout << "SIZE OF MATCHES: " << matches->size() << "\n";
+			for(int j = (int)(matches->size())-1; j >= 0; j--)
 			{
-				if(matches->at(j).count > matches->at(swap).count)
+				//cout <<"First Loop\n";
+				//cout << "Count: " << matches->at(j).count << "\n";
+				if(matches->at(j).count > max)
 				{
-					swap = j;
+					//cout << "Max Updated!\n";
+					max = matches->at(j).count;
+					maxindex = j;
 				}
 			}
-			Song tmp = matches->at(swap);
-			matches->at(swap) = matches->at(i);
-			matches->at(i) = tmp;
-			i++;
-			if(matches->at(i).title != matches->at(i-1).title || matches->at(i).artist != matches->at(i-1).artist)
+			//cout << "Max: " << max << "\nMax Index: " << maxindex << "\n";
+			for(int j = (maxindex-max+1); j <= maxindex; j++)
 			{
-				count++; //We know there's a different song.
+				//cout << "Second Loop\n";
+				sorted_matches->push_back(matches->at(j));
+			}
+			for(int j = 0; j < max; j++)
+			{
+				//cout << "Third Loop\n";
+				matches->erase(matches->begin()+(maxindex-max+1));
 			}
 		}
-		//Go through and print the songs
-		*/
-		/*
-		if(matches->size() == 1) //We need to do this because the following method doesn't check
-		//the last cell (it would segfault)
-		{
-			sorted_matches->push_back(matches->at(0));
-		}
-		else
-		{
-			cout << "NOW SORTING\n";
-			vector<difference>* differences = new vector<difference>;
-			string temp = "";
-			int i = 0;
-			difference tempDifference;
-			cout << "Building Difference Table\n";
-			while(i < (int)(matches->size())-1)
-			{
-				if(matches->at(i).title != temp)
-				{
-					tempDifference.beginningIndex = i;
-					temp = matches->at(i).title;
-				}
-				if(matches->at(i+1).title != temp || i == (int)(matches->size()-2))
-				{
-					tempDifference.endingIndex = i;
-					differences->push_back(tempDifference);
-				}
-			}
-			cout << "Sorting\n";
-			int swap = 0; //Selection-sort the array of differences
-			//to get the biggest ranges
-			for(int j = 0; j < (int)(differences->size()); j++)
-			{
-				swap = j;
-				for(int k = j+1; k < (int)(differences->size()); k++)
-				{
-					if(differences->at(k).endingIndex-differences->at(k).beginningIndex
-							 < differences->at(swap).endingIndex-differences->at(swap).beginningIndex)
-					{
-						swap = k;
-					}
-				}
-				difference tmp = differences->at(swap);
-				differences->at(swap) = differences->at(j);
-				differences->at(j) = tmp;
-			}
-			cout << "Copying Songs\n";
-			for(int j = 1; j < 11; j++) //Use the top 10 differences to copy the songs
-			{
-				int index = differences->size()-j;
-				for(int k = (differences->at(index).beginningIndex);
-						k <= (differences->at(index).endingIndex); k++)
-				{
-					sorted_matches->push_back(matches->at(k));
-				}
-			}
-			delete differences;
-		}
-		*/
 		for(int i = 0; i < /*10*/(int)(sorted_matches->size()); i++)
 		{
 			print_song(sorted_matches->at(i));
@@ -226,6 +176,7 @@ void SongSearch::copy(Song song, int index)
 	newSong.title = song.title;
 	newSong.artist = song.artist;
 	newSong.lyrics = get_context(song.lyrics, index);
+	newSong.count = song.count;
 	matches->push_back(newSong);
 }
 
@@ -346,9 +297,9 @@ void SongSearch::search_lyrics(string pattern, Song song)
 		}
 		if(j <= 0)
 		{
+			song.count++;
 			copy(song, index);
 			//cout << index << "\n";
-			//song.count++;
 			index++;
 		}
 		else

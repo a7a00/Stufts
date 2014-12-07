@@ -23,13 +23,7 @@ public:
 		string lyrics;
 		int count = 0;
 	};
-	
-	//struct difference
-	//{
-	//	int beginningIndex;
-	//	int endingIndex;
-	//};
-	
+		
 	vector<Song>* songs;
 	vector<Song>* matches;
 	vector<Song>* sorted_matches;
