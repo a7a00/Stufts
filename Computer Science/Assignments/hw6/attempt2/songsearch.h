@@ -23,9 +23,10 @@ public:
 		string lyrics;
 		int count = 0;
 	};
-	
+		
 	vector<Song>* songs;
 	vector<Song>* matches;
+	vector<Song>* sorted_matches;
 
 	SongSearch();
 	~SongSearch();
@@ -34,7 +35,7 @@ public:
 	void read_lyrics(const char * filename, bool show_progress );
 	
 	// convert a string to lowercase and without punctuation
-	string alpha_only(string s);
+	string alpha_only(string s, bool lower);
 	
 	//Searches the entire database for a prompted word
 	void search();
@@ -65,7 +66,17 @@ private:
 	//This needs to call copy whenever it finds a match
 	void search_lyrics(string pattern, Song song);
 
+	//Allows the wildcard character (ASCII 178) to be matched against punctuation.
+	bool wildcardmatch(char patternchar, char lyricschar);
+
+	//Sorts the matches array and find the top 10 songs,
+	//copying them into their own vector.
+	void sortMatches();
+
 	//prints information about the song
 	void print_song(Song song);
+	
+	//Nukes the program and leaves.
+	void fullStop();
 };
 #endif

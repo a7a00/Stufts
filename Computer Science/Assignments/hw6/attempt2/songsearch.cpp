@@ -16,12 +16,14 @@ SongSearch::SongSearch()
 {
 	songs = new vector<Song>;
 	matches = new vector<Song>;
+	sorted_matches = new vector<Song>;
 }
 
 SongSearch::~SongSearch()
 {
 	delete songs;
 	delete matches;
+	delete sorted_matches;
 }
 
 //
@@ -82,14 +84,16 @@ void SongSearch::read_lyrics(const char * filename, bool show_progress)
 //   returns: the alpha-only string
 //   does: converts the string
 //
-string SongSearch::alpha_only(string s)
+//Can also convert to all uppercase.
+string SongSearch::alpha_only(string s, bool lower)
 {
         ostringstream ss;
         for (size_t i=0;i<s.length();i++)
 	{
                 if (isalnum(s[i]))
 		{
-                        ss << (char)(tolower(s[i]));
+                        if(lower) ss << (char)(tolower(s[i]));
+			else ss << (char)(toupper(s[i]));
                 }
         }
         return ss.str();
@@ -97,54 +101,87 @@ string SongSearch::alpha_only(string s)
 
 void SongSearch::search()
 {
-	//read in words
-	string word;
-	cin >> word;
-	word = alpha_only(word);
-	//search each song and copy it over if there's a match
-	for(int i = 0; i < (int)(songs->size()); i++)
+	while(true)
 	{
-		search_lyrics(word, songs->at(i));
-		//if(songs[i].count > 0) copy(song[i]);
-	}
-	//We now sort the array of matches with a selection sort
-	//We terminate it ater the 10 largest elements have been found.
-	if(matches->size() == 0) //If there's nothing in the matches list, we can just leave.
-	{
-		cout << "No results found!\n";
-		return;
-	}
-	/*
-	int swap = 0;
-	int count = 1; //Starting at 1 because we know there's at lest 1 match
-	int i = 0; //Array index we're on
-	while(count < 10) //This is a simple selection sort algorithm
-	//To save time, we terminate it after we've found the 10 unique songs with the highest counts
-	{
-		swap = i;
-		for(int j = i+1; j < (int)(matches->size()); j++)
+		//read in words
+		string word;
+		string word2;
+		cin >> word;
+		if(word == "<BREAK>") return;
+		word = alpha_only(word, true);
+		word2 = alpha_only(word, false);
+		string word3 = word;
+		word3[0] = toupper(word[0]);
+		//search each song and copy it over if there's a match
+		for(int i = 0; i < (int)(songs->size()); i++)
 		{
-			if(matches->at(j).count > matches->at(swap).count)
-			{
-				swap = j;
-			}
+			search_lyrics(word, songs->at(i));
+			search_lyrics(word2, songs->at(i));
+			search_lyrics(word3, songs->at(i));
+			//if(songs[i].count > 0) copy(song[i]);
 		}
-		Song tmp = matches->at(swap);
-		matches->at(swap) = matches->at(i);
-		matches->at(i) = tmp;
-		i++;
-		if(matches->at(i).title != matches->at(i-1).title || matches->at(i).artist != matches->at(i-1).artist)
+		//We now sort the array of matches with a selection sort
+		//We terminate it ater the 10 largest elements have been found.
+		if(matches->size() == 0) //If there's nothing in the matches list, we can just leave.
 		{
-			count++; //We know there's a different song.
+			cout << "No results found!\n";
+			continue;
 		}
+		sortMatches();
+		for(int i = 0; i < /*10*/(int)(sorted_matches->size()); i++)
+		{
+			print_song(sorted_matches->at(i));
+		}
+		for(int i = 0; i < (int)(songs->size()); i++)
+		{
+			songs->at(i).count = 0;
+		}
+		matches->erase(matches->begin(), matches->end());
+		sorted_matches->erase(sorted_matches->begin(), sorted_matches->end());
+		cout << "<END OF REPORT>\n";
 	}
-	*/
-	//Go through and print the songs
+}
+
+void SongSearch::sortMatches()
+{
+	//cout << "NOW SORTING\n";
+	//vector<indexAndFreq>* thisVector = new vector<indexAndFreq>;
+	string temp = "";
+	//cout << "Building Difference Table\n";
 	for(int i = 0; i < (int)(matches->size()); i++)
 	{
-		print_song(matches->at(i));
+		cout << matches->at(i).count << ", ";
 	}
-	cout << "<END-OF-REPORT>\n";
+	cout << "\n";
+	for(int i = 0; i < 10; i++)
+	{
+		//cout << i << "\n";
+		int max = 0;
+		int maxindex = 0;
+		//cout << "SIZE OF MATCHES: " << matches->size() << "\n";
+		for(int j = (int)(matches->size())-1; j >= 0; j--)
+		{
+			//cout <<"First Loop\n";
+			//cout << "Count: " << matches->at(j).count << "\n";
+			if(matches->at(j).count > max)
+			{
+				//cout << "Max Updated!\n";
+				max = matches->at(j).count;
+				maxindex = j;
+			}
+		}
+		cout << "Max: " << max << "\nMax Index: " << maxindex << "\n";
+		for(int j = (maxindex-max+1); j <= maxindex; j++)
+		{
+			//cout << "Second Loop\n";
+			sorted_matches->push_back(matches->at(j));
+		}
+		for(int j = 0; j < max; j++)
+		{
+			//cout << "Third Loop\n";
+			matches->erase(matches->begin()+(maxindex-max+1));
+		}
+	}
 }
 
 void SongSearch::copy(Song song, int index)
@@ -153,6 +190,7 @@ void SongSearch::copy(Song song, int index)
 	newSong.title = song.title;
 	newSong.artist = song.artist;
 	newSong.lyrics = get_context(song.lyrics, index);
+	newSong.count = song.count;
 	matches->push_back(newSong);
 }
 
@@ -167,7 +205,7 @@ string SongSearch::get_context(string lyrics, int index)
 	//If we see a certain amount of spaces before the loop, we know we can grab with impunity.
 	{
 		if(lyrics[i] == ' ') spaces++;
-		if(spaces == 11) //Words = spaces-1
+		if(spaces == 6) //Words = spaces-1
 		{
 			from = i;
 			break;
@@ -178,14 +216,14 @@ string SongSearch::get_context(string lyrics, int index)
 	for(int i = index; i < (int)(lyrics.length()); i++) //Same going forwards
 	{
 		if(lyrics[i] == ' ') spaces++;
-		if(spaces == 10)
+		if(spaces == 7)
 		{
 			len = i;
 			break;
 		}
 		//closeToEnd = true;
 	}
-	return lyrics.substr(from, len);
+	return lyrics.substr(from, len-from);
 }
 
 //This function creates a "Last Position Table". By the end of the method,
@@ -258,8 +296,8 @@ string SongSearch::jumpingTable(string pattern)
 
 void SongSearch::search_lyrics(string pattern, Song song)
 {
-	pattern = " " + pattern;
-	pattern += " "; //This prevents us from picking up partial searches.
+	pattern = /*(char)(178)*/" " + pattern; //TODO FIND OUT WHY THIS FIX DOESN'T WORK
+	pattern += " ";//(char)(178); //This prevents us from picking up partial searches.
 	//HERE THERE BE DRAGONS
 	string jT = jumpingTable(pattern);
 	string lPT = lastPositionTable(pattern);
@@ -267,14 +305,16 @@ void SongSearch::search_lyrics(string pattern, Song song)
 	while(index < (int)(song.lyrics.length()-pattern.length()+1))
 	{
 		int j = pattern.length();
-		while((j > 0) && (pattern[j-1] == song.lyrics[index+j-1]))
+		//while((j > 0) && (pattern[j-1] == song.lyrics[index+j-1]))
+		while((j > 0) && (wildcardmatch(pattern[j-1], song.lyrics[index+j-1])))
 		{
 			j -= 1;
 		}
 		if(j <= 0)
 		{
+			song.count++;
 			copy(song, index);
-			//song.count++;
+			//cout << index << "\n";
 			index++;
 		}
 		else
@@ -285,6 +325,25 @@ void SongSearch::search_lyrics(string pattern, Song song)
 			if(lastPosition > jump) index += lastPosition;
 			else index += jump;
 		}
+	}
+}
+
+//Allows the wildcard character (ASCII 178) to be matched against punctuation.
+bool SongSearch::wildcardmatch(char patternchar, char lyricschar)
+{
+	//cout << "We're calling this!\n";
+	if((int)(patternchar) == 178)
+	{
+		if((int)(lyricschar) >= 32
+			&& (int)(lyricschar) <= 47) //Range for punctuation
+		{
+			return true;
+		}
+		else return false;
+	}
+	else
+	{
+		return (patternchar == lyricschar);
 	}
 }
 
