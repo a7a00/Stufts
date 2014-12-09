@@ -66,13 +66,6 @@ private:
 	//This needs to call copy whenever it finds a match
 	void search_lyrics(string pattern, Song song);
 
-	//Allows the wildcard character (ASCII 178) to be matched against punctuation.
-	bool wildcardmatch(char patternchar, char lyricschar);
-
-	//Sorts the matches array and find the top 10 songs,
-	//copying them into their own vector.
-	void sortMatches();
-
 	//prints information about the song
 	void print_song(Song song);
 	
