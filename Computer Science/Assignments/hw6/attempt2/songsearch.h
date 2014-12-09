@@ -66,8 +66,14 @@ private:
 	//This needs to call copy whenever it finds a match
 	void search_lyrics(string pattern, Song song);
 
+	//Allows the wildcard character (ASCII 178) to be matched against punctuation.
+	bool wildcardmatch(char patternchar, char lyricschar);
+
 	//prints information about the song
 	void print_song(Song song);
+	
+	//Sortes the matches by frequency
+	void sortMatches();
 	
 	//Nukes the program and leaves.
 	void fullStop();

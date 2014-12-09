@@ -127,46 +127,60 @@ void SongSearch::search()
 			cout << "No results found!\n";
 			continue;
 		}
-		//cout << "NOW SORTING\n";
-		//vector<indexAndFreq>* thisVector = new vector<indexAndFreq>;
-		string temp = "";
-		//cout << "Building Difference Table\n";
-		for(int i = 0; i < 10; i++)
-		{
-			//cout << i << "\n";
-			int max = 0;
-			int maxindex = 0;
-			//cout << "SIZE OF MATCHES: " << matches->size() << "\n";
-			for(int j = (int)(matches->size())-1; j >= 0; j--)
-			{
-				//cout <<"First Loop\n";
-				//cout << "Count: " << matches->at(j).count << "\n";
-				if(matches->at(j).count > max)
-				{
-					//cout << "Max Updated!\n";
-					max = matches->at(j).count;
-					maxindex = j;
-				}
-			}
-			//cout << "Max: " << max << "\nMax Index: " << maxindex << "\n";
-			for(int j = (maxindex-max+1); j <= maxindex; j++)
-			{
-				//cout << "Second Loop\n";
-				sorted_matches->push_back(matches->at(j));
-			}
-			for(int j = 0; j < max; j++)
-			{
-				//cout << "Third Loop\n";
-				matches->erase(matches->begin()+(maxindex-max+1));
-			}
-		}
+		sortMatches();
 		for(int i = 0; i < /*10*/(int)(sorted_matches->size()); i++)
 		{
 			print_song(sorted_matches->at(i));
 		}
+		for(int i = 0; i < (int)(songs->size()); i++)
+		{
+			songs->at(i).count = 0;
+		}
 		matches->erase(matches->begin(), matches->end());
 		sorted_matches->erase(sorted_matches->begin(), sorted_matches->end());
 		cout << "<END OF REPORT>\n";
+	}
+}
+
+void SongSearch::sortMatches()
+{
+	//cout << "NOW SORTING\n";
+	//vector<indexAndFreq>* thisVector = new vector<indexAndFreq>;
+	string temp = "";
+	//cout << "Building Difference Table\n";
+	for(int i = 0; i < (int)(matches->size()); i++)
+	{
+		cout << matches->at(i).count << ", ";
+	}
+	cout << "\n";
+	for(int i = 0; i < 10; i++)
+	{
+		//cout << i << "\n";
+		int max = 0;
+		int maxindex = 0;
+		//cout << "SIZE OF MATCHES: " << matches->size() << "\n";
+		for(int j = (int)(matches->size())-1; j >= 0; j--)
+		{
+			//cout <<"First Loop\n";
+			//cout << "Count: " << matches->at(j).count << "\n";
+			if(matches->at(j).count > max)
+			{
+				//cout << "Max Updated!\n";
+				max = matches->at(j).count;
+				maxindex = j;
+			}
+		}
+		cout << "Max: " << max << "\nMax Index: " << maxindex << "\n";
+		for(int j = (maxindex-max+1); j <= maxindex; j++)
+		{
+			//cout << "Second Loop\n";
+			sorted_matches->push_back(matches->at(j));
+		}
+		for(int j = 0; j < max; j++)
+		{
+			//cout << "Third Loop\n";
+			matches->erase(matches->begin()+(maxindex-max+1));
+		}
 	}
 }
 
@@ -191,7 +205,7 @@ string SongSearch::get_context(string lyrics, int index)
 	//If we see a certain amount of spaces before the loop, we know we can grab with impunity.
 	{
 		if(lyrics[i] == ' ') spaces++;
-		if(spaces == 11) //Words = spaces-1
+		if(spaces == 6) //Words = spaces-1
 		{
 			from = i;
 			break;
@@ -202,7 +216,7 @@ string SongSearch::get_context(string lyrics, int index)
 	for(int i = index; i < (int)(lyrics.length()); i++) //Same going forwards
 	{
 		if(lyrics[i] == ' ') spaces++;
-		if(spaces == 10)
+		if(spaces == 7)
 		{
 			len = i;
 			break;
@@ -282,8 +296,8 @@ string SongSearch::jumpingTable(string pattern)
 
 void SongSearch::search_lyrics(string pattern, Song song)
 {
-	pattern = " " + pattern;
-	pattern += " "; //This prevents us from picking up partial searches.
+	pattern = /*(char)(178)*/" " + pattern; //TODO FIND OUT WHY THIS FIX DOESN'T WORK
+	pattern += " ";//(char)(178); //This prevents us from picking up partial searches.
 	//HERE THERE BE DRAGONS
 	string jT = jumpingTable(pattern);
 	string lPT = lastPositionTable(pattern);
@@ -291,7 +305,8 @@ void SongSearch::search_lyrics(string pattern, Song song)
 	while(index < (int)(song.lyrics.length()-pattern.length()+1))
 	{
 		int j = pattern.length();
-		while((j > 0) && (pattern[j-1] == song.lyrics[index+j-1]))
+		//while((j > 0) && (pattern[j-1] == song.lyrics[index+j-1]))
+		while((j > 0) && (wildcardmatch(pattern[j-1], song.lyrics[index+j-1])))
 		{
 			j -= 1;
 		}
@@ -310,6 +325,25 @@ void SongSearch::search_lyrics(string pattern, Song song)
 			if(lastPosition > jump) index += lastPosition;
 			else index += jump;
 		}
+	}
+}
+
+//Allows the wildcard character (ASCII 178) to be matched against punctuation.
+bool SongSearch::wildcardmatch(char patternchar, char lyricschar)
+{
+	//cout << "We're calling this!\n";
+	if((int)(patternchar) == 178)
+	{
+		if((int)(lyricschar) >= 32
+			&& (int)(lyricschar) <= 47) //Range for punctuation
+		{
+			return true;
+		}
+		else return false;
+	}
+	else
+	{
+		return (patternchar == lyricschar);
 	}
 }
 
