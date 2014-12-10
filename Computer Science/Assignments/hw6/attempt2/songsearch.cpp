@@ -292,19 +292,29 @@ string SongSearch::jumpingTable(string pattern)
 
 void SongSearch::search_lyrics(string pattern, Song song)
 {
-	pattern = (char)(17) + pattern; //TODO FIND OUT WHY THIS FIX DOESN'T WORK
+	pattern = (char)(17) + pattern; //ASCII 17 (Device Control 1) appears nowhere in an input file.
+						//This makes it the perfect wildcard
 	pattern += (char)(17); //This prevents us from picking up partial searches.
 	//HERE THERE BE DRAGONS
 	string jT = jumpingTable(pattern);
 	string lPT = lastPositionTable(pattern);
 	int index = 0;
+	midWordPunctuation = false; //This should remain false by default.
+	bool mwpWasUsed;
 	while(index < (int)(song.lyrics.length()-pattern.length()+1))
 	{
+		mwpWasUsed = false;
 		int j = pattern.length();
 		//while((j > 0) && (pattern[j-1] == song.lyrics[index+j-1]))
 		while((j > 0) && (wildcardmatch(pattern[j-1], song.lyrics[index+j-1])))
 		{
-			j -= 1;
+			if(!midWordPunctuation) j -= 1;
+			else
+			{
+				mwpWasUsed = true;
+				midWordPunctuation = false; //It was just this once
+				index--; //Re-align with what's on the other side of the punctuatuon.
+			}
 		}
 		if(j <= 0)
 		{
@@ -312,6 +322,7 @@ void SongSearch::search_lyrics(string pattern, Song song)
 			copy(song, index);
 			//cout << index << "\n";
 			index++;
+			if(mwpWasUsed) index++;
 		}
 		else
 		{
@@ -324,7 +335,9 @@ void SongSearch::search_lyrics(string pattern, Song song)
 	}
 }
 
-//Allows the wildcard character (ASCII 178) to be matched against punctuation.
+//Allows the wildcard character (ASCII 17) to be matched against punctuation.
+//If the pattern contains punctuation, give it the OK as a match, but let us
+//know that it's not an ordinary match
 bool SongSearch::wildcardmatch(char patternchar, char lyricschar)
 {
 	//cout << "We're calling this!\n";
@@ -339,7 +352,14 @@ bool SongSearch::wildcardmatch(char patternchar, char lyricschar)
 	}
 	else
 	{
-		return (patternchar == lyricschar);
+		if((int)(lyricschar) >= 33
+			&& (int)(lyricschar) <= 47) //Punctuation (EXCLUDING SPACES)
+		{
+			midWordPunctuation = true; //This is punctuation, not technically
+							//a match
+			return true;
+		}
+		else return (patternchar == lyricschar);
 	}
 }
 

@@ -40,6 +40,10 @@ public:
 	//Searches the entire database for a prompted word
 	void search();
 private:
+
+	//Used to tell the word searcher when to skip a word.
+	bool midWordPunctuation;
+
 	//copies a song from the main list to the list of matches
 	//should call get_context
 	void copy(Song song, int index);
