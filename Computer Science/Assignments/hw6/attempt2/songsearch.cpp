@@ -124,7 +124,8 @@ void SongSearch::search()
 		//We terminate it ater the 10 largest elements have been found.
 		if(matches->size() == 0) //If there's nothing in the matches list, we can just leave.
 		{
-			cout << "No results found!\n";
+			//cout << "No results found!\n";
+			cout << "<END OF REPORT>\n";
 			continue;
 		}
 		sortMatches();
@@ -148,11 +149,6 @@ void SongSearch::sortMatches()
 	//vector<indexAndFreq>* thisVector = new vector<indexAndFreq>;
 	string temp = "";
 	//cout << "Building Difference Table\n";
-	for(int i = 0; i < (int)(matches->size()); i++)
-	{
-		cout << matches->at(i).count << ", ";
-	}
-	cout << "\n";
 	for(int i = 0; i < 10; i++)
 	{
 		//cout << i << "\n";
@@ -170,7 +166,7 @@ void SongSearch::sortMatches()
 				maxindex = j;
 			}
 		}
-		cout << "Max: " << max << "\nMax Index: " << maxindex << "\n";
+		//cout << "Max: " << max << "\nMax Index: " << maxindex << "\n";
 		for(int j = (maxindex-max+1); j <= maxindex; j++)
 		{
 			//cout << "Second Loop\n";
@@ -296,8 +292,8 @@ string SongSearch::jumpingTable(string pattern)
 
 void SongSearch::search_lyrics(string pattern, Song song)
 {
-	pattern = /*(char)(178)*/" " + pattern; //TODO FIND OUT WHY THIS FIX DOESN'T WORK
-	pattern += " ";//(char)(178); //This prevents us from picking up partial searches.
+	pattern = (char)(17) + pattern; //TODO FIND OUT WHY THIS FIX DOESN'T WORK
+	pattern += (char)(17); //This prevents us from picking up partial searches.
 	//HERE THERE BE DRAGONS
 	string jT = jumpingTable(pattern);
 	string lPT = lastPositionTable(pattern);
@@ -332,7 +328,7 @@ void SongSearch::search_lyrics(string pattern, Song song)
 bool SongSearch::wildcardmatch(char patternchar, char lyricschar)
 {
 	//cout << "We're calling this!\n";
-	if((int)(patternchar) == 178)
+	if((int)(patternchar) == 17)
 	{
 		if((int)(lyricschar) >= 32
 			&& (int)(lyricschar) <= 47) //Range for punctuation
