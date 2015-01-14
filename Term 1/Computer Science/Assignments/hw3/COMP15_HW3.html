@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Comp 15 (Data Structures) - Designing a Class Roster with Waitlists</title>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+</head>
+<body>
+<div id="container">
+<h2>COMP 15 HW3</h2>
+Assigned: Friday September 26, 2014, Due: Friday, October 10, 2014, 11:59pm.
+
+<h2>Designing a Class Roster with Waitlists</h2>
+
+<h2>1. Overview</h2>
+
+<p>As much as everyone likes to criticize Tufts SIS, it does have a difficult job to do. In this assignment, we will be modeling the SIS task of placing students into a course that has certain requirements. Namely, we will be allowing students who are majoring in a subject to go directly in to the class roster, and those that are not majors will go onto a waitlist. Additionally, if the class is at a defined capacity, major students will be placed onto a waitlist of their own.
+
+<p>We will be using two Abstract Data Types (ADTs) for this assignment: a Set and a Queue. We have discussed both in class, and for this assignment, we have built a Set for you, and you will be responsible for building the Queue based on a header file for a Queue. You will be limited to standard Queue functions: enqueue(), dequeue(), and is_empty(). You are not allowed to write any other public functions for the Queue.
+
+<p>We will model a Student with a struct that includes two fields: name (a string) and major (a boolean value for whether the student is a major or not). 
+
+<p>We will be modeling the Course itself with a class called “IsisCourse”. For the assignment, the Set will model the actual class roster, and the Queue will model the two waitlists. Students will attempt to enroll in the class, and based on the rules above (and listed in IsisCourse.h, as well). Students can be dropped from the class, and when a student is dropped, Students come off the waitlist in the priority described above, up to the class capacity.
+
+<p>The class capacity can be raised (but not lowered), and if that happens, Students come off the waitlists according to their waitlist (majors first), and by their position on the waitlist (who registered first).
+
+<h2>2. Implementation Specifics</h2>
+
+<p>We have provided you the Set and Student implementations in full.  We have also provided you with the header files Queue.h and IsisClass.h, and we have started the Queue.cpp and IsisClass.cpp files.  There is also an example main.cpp file that demonstrates how the program will be used. We have provided exact output for main.cpp, (called default_main_output.txt) and in your testing you should ensure that your output is identical to that output.  You can do that as follows:
+
+<code><pre>
+./hw3 > my_output.txt
+diff my_output.txt default_main_output.txt
+</pre></code>
+
+<p>You should, of course, also write your own tests for the Queue functions and IsisClass functions that you write.
+
+<p>You should read the header files carefully, as we have annotated them extensively to describe how we want the program to behave. Obviously, if you are unclear on the expected behavior, post a question on Piazza so we can clarify the goals.
+
+
+<h2>4. Low Level Details</h2>
+
+Getting the files
+
+There are two ways to get the files for this assignment. The first is by copying the original files from the class folder. The second is to use “git” to pull the files from the GitHub cloud server.
+
+<h2>Method 1: copy files from the class folder</h2>
+
+First ssh to the homework server and, and make a directory called orderedListAssignment
+
+<code><pre>
+ssh -X your_cs_username@homework.cs.tufts.edu
+mkdir hw3
+</pre></code>
+
+change into that directory
+
+<code><pre>
+cd hw3
+</pre></code>
+
+At the command prompt, enter (don’t forget the period):
+
+<code><pre>
+cp /comp/15/public_html/assignments/hw3/files/* .
+</pre></code>
+
+<h2>Method 2: pull from GitHub:</h2>
+
+At the command prompt, enter 
+
+<code><pre>
+git clone https://github.com/Tufts-COMP15/Data_Structures_F2014_HW3.git hw3
+</pre></code>
+
+change into the directory that git created:
+
+<code><pre>
+cd hw3
+</pre></code>
+
+<h2>Compiling and running:</h2>
+<ul>
+<li>At the command prompt, enter “make” and press enter or return to compile.
+<li>At the command prompt, enter “./hw3” and press return to run the new program.
+</ul>
+
+
+<h2>Providing:</h2>
+At the command prompt, enter “make provide” and press enter or return.
+
+
+</div>
+</body>
+</html>
+

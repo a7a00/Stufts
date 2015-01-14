@@ -1,0 +1,91 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,lmargin=2cm}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{babel}
+\begin{document}
+
+\title{Homework 11: Differental Equations}
+
+
+\author{Alexander Gould, Section 3}
+
+
+\date{September 26, 2014}
+
+\maketitle
+9. These first two just needed basic integration.
+
+\[
+f'(t)=3x^{2}-4x+10\quad f(0)=20\qquad x^{3}-2x^{2}+10x+C\quad f(x)=\boxed{x^{3}-2x^{2}+10x+20}
+\]
+
+
+10.
+
+\[
+f'(x)=8e^{-4x}+1\quad f(0)=5\qquad\boxed{2e^{-4x}+x+5}
+\]
+
+
+15.
+
+\[
+f'(x)=-2f-4\qquad\int\frac{df}{-2f-4}=\int1dx\quad-\frac{\ln\left|-2f-4\right|}{2}=x+C\quad\boxed{f(x)=-\frac{1}{2e^{2x+C}}-2}
+\]
+
+
+17.
+
+\[
+f'(x)=3f-6\quad y(0)=9\qquad\int\frac{df}{3y-6}=\int1dx\quad\frac{\ln\left|3y-6\right|}{3}=x+C\quad y=\frac{e^{3(x+C)}+6}{3}\quad C=\frac{\ln21}{3}\quad\boxed{y=7e^{3x}+2}
+\]
+
+
+23.
+
+\[
+\frac{dy}{dt}=\frac{3t^{2}}{y}\quad\int ydy=\int3t^{2}dt\quad\frac{y^{2}}{2}=x^{3}+C\quad\boxed{y=\pm\sqrt{2}\sqrt{x^{3}+C}}
+\]
+
+
+24.
+
+\[
+\frac{dy}{dx}=y\left(x^{2}+1\right)\quad\int\frac{dy}{y}=\int\left(x^{2}+1\right)dx\quad\ln\left|y\right|=\frac{x^{3}}{3}+x+C\quad\boxed{y=C^{\frac{x^{3}}{3}+x}}
+\]
+
+
+25.
+
+\[
+f'(x)=e^{\frac{f}{2}}\sin x\quad\int\frac{df}{e^{\frac{f}{2}}}=\int\sin xdx\quad-\frac{2}{e^{\frac{f}{2}}}=-\cos x+C\quad\boxed{y=-2\ln\left|\cos x+C\right|+\ln\left|4\right|}
+\]
+
+
+28.
+
+\[
+f'(x)=f(4x^{3}+1)\quad f(0)=4\quad\int\frac{df}{f}=\int\left(4x^{3}+1\right)dx\quad\ln\left|y\right|=x^{4}+x+C\quad y=Ce^{x^{4}+x}\quad\boxed{y=4x^{x^{4}+x}}
+\]
+
+
+30.
+
+\[
+f'(x)=\frac{x^{3}}{\sec x}\quad f(0)=3\quad\int df=\int x^{3}\cos xdx\quad y=\boxed{3\cos x\left(x^{2}-2\right)+x\left(x^{2}-6\right)\sin x+9}
+\]
+
+
+31.
+
+\[
+\frac{dy}{dx}=e^{x}e^{-y}\quad y(0)=\ln3\quad\int e^{y}\frac{dy}{dx}=\int e^{x}\quad y=\ln\left|e^{x}+C\right|\quad\boxed{y=\ln\left(e^{x}+2\right)}
+\]
+
+\end{document}

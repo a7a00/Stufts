@@ -1,0 +1,32 @@
+% This file was created with JabRef 2.10b2.
+% Encoding: UTF-8
+
+
+@Electronic{MangaBigInEurope,
+  Title                    = {Manga Grows in the Heart of Europe},
+  Author                   = {Danica Davidson},
+  HowPublished             = {Online Publication},
+  Language                 = {English},
+  Month                    = {January},
+  Organization             = {CNN},
+  Url                      = {http://geekout.blogs.cnn.com/2012/01/26/manga-in-the-heart-of-europe/},
+  Year                     = {2012},
+
+  Owner                    = {alex},
+  Timestamp                = {2014.12.13}
+}
+
+@Electronic{MangaBigInJapan,
+  Title                    = {Comic Giants Battle for Readers},
+  Author                   = {Saira Syed},
+  HowPublished             = {Online Publication},
+  Language                 = {English},
+  Month                    = {August},
+  Organization             = {BBC},
+  Url                      = {http://www.bbc.co.uk/news/business-14526451},
+  Year                     = {2011},
+
+  Owner                    = {alex},
+  Timestamp                = {2014.12.13}
+}
+

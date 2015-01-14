@@ -1,0 +1,97 @@
+%% LyX 2.1.1 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose,lmargin=1cm}
+\usepackage{amsmath}
+\usepackage{esint}
+\usepackage{babel}
+\begin{document}
+
+\title{Homework 6: Trigonometric Substitution}
+
+
+\author{Alexander Gould, Period 3}
+
+
+\date{September 16, 2014}
+
+\maketitle
+8.
+
+\[
+\int\frac{dx}{\left(9-x^{2}\right)^{\frac{3}{2}}}\qquad\theta=3\sin x\quad d\theta=3\cos xdx\qquad\int\frac{3\cos\theta}{\sqrt{\left(9-9\sin^{2}\theta\right)^{3}}}=\int\frac{3\cos\theta}{\sqrt{9\left(\cos^{2}\theta\right)^{3}}}=\frac{x}{9\sqrt{9-x^{2}}}+C\quad\left.\frac{x}{9\sqrt{9-x^{2}}}\right|_{0}^{\frac{3}{2}}=\boxed{\frac{1}{9\sqrt{3}}}
+\]
+
+
+9.
+
+\[
+\int_{5}^{10}\sqrt{100-x^{2}}dx\qquad x=10\sin u\quad dx=10\cos udu\qquad\int\sqrt{100-\left(10\sin u\right)^{2}}\times10\cos udu=100\int\cos^{2}udu=100\int\left(\frac{1}{2}+\frac{\cos2u}{2}du\right)=
+\]
+
+
+\[
+100\left(\frac{u}{2}+\frac{1}{2}\int\cos2udu\right)\qquad w=2u,dw=2du\quad100\left(\frac{u}{2}+\frac{\sin2u}{2}\right)=100\left(\frac{\sin^{-1}\frac{x}{10}}{2}+\frac{2\times\frac{x}{10}\sqrt{1-\left(\frac{x}{10}\right)}}{4}\right)+C=f\left(x\right)
+\]
+
+
+\[
+\left.f\left(x\right)\right|_{5}^{10}=\boxed{\frac{25}{6}\left(4\pi-3\sqrt{3}\right)}
+\]
+
+
+17.
+
+\[
+\int\frac{dx}{\sqrt{36-x^{2}}}\qquad x=6\sin u,dx=6\cos udu\qquad\int\frac{6\cos u}{\sqrt{36-\left(6\sin u\right)^{2}}}du=\int\frac{6\cos u}{6\sqrt{\cos^{2}x}}=\int du=\boxed{\sin^{-1}\frac{x}{6}+C}
+\]
+
+
+23.
+
+\[
+\int\frac{x^{2}}{\sqrt{16-x^{2}}}dx\qquad x=4\sin u,dx=4\cos udu\qquad\int\frac{4\cos u\left(4\sin u\right)^{2}}{\sqrt{16-\left(4\sin u\right)^{2}}}du=16\int\sin^{2}udu=16\left(\int\frac{du}{2}-\int\frac{\cos2u}{2}du\right)
+\]
+
+
+\[
+w=2u,dw=2du\qquad\frac{1}{2}\int\cos wdw\qquad16\left(\frac{u}{2}-\frac{\sin2u}{4}\right)=\boxed{16\left(\frac{\sin^{-1}\frac{x}{4}}{2}-\frac{x\sqrt{1-\frac{x^{2}}{16}}}{8}\right)+C}
+\]
+
+
+30.
+
+\[
+\int\frac{x^{4}}{1+x^{2}}dx\qquad x=\tan u,dx=\sec^{2}udu\qquad\int x^{2}-dx+\int\frac{\sec^{2}u}{\tan^{2}u+1}du=\frac{x^{3}}{3}-x+\int du=\boxed{\frac{x^{3}}{3}-x+\tan^{-1}x+C}
+\]
+
+
+33.
+
+\[
+\int\frac{x^{2}}{\left(25+x^{2}\right)^{2}}dx=\boxed{\frac{\tan^{-1}\frac{x}{5}-\frac{5x}{25+x^{2}}}{10}+C}\qquad\left(???\right)
+\]
+
+
+41.
+
+\[
+\int\frac{dx}{\sqrt{x^{2}+16}}\qquad x=4\tan u,dx=4\sec^{2}udu\qquad\int\frac{4\sec^{2}u}{\sqrt{16\tan^{2}u+16}}du=\int\sec udu=\ln\left(\sec u+\tan u\right)=
+\]
+
+
+\[
+\boxed{\ln\left(\sqrt{1+\frac{x^{2}}{16}}+\frac{x}{4}\right)+C}
+\]
+
+
+43.
+
+\[
+\int\frac{dx}{\left(9x^{2}+1\right)^{\frac{3}{2}}}\qquad x=\frac{\tan u}{3},dx=\frac{\sec^{2}u}{3}du\qquad\int\frac{\sec^{2}u}{\left(3\tan^{2}u+1\right)^{\frac{3}{2}}}du=\int\frac{1}{3\sec u}du=\frac{1}{3}\int\cos udu=\frac{\sin u}{3}=\boxed{\frac{x}{\sqrt{1+9x^{2}}}+C}
+\]
+
+\end{document}

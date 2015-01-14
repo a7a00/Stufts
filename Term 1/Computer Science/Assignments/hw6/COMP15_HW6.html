@@ -1,0 +1,441 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Comp 15 (Data Structures) - Assignment 6: Song Search</title>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+</head>
+<body>
+<div id="container">
+<h1>Song Search</h1>
+<ul>
+<li>Assigned: Sunday, 16 November 2014</li>
+<li>Design Check Due: Monday,  24 November, 11:59pm.</li>
+<li>Final Assignment Due: Sunday, 7 December, 11:59pm</li>
+</ul>
+
+<ol>
+<li>Overview
+
+Ever hear a song on the radio and wonder what it is? What is the song title and artist? You've heard a few of the lyrics — you know, "love something something heartbreak" — but how do you find the song? Worry no longer! We will solve this problem by creating a search engine for song lyrics.
+
+<p>But how many songs are there? Well, we have constructed a data file with lyrics for 170,000 songs with a total of 40 million words. The data file itself is 200 megabytes.
+
+<p>Soooo...the efficiency, both time and memory, of your search data structure is critical. Since searches are based on words, you can consider N to be 40 million. Even linear searches will be painful, but anything that is O(N^2) will take hours or days to complete.
+
+<li>Project Description
+Given a word, your program will identify the songs that contain that word. For the basic version of the program you only need to search for a single word. Note: you will not be matching against the title or artist.
+
+<p>You will run your program using the command-line, and you will provide the song database as in input file. We will provide you a small test database and you will also be able to test on the large database as well. But, it will probably take minutes to load and process the large database, so most of your testing should be on smaller databases.
+
+<p>For each matching song, your program should print out the artist, title, and context of the match. The context should consist of a fragment of the lyrics containing the word, in the following form: print the five words before the matching word, then print the matching word, and then print the five words after the matching word (see the example below).
+
+<p>Clearly, there might be many songs that contain a given word. Part of your job is to rank the matching songs and present only the top 10 best matching songs. Matching songs will be ranked by the number of times the word occurs in the lyrics of a particular song (e.g., if a word occurs more times in one song than in another, the first song is ranked higher).
+
+<p>Here is an example run:
+
+<code><pre>
+user_name$  ./songsearch lyrics_fulldb.txt
+massachusetts  <——— user input (i.e., the program does not print any prompts)
+Massachusetts
+Title: Massachusetts
+Artist: Bee Gees
+Context: Feel I'm goin back to Massachusetts Somethings telling me I must
+
+Title: Massachusetts
+Artist: Bee Gees
+Context: lights all went out in Massachusetts The day I left her
+
+Title: Massachusetts
+Artist: Bee Gees
+Context: lights all went out in Massachusetts They brought me back to
+
+Title: Massachusetts
+Artist: Bee Gees
+Context: Talk about the life in Massachusetts Speak about the people I
+
+Title: Massachusetts
+Artist: Bee Gees
+Context: lights all went out in Massachusetts And Massachusetts is one place
+
+Title: Massachusetts
+Artist: Bee Gees
+Context: went out in Massachusetts And Massachusetts is one place I have
+
+Title: Massachusetts
+Artist: Bee Gees
+Context: have seen I will remember Massachusetts (I will remember Massachusetts) (repeat
+
+Title: Massachusetts
+Artist: Bee Gees
+Context: remember Massachusetts (I will remember Massachusetts) (repeat to fade)
+
+Title: Homecoming King
+Artist: Guster
+Context: sooner you're home Back in Massachusetts To your golden age where
+
+Title: Homecoming King
+Artist: Guster
+Context: you give in Back to massachusetts To your golden age where
+
+Title: The Flow
+Artist: Akrobatik
+Context: yo It's Akrobatik y'all, Boston Massachusetts Who's up next? Who's up
+
+Title: Holiday For States
+Artist: Allan Sherman
+Context: District of Columbia, New Hampshire, Massachusetts, Alabama, South Dakota, North Dakota,
+
+Title: Nifty Fifty United States And Capitals, Yakko, Ani
+Artist: Animaniacs
+Context: then we go north, to Massachusetts Boston and Albany New York.
+
+Title: Millworker
+Artist: Bette Midler
+Context: no good millworking man from Massachusetts who died from too much
+
+Title: When The Weight Comes Down
+Artist: Black Stone Cherry
+Context: fog rollin' on to Boston, Massachusetts Who's got the smokin' gun
+
+Title: 924
+Artist: Fifteen
+Context: a food pantry in Springfield, Massachusetts In the Mellow House Garage
+
+Title: Amy
+Artist: Gary B & The Notions
+Context: roam, From the shores of Massachusetts It's how you tuck your
+
+Title: Millworker
+Artist: James Taylor
+Context: no good millworking man From Massachusetts Who dies from too much
+
+&ltEND-OF-REPORT>
+</pre></code>
+
+<br>In this example, the word "massachusetts" appears 8 times in the Bee Gees song, but only 2 times in “Homecoming King", so the Bee Gees song should appear earlier in the results. In the other eight songs, the word only appears once (and notice that the same song by different artists appears both times, e.g., Millworker by Bette Midler and also by James Taylor). Also note: the order for the songs that have the same number of occurrences does not matter. Only the top ten songs should be printed, but all lyrics that match in those top ten songs should be printed.
+
+<li>Implementation Specifics
+
+The key problem in this program is managing the scale of the data. As with our previous programs, you will first need to read in the data from the lyrics file. The difference in this program is that you will need to store the information in an efficient structure that (a) doesn't require tons of memory, and (b) makes answering user queries fast.
+
+<p>You will probably use a variety of data structures: hash tables (or a trie), sets, and sequences. You must use the structures you have built yourself in class, or that we have provided to you in other assignments. The only data structure you are allowed to use from the standard library is the vector&lt> data structure, which we will discuss in class. You may not use any other data structure from the standard template library (e.g., hashmaps, queues, etc.).
+
+<li>Design Check
+
+Before or during your regularly scheduled lab time next week, you must present your proposed design to one of the TAs and discuss the pros and cons (you do not need to set up a meeting, but you need to go to office hours or speak with your TA during or after lab). Your design should describe:
+
+<ul>
+<li>A high-level description of how you will store the lyric information in terms of hash tables, vectors, sequences, etc.</li>
+<li>A sketch of the song search algorithm, showing how you will identify and rank the matching songs.</li>
+<li>You will need to Provide your design document by Monday,  24 November, 11:59pm.</li>
+</ul>
+
+<p>Things to think about:
+
+<ul>
+<li>What kind of data structure will make it efficient to search based on words?</li>
+<li>How can you represent and retrieve both the song information (title and artist) and the context (part of the lyrics themselves).</li>
+<li>We will need to keep track of multiple instances of a word, both within one song and across multiple songs. How can you do this?</li>
+<li></li>
+</ul>
+
+<li>Running and Testing Your Code
+
+	When you run your code from the command-line, you will be able to enter search words as in the example above. In order to stop the program, you type &ltBREAK> as the search word.
+
+Keep in mind that your program should not print any prompts to the screen to request information from the user. However, if you do want prompts that only show up when a user is entering your program from the command line (vs from a script), you can create a command-line only version of the prompt as follows:
+
+<code><pre>
+if ( isatty(0) ) {
+		cout &lt"Enter a word: ”; 
+}
+</pre></code>
+ 
+<li>Input Data
+
+<ul>
+<li>Full data file: /comp/15/public_html/assignments/hw6/lyrics_full/lyrics_fulldb.txt
+
+<li>Small data file: /comp/15/public_html/assignments/hw6/files/rick_db.txt
+
+<li>Basic code for reading the file: /comp/15/public_html/assignments/hw6/files/read_lyrics.cpp
+</ul>
+
+The full data file is very large (200MB), so you should not try to copy it to your home directory. I strongly recommend you develop the program using the small data file, which has the same format, but only contains a few songs.  When you do want to use the huge data file, you should create a “symlink” in your working directory, as follows:
+
+<p><code>ln -s /comp/15/public_html/assignments/hw6/other_lyrics/lyrics_fulldb.txt lyrics_fulldb.txt</code>
+
+<p>The symlink will allow you to read from the data file as if it was in your working directory, without taking up 200MB of your own disk space. (Note: there are also three other relatively small databases in the other_lyrics folder: 13300Songs.txt, 2316Songs.txt, and poems.txt.
+
+<p>The format of the files is very simple. The first line is the artist name, the second line is the song title, and subsequent lines contain the lyrics. Songs are separated by a special token "&ltBREAK>" on a line by itself. Here is a snippet:
+
+<code><pre>
+Rick Astley
+Cry For Help 
+She's taken my time
+convinced me she's fine
+but when she leaves I'm not so sure.
+It's always the same: she's playing her game
+and when she goes I feel to blame.
+Why won't she say she needs me?
+...etc...
+&ltBREAK>
+Rick Astley
+Hold Me In Your Arms 
+We've been trying for a long time to say what we want to say
+But feelings don't come easy to express in a simple way.
+But we all have feelings
+we all need loving
+And who would be the fool to say that if you -
+Hold me in your arms
+...etc...
+</pre></code>
+
+<p>We have provided you with code that reads the file, but does not do anything with the data. You will need to augment this code with your own code to store the information.
+
+<li>Other Comments
+
+<ul>
+<li>The Makefile (provided) will create one executable file: <code>songsearch</code>
+
+<li>We have provided you a read_lyrics.cpp file (and .h file), and a simple main.cpp file. We have also provided a hash function (not a hash table — you would need to create that yourself). See section 8 below for details. You will need to create the rest of the interface yourself. You may find it easiest to simply copy the contents of read_lyrics.cpp into a class file and make the read function (and “alpha only” function) part of your class.
+
+<li>We have also provided (in the read_lyrics.cpp file) an “alpha_only()” function. This function converts a string with uppercase letters and punctuation into a string that is only lowercase and does not have punctuation. Your searches will be based on the lowercase, non-punctuated lyric, although you will have to return the true (possibly punctuated and uppercase) lyric for your result. Example: If a lyric was “We’re going back to good ’ol California!”, then a search for “we’re” and “were” and “ol” and “’ol” and “california” would all match the line.
+
+<li>The output from your program should include &ltEND-OF-REPORT> on a line by itself, in order to indicate that the output has completed.
+
+<li>As always, direct any specific questions to the Piazza class site.
+
+<li>Hash function for strings
+
+<br>Bob Jenkins is a programmer who has developed a number of nice, widely-used hash functions for strings. We have provided version of his code that will work nicely with C++. You can use it for your own hash table implementation. You can find the files here:
+
+<p>
+<code><pre>
+/comp/15/public_html/assignments/hw6/files/hashfunc.cpp
+/comp/15/public_html/assignments/hw6/files/hashfunc.h
+</pre></code>
+
+<p>The only function you need to use is hash_string. You give it a string and it returns a large hash code. You must then mod or mask this number to get it into the range of the size of your hash table.
+
+<code>uint32_t hash_string(const std::string & str);</code>
+
+Note that the uint32_t data type is just an abbreviation for an unsigned 32-bit integer. You can declare a variable of type uint32_t and then mod it down to a regular int:
+
+<p>
+<code><pre>
+uint32_t hashcode = hash_string(a_word);
+int index = hashcode % size;</pre></code>
+</ul>
+
+<li>Low Level Details
+
+Getting the files
+
+<p>Method 1: copy files from the class folder
+<ul>
+<li>The files are located at /comp/15/public_html/assignments/hw6/files
+
+<li>To get the files: mkdir hw6 && cd hw6 && cp /comp/15/public_html/assignments/hw6/files/* .
+</ul>
+
+<p>Method 2: pull from GitHub:
+
+<ul>
+<li>At the command prompt, enter 
+
+<li>“git clone https://github.com/Tufts-COMP15/Data_Structures_F2014_HW6.git hw6”
+
+<li>change into the directory that git created:
+
+<li>“cd hw6”
+</ul>
+
+<p>Compiling and providing
+<ul>
+<li>Create your own Makefile, using the examples we have had in class. We have given you a template Makefile with the files themselves removed.
+
+<li>To make: make
+
+<li>To submit your design document: at the command prompt, enter “make provide_design”
+
+<li>To submit your completed project, enter “make provide”
+</ul>
+
+<li>FAQ
+<ol>
+<li>How many songs do we return?
+<ol type=a>
+<li>
+You return up to 10 songs, if there are at least 10 songs that have lyrics that match the search term.
+</ol>
+
+<li>How many lyrics per song do we return?
+<ol type=a>
+<li>All lyrics for each of the top ten songs.
+</ol>
+
+<li>What if there are 11 songs that match?
+<ol type=a>
+<li>Only return the top 10 songs
+</ol>
+
+<li>If any of our Top 10 results have the search term in them multiple times (which presumably most of them will), do we need to print out every hit within each song, or just one? If just one, does it matter which one?
+<ol type=a>
+<li>Yes. Print out each hit, even if it happens more than once on each line. See question 8 below — you can think of the song as one long list of words, and it is not broken up by lines.
+</ol>
+
+<li>What if the 10th and 11th song both have one match? Which one do we return?
+<ol type=a>
+<li>It doesn’t matter — you are free to return either song as the 10th song.
+<li>In other words, ties between songs don’t matter — one person may return one song, and the other may return the second matching song with the same number of hits.
+<li>This is also true for earlier matches — let’s say that there are fifteen songs that match lyrics, and each one only has one match. You can return any of those songs, in any order (but you have to return 10 of them).
+</ol>
+
+<li>What do you mean, “print the five words before the matching word, then print the matching word, and then print the five words after the matching word”? What if the word was at the beginning of the song?
+<ol type=a>
+<li>See the example above.
+<li>If the word you are searching for comes near the beginning or end of the song (e.g., if it is the first or second word of the song), you only need to print the words back to the beginning (or to the end) of the song. E.g.:
+
+<pre>
+	A song (Rick Astley, Together Forever) starts as follows:
+			If there's anything you need
+			All you have to do is say
+
+	If you search for “anything”, you would return the following:
+			Title: Together Forever
+			Artist: Rick Astley
+			Context: If there’s anything you need All you have
+
+	Notice that you only print out two words before “anything” because there are only two words in the lyrics before “anything”. You do print five words after “anything.”
+</pre>
+</ol>
+
+<li>Do we return results based on partial searches? E.g., if we search for “any” and the lyrics have the word “anything”, is that a hit?
+<ol type=a>
+<li>No. Only search on full words.
+<li>Remember, though, punctuation is ignored. So, a search for “any” would match “any”, “Any”, “Any!”, “any,” etc.
+</ol>
+
+<li>So the lyrics of the song are not broken up by line?
+<ol type=a>
+<li>The song gets read in word-by-word, and lines are ignored. So, you can think of a song as one long string of words.
+</ol>
+
+<li>Is our program supposed to work in a loop?
+<ol type=a>
+<li>Yes. You should continue to accept searches until the user types “&ltBREAK>”, at which point your program should clean up its memory and exit.
+<p>The basic flow is as follows:
+<ul>
+<li>Read in the lyrics
+<li>Start a while(!done) loop that waits for a search term from the user.
+<li>Find the lyrics based on the search term
+<li>Continue with the while loop
+<li>When the user types “&ltBREAK>”, exit the program.
+</ul>
+</ol>
+
+<li>Can you explain more about how to use hash_func.cpp?
+<ol type=a>
+<li>Here is a high-level overview of creating a hash function for your program (using a linear probe):
+<code><pre>
+void insert(string key,obj *value) { // key is a string, val is a pointer to some object
+	    				// that contains the key as well
+
+if (load_factor() > LOADMAX) expand_table();
+
+uint32_t hash = hash_string(key) % table_size;
+
+while (table[hash] != NULL) {
+	hash = (hash + 1) % table_size; // linear probe
+}
+
+	table[hash] = value;
+}
+
+obj *find(key) {
+
+	uint32_t hash = hash_string(key) % table_size;
+	while (table[hash] != NULL && table[hash]->key != key) {
+		hash = (hash + 1) % table_size; // linear probe
+	}
+	return table[hash];
+}
+
+void expand_table() {
+	1. create new table with twice table_size
+	2. initialize the new table to NULLs
+	3. swap the new table pointer and old table pointers
+	4. change table_size to twice the table_size
+	5. rehash all the old keys (which you get by walking through the
+	   old table
+	6. delete [] the old table
+}
+</pre></code>
+</ol>
+
+<li>In the rick_db example, there are some lines which are not actually lyrics, such as (CHORUS). We can remove the punctuation for this using alpha_only(), but is it okay to treat this like any other word in the lyrics?
+<ol type=a>
+<li>Yes, treat ALL words as lyrics. The database is not perfectly clean.
+</ol>
+
+<li>I was just wondering what we should expect our program memory usage to be because mine seems to use about 3gb when working with the complete data base. Is that too large? Should I try to make it smaller?
+<ol type=a>
+<li>3GB sounds about right -- my smallest attempt takes 2GB, and the largest takes 4GB.
+</ol>
+
+<li>What if the user searches for “Astley”. Do we return all Rick Astley songs?
+<ol type=a>
+<li>No — you only search for lyrics. An “above and beyond” could search for song titles or artists, but do not do that for your regular submission.
+</ol>
+
+<li>Can a user search for a phrase, e.g., “I will always”?
+<ol type=a>
+<li>No. Searches should be for single words only. Hyphenated words will match the whole hyphenated word. E.g., if a lyric was “high-tech” then “hightech” and “high-tech” would both match.
+</ol>
+
+<li>How does alphaOnly handle numbers? 
+<ol type=a>
+<li>The "alpha" in "alphaOnly" will not strip digits (so I guess it should be called “alphaNumOnly”). You should be able to search for “123”, for instance, and it would return a hit for “1up”.
+</ol>
+
+<li>Is it legal to have a pointer be the return type of a function?
+<ol type=a>
+<li>Absolutely — you should not be passing around your database by value (it will be WAY too slow). You can use either pointers or references.
+</ol>
+
+<li>If I use a Trie to hold the lyrics, do I have to account for numbers or uppercase letters, or punctuation?
+<ol type=a>
+<li>You will need to account for numbers, but not punctuation or uppercase letters. You will also have to store the full lyrics with punctuation, but you should not do that in a Trie.
+</ol>
+
+<li>What is the “show_progress” variable all about in read_lyrics?
+<ol type=a>
+<li>If you call read_lyrics() with show_progress as true (e.g., read_lyrics(“rick_db.txt”,true)), the read_lyrics function will print out the song and artist regularly, but not every time (change the “% 10000” to something smaller if you are using a small database). This is a good debugging tool — you can see how far along your database has been read.
+</ol>
+
+<li>What's the desired behavior if our search returns no matches?
+<ol type=a>
+<li>The program should print “&ltEND-OF-REPORT>” and a newline (no quotes).
+</ol>
+
+<li>How quickly should we expect our data structures to create? I know we want our searches to be very fast, but how long should we be expected to wait when we run our program until we are able to enter input.
+<ol type=a>
+<li>I've written the program about five times now, and my best time for going through the whole database on the Homework server is about two and a half minutes. The worst is about five minutes. If it's longer than about ten minutes, we won't be able to grade it.
+</ol>
+
+<li>Are there other small- or medium-sized databases we can test our code on?
+<ol type=a>
+<li>Yes. See section (6) above (“Input Data”).
+</ol>
+
+</ol>
+
+</ol>
+
+
+
+</div>
+</body>
+</html>
+

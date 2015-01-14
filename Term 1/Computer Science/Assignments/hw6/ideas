@@ -1,0 +1,7 @@
+Each song is represented by a song object, containing the title, author and full text of the song as strings. In order to see if the word is there, "grep" the lyrics string and set the in-class variable "numberOfTimes" to the number of times the lyrics string contains the pattern.
+
+To generate the context string, "grep" for spaces, and get a list of all the indicies in the lyrics string that hold a space. You know the index of the beginning of the word, so just return the substring of the lyrics from [5 space indexes before] to [5 space indexes after].
+
+http://www.iti.fh-flensburg.de/lang/algorithmen/pattern/bmen.htm
+http://en.wikipedia.org/wiki/Boyer–Moore_string_search_algorithm
+http://www.cs.utexas.edu/users/moore/best-ideas/string-searching/

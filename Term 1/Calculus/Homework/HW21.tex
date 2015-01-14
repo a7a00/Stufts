@@ -1,0 +1,54 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{babel}
+\begin{document}
+
+\title{Homework 21: Alternating Series}
+
+
+\author{Alexander Gould, Section 3}
+
+\maketitle
+\textbf{Determine whether the following series converge.}
+
+11. Nuke the alternator of $\sum\frac{(-1)^{k+1}}{k^{3}}$ and we
+get $\frac{1}{k^{3}}$, which decreases to 0. Therefore this sum converges.
+
+12. Exactly the same as \#11. Get rid of the alternator $\sum\frac{(-1)^{k}}{k^{2}+10}$
+and take the limit of $\frac{1}{k^{2}}$ once the constant goes away
+and the series converges.
+
+13. The alternator of $\sum(-1)^{k+1}\frac{k^{2}}{k^{3}+1}$ is already
+separated for us. When we remove the constant and take the limit of
+$\frac{k^{2}}{k^{3}}$, we see it decreases to 0 and the series converges.
+
+14. Same here. $\sum(-1)^{k}\frac{\ln k}{k^{2}}$ becomes $\frac{\ln k}{k^{2}}$,
+which increases to 0 as the denominator overpowers the numerator,
+so the series converges.
+
+15. Killing the alternator, getting rid of the constants and taking
+the limit of $\frac{k^{2}}{k^{2}}$ gets us 1, not 0, which means
+the series diverges.
+
+16. Getting rid of the alternator here gives us the limit of $\frac{1}{5}^{k}$,
+which decreases to 0, and the series converges.
+
+17. Another easy alternator removal. Take the limit of $1+\frac{1}{k}$,
+limit of a sum is the sum of the limits, and we converge to 1, so
+the series doesn't converge.
+
+18. We can't just take the alternator out, but we can see that the
+numerator endlessly alternates, so we can just get rid of it like
+it's a standard alternator. $\frac{1}{k^{2}}$ goes to 0, so the series
+converges.
+
+20. Knock the alternator out of $\sum\frac{(-1)^{k}}{k\ln^{2}k}$
+and we get $\frac{1}{k\ln^{2}k}$, which approaches 0, so the series
+converges.
+
+23. Knock out the alternator again and take the limit of $\frac{1}{\sqrt{x^{2}+4}}$,
+which goes to 0, so the series converges.
+\end{document}
