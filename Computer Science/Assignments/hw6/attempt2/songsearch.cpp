@@ -301,6 +301,8 @@ void SongSearch::search_lyrics(string pattern, Song song)
 	int index = 0;
 	midWordPunctuation = false; //This should remain false by default.
 	bool mwpWasUsed;
+	int tempindex;
+	int tempj;
 	while(index < (int)(song.lyrics.length()-pattern.length()+1))
 	{
 		mwpWasUsed = false;
@@ -311,8 +313,11 @@ void SongSearch::search_lyrics(string pattern, Song song)
 			if(!midWordPunctuation) j -= 1;
 			else
 			{
+				//cout << "MWP Used!\n";
 				mwpWasUsed = true;
 				midWordPunctuation = false; //It was just this once
+				tempindex = index;
+				tempj = j;
 				index--; //Re-align with what's on the other side of the punctuatuon.
 			}
 		}
@@ -322,10 +327,23 @@ void SongSearch::search_lyrics(string pattern, Song song)
 			copy(song, index);
 			//cout << index << "\n";
 			index++;
-			if(mwpWasUsed) index++;
+			if(mwpWasUsed)
+			{
+				index = tempindex;//+1;//index++;
+				j = tempj;
+				break;
+			}
+			//mwpWasUsed = false;
 		}
 		else
 		{
+			if(mwpWasUsed)
+			{
+				index = tempindex;//index++;
+				j = tempj;
+				//continue;
+			}
+			//mwpWasUsed = false;
  			int lastPosition = lPT[(int)(song.lyrics[index+j-1])];
 			if(lastPosition == 0) lastPosition = pattern.length();
 			int jump = jT[pattern.length()-j];
