@@ -13,7 +13,7 @@ to regulate contact. There were periods of extensive contact, followed
 by periods of relative withdrawl. From 600-850, there's a period of
 extensive borrowing from Choseon Korea and Tang China. Japan then
 withdrew to create its own culture, which is where we get a lot of
-stereotypical ``Japanese Culture''. From 1400-1640, Japan borrowed
+stereotypical "Japanese Culture". From 1400-1640, Japan borrowed
 heavily from China and Europe as ports opened for trade. Tokugawa
 withdrew it again, and Matthew Perry forced it open. Japan is larger
 than Germany, but smaller than France or Montana. It's vastly mountainous
