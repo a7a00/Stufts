@@ -39,7 +39,7 @@ precious metal mining and a place of exile for political outcasts.
 It's also home to Japan's largest lake.
 
 
-## 球種（？）
+## 九州
 
 Originally built of 9 kingdoms, this is the main trading point of
 Japan.
