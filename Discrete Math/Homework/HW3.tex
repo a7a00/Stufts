@@ -1,0 +1,172 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{textcomp}
+\usepackage{amstext}
+\usepackage{amssymb}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\newcommand{\lyxmathsym}[1]{\ifmmode\begingroup\def\b@ld{bold}
+  \text{\ifx\math@version\b@ld\bfseries\fi#1}\endgroup\else#1\fi}
+
+%% Because html converters don't know tabularnewline
+\providecommand{\tabularnewline}{\\}
+
+\makeatother
+
+\usepackage{babel}
+\begin{document}
+
+\title{Homework 3}
+
+
+\author{Alexander Gould}
+
+\maketitle
+91
+
+4. Show that the negative of an even number is even. Use a direct
+proof.
+
+\begin{tabular}{|c|c|}
+\hline 
+Statement & Reason\tabularnewline
+\hline 
+\hline 
+$n$ is even. & Given\tabularnewline
+\hline 
+$\exists k\left(n=2k\right)$ & Definition of an even number\tabularnewline
+\hline 
+$-n=2*-k$ & Multiply both sides by -1.\tabularnewline
+\hline 
+$-n=2a$ & Assign $a=-k$.\tabularnewline
+\hline 
+$-n$ is even. & Definition of an even number\tabularnewline
+\hline 
+\end{tabular}
+
+6. Use a direct proof to show that the product of two odd numbers
+is odd.
+
+\begin{tabular}{|c|c|}
+\hline 
+Statement & Reason\tabularnewline
+\hline 
+\hline 
+$a$ and $b$ are odd. & Given\tabularnewline
+\hline 
+$\exists c\left(a=2c+1\right)$,$\exists d\left(b=2d+1\right)$ & Definition of an odd number\tabularnewline
+\hline 
+$ab=\left(2c+1\right)\left(2d+1\right)$ & Multiply $a$ and $b$\tabularnewline
+\hline 
+$ab=4cd+2c+2d+1$ & FOIL\tabularnewline
+\hline 
+$ab=2\left(2cd+c+d\right)+1$ & Distributive Property\tabularnewline
+\hline 
+$\left(2cd+c+d\right)\in\mathbb{Z}$ & The sums and products of integers are integers\tabularnewline
+\hline 
+$ab$ is odd. & Definition of an odd number\tabularnewline
+\hline 
+\end{tabular}
+
+11. Prove or disprove that the product of two irrational numbers is
+irrational.
+
+We can disprove this by counter-example. $\sqrt{3}$ is irrational,
+but the product of $\sqrt{3}$ and $\sqrt{3}$ is either 3 or -3,
+both rational.
+
+16. Prove that if $m$ and $n$ are integers and $mn$ is even, then
+$m$ is even or $n$ is even.
+
+Using our answer from Question 6, we know that if both $m$ and $n$
+are odd, $mn$ will always be odd. Therefore, at least one of them
+\textit{has} to be even.
+
+17. Show that if $n$ is an integer and $n^{3}+5$ is odd, then $n$
+is even using:
+
+A. A proof by contraposition (If $n$ is odd, $n^{3}+5$ is even.)
+
+\begin{tabular}{|c|c|}
+\hline 
+Statement & Reason\tabularnewline
+\hline 
+\hline 
+$n$ is odd. & Given\tabularnewline
+\hline 
+$\exists k\left(n=2k+1\right)$ & Definition of an odd number\tabularnewline
+\hline 
+$n^{3}+5=2\left(4k^{3}+6k^{2}+3k+3\right)$ & FOIL\tabularnewline
+\hline 
+$\left(4k^{3}+6k^{2}+3k+3\right)\in\mathbb{Z}$ & The sums and products of integers are integers\tabularnewline
+\hline 
+$n^{3}+5$ is even. & Definition of an even number\tabularnewline
+\hline 
+\end{tabular}
+
+B. A proof by contradiction
+
+We start by assuming both $n$ and $n^{3}+5$ are odd. We can use
+the reasoning from Part A up until the end of the proof, where we've
+proved that $n^{3}+5$ has to be even. Since there's a contradiction,
+we know that either $n$ or $n^{3}+5$ is actually even. Since $n^{3}+5$
+is odd is a given, we know $n$ is even.
+
+24. Show that at least three of any 25 days chosen must fall in the
+same month of the year.
+
+If we assume that this is false, that means at most 2 days can be
+in the same month, meaning we'd need 24 days max. Since we know there
+are 25 days, there is a contradiction and the statement is true.
+
+26. Prove that if $n$ is a positive integer, then $n$ is even if
+and only if $7n+4$ is even.
+
+(Not sure how to put this one in a table.) Using our answer from Question
+16, we know that we need at least one even factor to get an even product.
+Since 7 is odd, $7n$ will have the same parity as $n$. We can then
+use the definition of an even number to say that an even number stays
+even only when another even number is added to it. (Othereise the
+``+1'' would turn it into an odd number.) Likewise, an even number
+added to an odd number yields an odd number. (Otherwise, the 2 ``+1'''s
+would cancel each other out.) Therefore, we know that $7n+4$ will
+always have the same parity as $n$. Since the 2 are equivelant, they're
+dependent on each other, proving the ``if and only if'' true.
+
+28. Prove that $m^{2}=n^{2}$ if and only if $m=n$ or $m=\lyxmathsym{\textminus}n$.
+
+Since we know the absolute values remain the same (two identical positive
+integers squared will still be equal), we just need to prove that
+a negative number times a negative number is positive. You can do
+this by factoring out the two impied ``-1'''s, squaring both now-identical
+positive numbers, and then reapplying 1 ``-1'' on each side of the
+equals sign. The numbers will now be negative, but still be equal.
+Since we now know that both a positive and a negative squared will
+yeild a positive, and we know that the absolute value is the same,
+we know that the statement is true. If $m$ is any value other than
+$n$ or $-n$, the absolute value part won't hold up. Since the condition
+goes both ways, the ``if and only if'' is true.
+
+30. Show that these three statements are equivalent, where $a$ and
+$b$ are real numbers: (i) $a<b$, (ii) $\frac{a+b}{2}>a$, and (iii)
+$\frac{a+b}{2}<b$.
+
+If the statements are equivelant, we should be able to get any statement
+from any other. So $a+b>2a$, $b>2a-a$, $a<b$ gets us from ii to
+i. Likewise, $a+b<2b$, $a<2b-b$, $a<b$ gts us from iii to i. And
+we can get from i to iii via $a+b<b+b$, $\frac{a+b}{2}<\frac{2b}{2}$,
+$\frac{a+b}{2}<b$, and from i to ii via $a+a<b+a$, $\frac{2a}{2}<\frac{a+b}{2}$,
+$\frac{a+b}{2}>a$.
+
+38. Find a counterexample to the statement that every positive integer
+can be written as the sum of the squares of three integers.
+
+15. It's greater than the squares of the first 3 squares, so those
+are the only ones we can use. But no combination of those gets us
+15. 
+\end{document}

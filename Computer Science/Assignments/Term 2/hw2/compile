@@ -1,0 +1,153 @@
+#!/bin/sh
+#########################################################
+#                     compile
+#
+#     Compiles all .c files and then links various
+#     programs relating to assignment iii.
+#
+#     Options:
+#        -nolink          #just compile, don't link
+#        -link exe_name   # name of executable to build,
+#                         # e.g. fgroups
+#        -link all        # build all executables (default)
+#
+#     Note that this script supports use of the comp 40
+#     versions of Hansons C Interfaces and Implementations
+#
+#     This script has special-case code that avoids 
+#     trying to compile useuarray2.c if uarray2.h
+#     has not yet been written, and usebit2.c if
+#     bit2.h has not been written. Similarly, it 
+#     will not try to link my_useuarray2 if useuarray2.o
+#     does not exist and won't try to link my_usebit2
+#     if usebit2.o does not exist. This is so that other
+#     compilation and linking can proceed even without
+#     those files.
+#
+#     STUDENTS WILL TYPICALLY HAVE TO EDIT THIS FILE
+#     TO DEAL WITH PROGRAMS DIVIDED INTO MORE SOURCE
+#     MODULES AND/OR TO CREATE MORE TEST PROGRAMS.
+#
+#########################################################
+
+#########################################################
+#                         Setup
+#########################################################
+
+set -e    # halt on first error
+
+# check command line parameters
+
+link=all  # link all binaries by default
+linked=no # track whether we linked
+
+case $1 in  
+  -nolink) link=none ; shift ;;  # don't link
+  -link)   [ -n "$2" ] || { echo "You need to say *what* to link" >&2; exit 1; }
+           link="$2" ; shift ; shift ;;  # link only one binary
+esac
+
+# Choose compilers and set compiler flags
+
+# use 'gcc' as the C compiler (at home, you could try 'clang')
+CC=gcc
+
+# the next two lines enable you to compile and link against CII40
+#
+#  Note that `xxxx` runs command xxxx, takes the output
+#  and inserts that into the string in place of `xxxx`
+#
+#  In this case, we're using pkg-config to set the correct
+#  include file flags (-I) and library search flags (-L and -l)
+#  that are needed for the COMP 40 version of 
+#  Hanson's "C Interfaces and Implementations" (the package called
+#  cii40).  You might want to try running:
+#
+#        pkg-config --cflags cii40
+#        pkg-config --libs cii40
+#
+#  from the command line and see what they do
+#
+CIIFLAGS=`pkg-config --cflags cii40`
+CIILIBS=`pkg-config --libs cii40`
+
+# the next three lines enable you to compile and link against 
+# course software by setting the compiler search path for 
+# includes of .h files (the -I switch) and the search
+# path for libraries containing .o files (-L and -l)
+#
+CFLAGS="-I. -I/comp/40/include $CIIFLAGS"
+LIBS="$CIILIBS -lm"    # might add more libraries for some projects
+LFLAGS="-L/comp/40/lib64"
+
+# these flags max out warnings and debug info
+FLAGS="-g -O -Wall -Wextra -Werror -Wfatal-errors -std=c99 -pedantic"
+
+#########################################################
+#     Clean out old object files and compile everything
+#########################################################
+
+# rm -f *.o  # make sure no object files are left hanging around
+
+case $# in
+  0) set *.c ;; # if no args are given, compile all .c files
+esac
+
+# compile each argument to a .o file
+for cfile 
+do
+  if  [[ $cfile = useuarray2.c ]] && [[ ! -f uarray2.h ]]; then
+      echo "skipping compile of useuaray2.c because uarray2.h does not exist"
+      continue
+  fi
+  if  [[ $cfile = usebit2.c ]] && [[ ! -f bit2.h ]]; then
+      echo "skipping compile of usebit2.c because bit2.h does not exist"
+      continue
+  fi
+  $CC $FLAGS $CFLAGS -c $cfile
+done
+
+#########################################################
+#     Link the .o files and libraries to create an
+#     executable program
+#########################################################
+
+# One case statement per exectuble binary
+
+case $link in
+  all|sudoku) $CC $FLAGS $LFLAGS -o sudoku sudoku.o uarray2.o -lpnmrdr $LIBS 
+                  linked=yes ;;
+esac
+
+case $link in
+  all|unblackedges) $CC $FLAGS $LFLAGS -o unblackedges unblackedges.o bit2.o -lpnmrdr $LIBS 
+                  linked=yes ;;
+esac
+
+case $link in
+  all|my_useuarray2)  
+       if  [[ -f useuarray2.o ]] && [[ -f uarray2.o ]]; then
+            $CC $FLAGS $LFLAGS -o my_useuarray2 useuarray2.o uarray2.o $LIBS 
+       else
+            echo "skipping link of my_useuaray2 because uarray2.o useuarray2.0 does not exist"
+       fi
+       linked=yes ;;
+esac
+
+case $link in
+  all|my_usebit2)  
+       if  [[ -f usebit2.o ]] && [[ -f bit2.o ]] ; then
+            $CC $FLAGS $LFLAGS -o my_usebit2 usebit2.o bit2.o $LIBS 
+       else
+            echo "skipping link of my_useuaray2 because bit2.o or usebit2.0 does not exist"
+       fi
+       linked=yes ;;
+esac
+
+# put out error msg if asked to link something we didn't recognize
+if [ $linked = no ]; then
+  case $link in  # if the -link option makes no sense, complain 
+    none) ;; # OK, do nothing
+    *) echo "`basename $0`: don't know how to link $link" 1>&2 ; exit 1 ;;
+  esac
+fi

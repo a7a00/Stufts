@@ -1,0 +1,16 @@
+COMP 40 - HW2 
+Design Checklist for Part A
+Authors: Elif Kinli, Alex Gould
+
+1- What is the abstract thing you are trying to represent?
+        A two-dimensional unboxed array that we will call UArray2
+2- What functions will you offer, and what are the contracts of that those 
+functions must meet?
+        T UArray2_new (int row, int col, int size)
+        void UArray2_free (T *uarray2)
+        int UArray_width (T uarray2)
+        int UArray2_height (T uarray2)
+        int UArray2_size (int row, int col)
+        void *UArray2_at (T uarray2, int row, int col)
+        UArray2_map_row_major
+        UArray2_map_col_major
