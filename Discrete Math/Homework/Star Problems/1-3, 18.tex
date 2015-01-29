@@ -1,0 +1,37 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{textcomp}
+\usepackage{babel}
+\begin{document}
+
+\title{§1.7, \#18}
+
+
+\author{Alexander Gould}
+
+\maketitle
+\textit{What is wrong with this argument? Let $S(x,y)$ be \textquotedblleft{}x
+is shorter than y.\textquotedblright{} Given the premise $\exists sS(s,Max)$,
+it follows that $S(Max,Max)$. Then by existential generalization
+it follows that $\exists xS(x,x)$, so that someone is shorter than
+himself.}
+
+There are 2 main problems here:
+\begin{enumerate}
+\item It doesn't follow at all that Max can replace $s$. All the $\exists$
+sign says is that there's \textit{somebody} who's shorter than Max.
+That someone doesn't have to be Max. If instead of $\exists$, we
+had $\forall$, then it would logically follow, because the statement
+has to hold for everybody. But $\exists$ means that we only need
+at least one person to meet the criteria, and that person doesn't
+have to be Max.
+\item The one person in the group who meets the criteria can't be Max at
+all. An essential precondition for $S(x,y)$ being true is that the
+two arguments are different, so they can be compared to each other.
+If you compare an object to itself, it fails that precondition, which
+means $S\left(Max,Max\right)$ has to be false.\end{enumerate}
+
+\end{document}
