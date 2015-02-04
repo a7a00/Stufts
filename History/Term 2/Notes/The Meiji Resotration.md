@@ -1,4 +1,4 @@
-# Rename
+# The Meiji Resotration
 
 We left off with the assassination of Ii Naosuke, and a lot of stuff starts happening very quickly. In order to rebuild relationships between the *daimyo* and the court, *sankin koutai* is abolished, and the emperor's sister marries the Shogun. Not super helpful, but essentially all the shogun could do. The shogunate also sends an official, Fukuzawa Yukichi, to to US, and he's nor particularly impressed, wondering why Christianity exists, and questioning San Fransisco's "lack of any Western technology". In the meantime, the Richardson affair is boiling over. Tokugawa Yoshinobu is released from house arrest and given a civil position. Emperor Komei then issues the first Imperial decree in *centuries*, ordering "expulsion of the barbarians". Choushu happily starts firing on Western vessels in 1863, and the British bomb Kagoshima flat in retaliation. The French and the US join in, too, and bomb the crap out of Shimonoseki. As the US draws away due to the Civil War, England starts getting more involved. The shogunate declares Choushu a "rebellious state". This all boils over into the...
 
