@@ -1,0 +1,48 @@
+%% LyX 2.0.6 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{textcomp}
+\usepackage{babel}
+\begin{document}
+
+\title{Star Problems}
+
+
+\author{Alexander Gould}
+
+\maketitle
+
+\section*{§ 1.8, \#6}
+
+Prove using the notion, without loss of generality, that $5x+5y$
+is an odd integer when x and y are integers of opposite parity.
+
+For the sake of argument, let $x$ be odd and $y$ be even. This means
+that the equation can be represented as $5\left(2a+1\right)+5\left(2b\right)$,
+for 2 integers $a$ and $b$. We can rewrite this as $10a+10b+5$,
+or $2\left(5a+5b\right)+5$. Since $5a+5b$ is an integer, this equation
+can be written as $2k+5$, or $2k+1+4$ for some integer $k$. Since
+4 is even, we can further write this as $2k+2j+1$, where $j=2$.
+Simplify this to $2\left(k+j\right)+1$, and since $k+j$ is an integer,
+we can further simplify it to $2h+1$, the definition of an odd integer.
+
+
+\section*{§ 1.8, \#20}
+
+Prove that given a real number $x$, there exist unique numbers $n$
+and $a$ such that $x=n+a$, $n$ is an integer, and $0\leq a<1$.
+
+If we choose an integer $b$ to be the greatest integer so that $b\leq x$
+and let $a=x-b$, we know through the priciples of subtraction that
+$a\geq0$. If $e\geq1$, (which would violate uniqueness), then we
+can use subtraction to show $(a-1)+1=x-n$, and $n+1=x-(a-1)$. Problem
+is that this implies $n+1\leq x$, which we know isn't true. Therefore,
+$a$ has to be somewhere between 0 and 1. We know they're unique by
+assuming 2 integers, $c$ and $d$ add up to $x$. We now know that
+$c+d=n+a$, and therefore that $c-n=a-d$. If $d\geq0$ and $n<1$,
+then $\left|a-d\right|<1$. Since $a$ and $d$ are both integers,
+that means they'd have to be equal. Since $c-n=a-d=0$, $c=n$ and
+$a=d$, which proves $n$ and $a$ are unique.
+\end{document}
