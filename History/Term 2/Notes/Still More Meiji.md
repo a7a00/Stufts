@@ -93,6 +93,6 @@ In 1881, multiple phenomena cause Meiji to get a move on with reform. On one han
 
 These should all sound *very* familiar. The Sumitomo largely occumy the South of Japan, while the Mitsui occupy the north. Where have we seen that before?
 
-![](../res/KLK.png)
+![](../res/KLK.jpg)
 
 In response to the outrage caused by this, there's a tour to study the world's constitutions and introdce democracy to Japan.
