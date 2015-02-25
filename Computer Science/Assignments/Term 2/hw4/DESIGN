@@ -1,0 +1,231 @@
+Homewok 4 (Arith) Design Doc
+Alex Gould (No partner due to illness)
+--------------------------------------
+
+PART A
+-----
+1. What is the abstract thing you are trying to represent? Often the
+answer will be in terms of sets, sequences, and finite maps.
+
+	I'm going to implement a 2D uarray2b, representing a PPM image read in
+	from a file. This array will have functionality to trim the image to a
+	workable size and write it to a new, compressed uarray2b, which will be
+	able to write its information out to a valid PPM file.
+
+2. What functions will you offer, and what are the contracts of that those
+functions must meet?
+
+	extern uarray2b_T readImage(FILE *fp)
+		- Opens and reads the file with a Pnmrdr instance
+		- Write the image data to a new uarray2b through use of
+			uarray2b_new and uarray2b_at.
+
+	extern void trimImage(uarray2b_T *array)
+		- Gets the dimensions of the image with uarray2b's supplied
+			size accessors.
+		- If an image dimension (width/height) is odd, free all
+			all emelents in that row/column, and decrement that
+			dimension.
+		- Alternatively, if dimension info is private (I think it is),
+			just make a new array one or both dimensions
+			decremented, and just drop (almost) all the data from
+			the original array into that.
+
+	extern void rgbToComponent(uarray2b_T *array)
+		-Go through the array block by block
+		-For every block, convert all values in each pixel to
+			floating point values.
+		-Use linear transformation to convert these converted pixels
+			from RGB to component representation.
+
+	extern void PixelsToWords(uarray2b_T *array, uarray2b_T *newArray)
+		- For every block in the image
+		- Average Pb and Pr into a new floating point value
+		- Use Arith40_index_of_chroma to convert this value into a
+			4 bit value.
+		- Convert each luminance value in the block into its
+			cosine coefficient by creating 4 Matrix objects.
+			Multiply each Matrix by its corresponding Y and
+			add the results together. Assign the variables
+			in the final Matrix as the 4 coefficients.
+		- Use bitpack_new to wrap all the values (index(Pb), index(Pr),
+			a, b, c and d) concatenated together into a word.
+
+	extern FILE *readImage(uarray2b *array)
+		- Write the standard header
+		- Go through the uarray2b in row-major order using the
+			a2methods interface.
+		- Go through every code word character-by-character, copying
+			each one to disk individually with putChar() to ensure
+			big-endian ordering.
+
+	extern FILE *readCompressedImage(FILE *fp)
+		- Check that the header is valid
+		- Allocate a new array for the compressed image
+		- Read in every word backwards, character by character,
+			into the new array.
+		- Break each word into local variables.
+		- Use chroma_of_index to get back Pb and Pr
+		- Use 4 new Matrices to multiply and add our way back to the
+			4 luminance values.
+		- Multiply these values by the inverse of the Matrix we used
+			to get them to get R, G and B values back, and cast
+			them as ints to round them.
+			(HERE THERE MAY BE DRAGONS)
+		- Write these new values into the new array.
+		- Use ppmwrite to write the values in the array to a file
+		- Free the array
+
+3. What examples do you have of what the functions are supposed to do?
+
+	Calling any method that takes an array will result in the array not
+	changing in size, but having the information in that array changed. If
+	at any point, information contained in the passed array is invalid, a
+	runtime error will be thrown.
+
+4. What representation will you use, and what invariants will it satisfy?
+(This question is especially important to answer precisely.)
+
+	The image will be represented by a uarray2b. Each block will contain 4
+	pixels or a code word.
+
+	Invariants
+	----------
+	- All dimensions of the uarray2b will be greater than 0.
+	- BlockSize will always be 4 pixels.
+	- The entire image will be represented in some form until quantization
+	- All pixels will contain valid RGB or component values
+
+5. When a representation satisfies all invariants, what abstract thing from
+step 1 does it represent? That is, what is the inverse mapping from any
+particular representation to the abstraction that it represents. This question
+is also especially important to answer precisely.)
+
+	A valid array is a representation of either an uncompressed or a
+	compressed image in some form, be that RGB, component, or code-word
+	values.
+
+6. What test cases have you devised?
+
+	Normal:
+		- Compress a valid image
+		- Decompress a valid image
+
+	Extreme:
+		- Compress an image with difficult to quantize values
+		- Decompress an image that has been heavily edited
+
+	Invalid:
+		- Decompress an image with the wrong endianness
+		- Compress an image of an invalid format
+		- Use invalid code-words
+
+7. What programming idioms will you need?
+
+	- Idioms used in matrix multiplication
+	- Idioms used in memory allocation
+	- Idioms for using pointers to structures
+	- Idioms used to manipulate individual bytes
+
+PART B
+------
+
+1. What is the abstract thing you are trying to represent? Often the
+answer will be in terms of sets, sequences, and finite maps.
+
+	bitpack.c will be able to tell if integers can be represented in
+	a bit of a given width and will be able extract data and change data
+	fields.
+
+2. What functions will you offer, and what are the contracts of that those
+functions must meet?
+
+bool Bitpack_fitsu(uint64_t n, unsigned width)
+	- Returns TRUE if an unsigned value n can fit in a bit-pack of width
+		"width".
+	- Returns FALSE otherwise.
+
+bool Bitpack_fitss( int64_t n, unsigned width) 
+	- Returns TRUE if a signed value n can fit in a bit-pack of width
+		"width".
+	- Returns FALSE otherwise.
+
+uint64_t Bitpack_getu(uint64_t word, unsigned width, unsigned lsb)
+	- Given a pointer to the least significant and the width, we
+		return the unsigned value at this address.
+
+int64_t Bitpack_gets(uint64_t word, unsigned width, unsigned lsb)
+	- Given a pointer to the least significant and the width, we
+		return the signed value at this address.
+
+uint64_t Bitpack_newu(uint64_t word, unsigned width, unsigned lsb, uint64_t value)
+	- Returns a new word, identical to the one passed, except the address
+		will now point to a definiton of a signed identical value
+		width bits wide.
+
+uint64_t Bitpack_news(uint64_t word, unsigned width, unsigned lsb,  int64_t value)
+	- Returns a new word, identical to the one passed, except the address
+		will now point to a definiton of an unsigned identical value
+		width bits wide.
+
+3. What examples do you have of what the functions are supposed to do?
+
+	Calling any function with valiud parameters will return a valid
+	value, or, in the case of the first 2, a boolean.
+
+4. What representation will you use, and what invariants will it satisfy?
+(This question is especially important to answer precisely.)
+
+	Each bit will be a standard C array with element size of one bit.
+	Movement within a cell will probably utilize pointers or bitwise
+	shifts. Accessing bits will involve pointers.
+
+5. When a representation satisfies all invariants, what abstract thing from
+step 1 does it represent? That is, what is the inverse mapping from any
+particular representation to the abstraction that it represents. This question
+is also especially important to answer precisely.)
+
+	A valid bitpack will be a string of bits representing values, with a
+	corresponding address in a reference table.
+
+6. What test cases have you devised?
+
+	Normal:
+		- Put and access valid information
+	Extreme:
+		- Perform multiple reads and writes on the same pack at the
+			same time.
+		- Attempt to access space thast hasn't been set up yet
+			(requires error handling by the propgram.
+
+	Invalid:
+		- Pass infomation that is too long or has a negative length
+		- Access illegal or in-use memory
+		- Attempt to overwrite parts of bitpacks that are already in use.
+
+7. What programming idioms will you need? 
+
+	- The idioms for bitwise operations
+	- The idioms for pointer arithmetic
+	- The idioms for using signed and unsigned integers
+
+SUPPLEMENTAL QUESTIONS
+----------------------
+How will your design enable you to do well on the challenge problem in Secton
+2.3?
+
+	All handling of the creation and reading of code words is done within
+	functions. As a result, I don't have to worry about passing any new
+	kinds of values. THe machine won't know the difference.
+
+An image is compressed and then decompressed. Identify all the places where
+information could be lost. Then it’s compressed and decompressed again. Could
+more information be lost? How?
+
+	Information could be lost as the conversion chops off precision for
+	some of the bits, or as quantization chops off the number of bits
+	we have to represent each number. Recompressing the image gives us the
+	same problem, as floating point values are used in the compression
+	function itself.
+
+	(https://www.youtube.com/watch?v=QEzhxP-pdos)

@@ -1,0 +1,72 @@
+README
+------
+
+2/14/15, Nga Pham, Alex Gould
+HW3 - Locality
+
+This project demonstrates our ability to work with caching and locality.
+We implement a blocked 2D array and use it in a program for manipulating
+PPM images with different access patterns.
+
+
+ARCHITECTURE
+------------
+This project consists of 2 concepts, a plain uarray2 and a blocked uarray2.
+
+These 2 methods are passed to an abstract interface, A2 methods, which
+abstracts away the implementation details and allows the user to specify
+an access pattern.
+
+WHAT WAS DONE
+-------------
+We successfully implemented the 2 accessing files, and gave them sufficient
+functionality to manipulate the images. We successfully
+implemented several function that was passed to our interfaces' traversal
+functions, as well as several functions to combine the mappings/manipulations
+into actual image transformations.
+
+We used multiple assertions to ensure that the data didn't stray outside the
+bounds that would allow the program to work.
+
+WHAT WASN'T DONE
+----------------
+The 2 interfaces implement their 2D data structures as 1D data structures.
+As a result, we did not store structures within structures as some
+implementations did.
+
+PROGRAM MEASUREMENTS
+--------------------
+             Row  Column Block
+             __________________
+90 Degrees  |0:19| 0:21 | 0:48 |
+            |__ _|______|______|
+180 Degrees |0:20| 0:19 | 0:47 |
+            |__ _|______|______|
+
+Row major is always less effective than column major, which is always less
+effective than block major, This isn't what we'd expect, as rotating an image
+by 90 degrees seems like it would be more effective if we were able to move
+large blocks of memory, as opoposed to individually loading rows and columns.
+
+Row-major ordering took the shortest amount of time overall, possibly due to
+the fact that an image with longer rows than columns was used to test the speed
+of the program. Column major ordering took less time than block ordering, again,
+possibly due to the aspect ratio and high resolution of the image. Only in
+one caching scheme was a 90 degree rotation more effective than a 180 degree
+one, and that was row-ordering. This might have to do with the fact that a
+90 degree rotation involves more operations on elements in the same row than a
+180 degree rotation.
+
+
+ACKNOWLEDGEMENTS
+----------------
+
+Many thanks to the amazing TA's of Halligan for helping us puzzle out
+all of the concepts. A huge thanks to Nga for soldiering through almost
+all the debugging while Alex wasn't available over the weekend.
+
+And of course thanks to stack overflow for image transformation tips.
+
+TIME SPENT
+----------
+Around 40 hours.
