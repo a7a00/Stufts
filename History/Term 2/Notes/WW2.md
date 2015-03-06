@@ -1,4 +1,4 @@
-# Rename
+# World War 2
 
 OK, so tention is building with the US, but we don't get involved because depression and isolationism. Yeah, we kinda let this happen...
 
