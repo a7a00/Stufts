@@ -23,7 +23,7 @@ In 1945, all *zaibatsu* assets are frozen, and we encourage the Japanese to do s
 
 11 judges from 11 nations take part. Tojo is hanged, under protest from Churchill. 6 are hanged for crimes against peace, but over 700 for minor offences. The Japanese felt no sympathy for these criminals, but they also felt that no justice seemed to be done. One Class A war criminal, Mishi Nobusuke, the Minister of Mutions, is actually released and allowed to become Prime Minister. And he had a grandson!
 
-![](../res/abe.jpg)
+![](../res/Abe.jpg)
 
 Oh, wow, this is awkward. Moving on...
 
