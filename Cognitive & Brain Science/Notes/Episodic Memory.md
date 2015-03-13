@@ -82,4 +82,8 @@ This is a very interesting topic to researchers, and it's the basic phenomenon o
 
 ...I get the strange feeling that I'm the only person in this lecture hall taking notes.
 
+![](../res/viewfromseat.jpg)
+
+Seriously, the back of this room is so loud. Remind me to sit back near the front next time.
+
 Anyhow, why do we then forget everything before 3? Researchers believe that it isn't just the structure of the brain, just the lack of semantics.
