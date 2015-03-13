@@ -1,4 +1,4 @@
-# Rename
+# Episodic and Procedural Memory
 
 Before we start, the next test will be at home and online once we get back from spring break. Also, sis you know that some people see their memories in first person and others see their memories in 3rd person?
 
@@ -61,4 +61,25 @@ You can do this in much more sinister ways. Approximatley 25% of adults recall a
 
 Fun fact while we're on break, this is a *very* popular way to arrest people in North Korea and Russia. All you have to do is leave doctored photos of family members out and about, not at home, where those members can see them, implant the false memories, and then come around next week to ask some innocent questions. The overwritten memories erase all alibi and can even incriminate the accused. Not that I'd know anything about how the Iminban arrests enemies of the Korean People, that's ridiculous, how would I know that? Another common technique that secret police from North Korea to Russia to China use is particularly nasty. When a fact is just brought up as a given in a conversation after the fact, such as "Don't mind the phone, think about what else was on the desk", this  will implant a memory, say, of the phone, and the subject will swear that a phone was there! And when you can insert a whole phone, it's very easy to insert things that will prove the subject's guilt of crimes against the Worker's Party. Again, I wouldn't know anything about how secret police overwrite memories to serve their own ends, why on earth would I be privy to that information?
 
-All right, back to class. Unfortunatley, this means that it's almost impossible to tell if repressed memories are real or not. Sorry.
+All right, back to class. Unfortunatley, this means that it's almost impossible to tell if repressed memories are real or not. Sorry. We're now moving on to the beginning of...
+
+## Procedural Memory
+
+Now, procedural memoey is not jut motor memory. It's any memory not avaiilable for concious recall. You can't explain it immediatley. For example, how to you ride a bike? You can do it, but you can't explain it. How do you recognize the word "lobster"? How do you recognize the smell of smoke? There are all things that are effortless to do, but hard to explain, and why we use the phrase "you have to try it to know" so much. So, are these memories different from declarative memories? Well, for starters, you need the hippocampus for declarative memories. You can *recall* them without them, but once it's damaged or removed, you can't make any more. But, you can make new *procedural* memories. One famous patient never learned having played a game before, yet he kept getting better and better at it, even without remembering his hours and hours of practice. So, the 2 kinds of memory are obviously seperate, right? We can confirm this with Korsakoff's Syndrome alcoholics, as well, but this is an example of a *single dissociation*. We can show that knocking out the hippocampus gets rid of the ability to write declarative memories, but we don't know if the hippocampus also plays a role in procedural memory creation. So, this isn't good enough. We want a "double dissociation:, where we can compare our population of people who can remember how but not what to a population that remembers what but not how.
+
+Turns out that that population exists, too! People with Parkinsons can remember the past perfectly, but can practice simple tasks for hours and hours and not get any better. There was some stupidly complex probability test that was used to test this that would make *me* punch a wall, let alone someone with Parkinson's. But people without Parkinson's (and our amnesiacs who can still learn how to do stuff!) pick it up right away without even thinking about it, while people with Parkinson's continue to struggle to recognize patterns. So while our amnesiacs are fine with implicit learning but suck at explicit learning, people with Parkinson's are the other way around. Bingo! The 2 systems must be seperate.
+
+We can even demonstrate this with normal people! In 1983, volunteers were asked to do one of three things. Memorize a word, memorize a word and its antonym, or generate an antonym of the shown word and remember that. As you can guess, these 3 tasks take an increasing amount of processing. We then perform 2 tests:
+
+* Did you see the word?
+* Here's an unrelated word for 40 milliseconds. See if you can recognize it.
+
+Performance on the first test (explicit) improves with the brainpower of the first task you did, but performance on the second test (implicit) actually *goes down* with brainpower. We're not sure what this means yet, but we can show that these systems are so seperate, they produce directly opposite results. This should be familiar to you from the time we discussed symbolic vs. perceptual memory.
+
+## Childhood Amnesia
+
+This is a very interesting topic to researchers, and it's the basic phenomenon of not remembering anything below around the age of 3. So, what gives? Well, for starters, infants can remember basic lever pressing tasks for several weeks. But, this is procedural memory, and given that we all know how to walk, this amnesia clearly doesn't apply. Is it possible our hippocami just aren't developed enough to remember the what, only the how, until we hit 3? Well, unfortunatley, these infants can't tell us. One study in 1994 showed that children shown a movie before their first birthday reenacted scenes from it before their second birthday, a whole year later, just like adults who did the same thing, except for amnesiacs of course. Since the amnesiacs don't do it, but babies and normal people do, it's obvious that the babies have some sort of declarative/explicit memory.
+
+...I get the strange feeling that I'm the only person in this lecture hall taking notes.
+
+Anyhow, why do we then forget everything before 3? Researchers believe that it isn't just the structure of the brain, just the lack of semantics.
