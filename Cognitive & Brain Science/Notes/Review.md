@@ -2,7 +2,7 @@
 
 Not entirely sure what we're doing, but we're supposed to be having a test. Lesson instead.
 
-## *Mememnto*
+## *Memento*
 
 Not entirely sure what the hell happened in this movie, and the lecture on it is making less sense.
 
