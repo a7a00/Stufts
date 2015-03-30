@@ -12,7 +12,7 @@ Anyway, more on how the US is screwing up Japan. We detonate an H-bomb 125 miles
 
 ![](../res/godzilla.jpg)
 
-***IT'S [GODZILLA](www.youtube.com/watch?v=OX2VaVtFYfs)!***
+***IT'S [GODZILLA](http://www.youtube.com/watch?v=OX2VaVtFYfs)!***
 
 ## The LDP and the Economic Miracle
 
