@@ -15,9 +15,9 @@ Last week, we talked about grammar. Let's talk about the other main component of
   * A massive surge in vocabulary. 
   * Children put words together into basic phrases.
   * If you're a little shit, you don't express any of this as *speech*, scaring your poor parents into hiring a fucking speech therapist who makes you say words that sound vaguely like "truck". But I digress...
-**2.5-6** - Vocabulary learning surges to 3.6 words per day.
-**6-8** - 6.6 words per day.
-**8-10** - 12.1 words per day.
+* **2.5-6** - Vocabulary learning surges to 3.6 words per day.
+* **6-8** - 6.6 words per day.
+* **8-10** - 12.1 words per day.
 
 ### Fast Mapping
 
